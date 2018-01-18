@@ -1,6 +1,6 @@
 package org.usfirst.frc.team1700.robot;
 
-import com.ctre.CANTalon;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -18,8 +18,8 @@ public class RobotMap {
 	// number and the module. For example you with a rangefinder:
 	// public static int rangefinderPort = 1;
 	// public static int rangefinderModule = 1;
-	public static CANTalon leftFrontDrive = new CANTalon(1),
-					       leftBackDrive = new CANTalon(2),
-					       rightFrontDrive = new CANTalon(3),
-					       rightBackDrive = new CANTalon(4);
+	public static TalonSRX leftFrontDrive = new TalonSRX(1),
+					       leftBackDrive = new TalonSRX(2),
+					       rightFrontDrive = new TalonSRX(3),
+					       rightBackDrive = new TalonSRX(4);
 }
