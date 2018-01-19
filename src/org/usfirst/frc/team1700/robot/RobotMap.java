@@ -2,6 +2,8 @@ package org.usfirst.frc.team1700.robot;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -21,5 +23,9 @@ public class RobotMap {
 	public static TalonSRX leftFrontDrive = new TalonSRX(1),
 					       leftBackDrive = new TalonSRX(2),
 					       rightFrontDrive = new TalonSRX(3),
-					       rightBackDrive = new TalonSRX(4);
+					       rightBackDrive = new TalonSRX(4),
+					       elevatorMotor = new TalonSRX(5);
+	public static DigitalInput topLimitSwitch = new DigitalInput(1),
+							bottomLimitSwitch = new DigitalInput(2);
+					   
 }
