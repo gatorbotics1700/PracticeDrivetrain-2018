@@ -9,8 +9,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1700.robot.commands.DriveCommand;
+import org.usfirst.frc.team1700.robot.commands.ElevatorDownCommand;
+import org.usfirst.frc.team1700.robot.commands.ElevatorStopCommand;
+import org.usfirst.frc.team1700.robot.commands.ElevatorUpCommand;
+import org.usfirst.frc.team1700.robot.commands.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
+import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -24,6 +29,7 @@ public class Robot extends IterativeRobot {
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	public static OI oi;
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
 	Command autonomousCommand;
 	SendableChooser<Command> chooser = new SendableChooser<>();
@@ -98,6 +104,8 @@ public class Robot extends IterativeRobot {
 		// this line or comment it out.
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
+		new DriveCommand();
+		new RunIntakeCommand();
 	}
 
 	/**
@@ -106,7 +114,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		new DriveCommand();
+		OI.elevatorUp.whileHeld(new ElevatorUpCommand());
+		OI.elevatorDown.whileHeld(new ElevatorDownCommand());
+		OI.elevatorUp.whenReleased(new ElevatorStopCommand());
+		OI.elevatorDown.whenReleased(new ElevatorStopCommand());
+		if (!intakeSubsystem.hasCube()) {
+			new RunIntakeCommand();
+		}
 	}
 
 	/**

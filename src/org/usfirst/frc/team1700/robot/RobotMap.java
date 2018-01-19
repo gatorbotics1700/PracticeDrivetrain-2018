@@ -3,6 +3,7 @@ package org.usfirst.frc.team1700.robot;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -11,21 +12,24 @@ import edu.wpi.first.wpilibj.DigitalInput;
  * floating around.
  */
 public class RobotMap {
-	// For example to map the left and right motors, you could define the
-	// following variables to use with your drivetrain subsystem.
-	// public static int leftMotor = 1;
-	// public static int rightMotor = 2;
-
-	// If you are using multiple modules, make sure to define both the port
-	// number and the module. For example you with a rangefinder:
-	// public static int rangefinderPort = 1;
-	// public static int rangefinderModule = 1;
+	//DRIVE TALONS
 	public static TalonSRX leftFrontDrive = new TalonSRX(1),
 					       leftBackDrive = new TalonSRX(2),
 					       rightFrontDrive = new TalonSRX(3),
-					       rightBackDrive = new TalonSRX(4),
-					       elevatorMotor = new TalonSRX(5);
-	public static DigitalInput topLimitSwitch = new DigitalInput(1),
-							bottomLimitSwitch = new DigitalInput(2);
+					       rightBackDrive = new TalonSRX(4);
+	
+	//INTAKE TALONS
+	public static TalonSRX elevatorMotor = new TalonSRX(5),
+						   leftIntakeMotor = new TalonSRX(6),
+						   rightIntakeMotor = new TalonSRX(7);
+	
+	//PNEUMATICS
+	public static DoubleSolenoid leftActuator = new DoubleSolenoid(0, 1),
+								 rightActuator = new DoubleSolenoid(2, 3);
+	
+	//DIGITAL SENSORS
+	public static DigitalInput topLimitSwitch = new DigitalInput(8),
+							   bottomLimitSwitch = new DigitalInput(9),
+							   intakeBeamBreak = new DigitalInput(7);
 					   
 }
