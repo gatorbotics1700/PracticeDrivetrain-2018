@@ -4,6 +4,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -31,5 +32,9 @@ public class RobotMap {
 	public static DigitalInput topLimitSwitch = new DigitalInput(8),
 							   bottomLimitSwitch = new DigitalInput(9),
 							   intakeBeamBreak = new DigitalInput(7);
+							   
+	public static Encoder	   leftDriveEncoder = new Encoder(0,1),
+							   rightDriveEncoder = new Encoder(2,3),
+							   elevatorEncoder = new Encoder(4,5);
 					   
 }

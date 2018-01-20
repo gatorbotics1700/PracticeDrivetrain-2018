@@ -4,6 +4,7 @@ import org.usfirst.frc.team1700.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -15,6 +16,7 @@ public class ElevatorSubsystem extends Subsystem {
 	TalonSRX EM = RobotMap.elevatorMotor;
 	DigitalInput UL = RobotMap.topLimitSwitch;
 	DigitalInput BL = RobotMap.bottomLimitSwitch;
+	Encoder enc = RobotMap.elevatorEncoder;
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -27,6 +29,10 @@ public class ElevatorSubsystem extends Subsystem {
     public boolean touchingSwitch() {
     		return UL.get() || BL.get();
     		
+    }
+    
+    public int getEncoderValue() {
+    	return enc.get();
     }
 }
 
