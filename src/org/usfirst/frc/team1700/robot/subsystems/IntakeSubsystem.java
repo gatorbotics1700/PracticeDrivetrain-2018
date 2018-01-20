@@ -27,13 +27,13 @@ public class IntakeSubsystem extends Subsystem {
         setDefaultCommand(new RunIntakeCommand());
     }
     
-    public void runIntake(double speed) {
-    	leftMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, speed);
+    public void runIntake(double speed) { //motors start running
+    	leftMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, speed); 
     	rightMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, speed);
     }
     
-    public void actuate(boolean in) {
-    	if (in) {
+    public void actuate(boolean in) { //pneumatics
+    	if (in) { //called in because intake
     		LA.set(DoubleSolenoid.Value.kForward);
     		RA.set(DoubleSolenoid.Value.kForward);
     	} else {
