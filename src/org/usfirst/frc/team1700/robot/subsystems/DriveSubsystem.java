@@ -20,6 +20,7 @@ public class DriveSubsystem extends Subsystem {
 	TalonSRX RB = RobotMap.rightBackDrive;
 	Encoder LE = RobotMap.leftDriveEncoder;
 	Encoder RE = RobotMap.rightDriveEncoder;
+	public double ticksToInches = 10; //placeholder; change later
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -40,6 +41,11 @@ public class DriveSubsystem extends Subsystem {
 	
 	public int getRightEncoderValue() {
 		return RE.get();
+	}
+	
+	public void resetEncoders() {
+		LE.reset();
+		RE.reset();
 	}
 	
 }

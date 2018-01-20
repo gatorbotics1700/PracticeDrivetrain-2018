@@ -95,6 +95,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		//DriveToDistance(12*12);
 	}
 
 	@Override
