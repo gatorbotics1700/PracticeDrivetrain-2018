@@ -41,4 +41,5 @@ public class OI {
 	public static Joystick coJoy = new Joystick(2);
 	public static Button elevatorUp = new JoystickButton(coJoy, 2);
 	public static Button elevatorDown = new JoystickButton(coJoy, 3);
+	public static Button letGo = new JoystickButton(coJoy, 4);
 }
