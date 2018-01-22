@@ -29,10 +29,10 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	public void driveTank(double leftSpeed, double rightSpeed) {
-		LF.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, leftSpeed);
-		LB.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, leftSpeed);
-		RF.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, rightSpeed);
-		RB.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, rightSpeed);
+		LF.set(RobotMap.PERCENT_OUTPUT, leftSpeed);
+		LB.set(RobotMap.PERCENT_OUTPUT, leftSpeed);
+		RF.set(RobotMap.PERCENT_OUTPUT, -rightSpeed);
+		RB.set(RobotMap.PERCENT_OUTPUT, -rightSpeed);
 	}
 	
 	public int getLeftEncoderValue() {

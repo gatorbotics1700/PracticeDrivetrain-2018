@@ -16,9 +16,14 @@ public class IntakeSubsystem extends Subsystem {
 	
 	TalonSRX leftMotor = RobotMap.leftIntakeMotor;
 	TalonSRX rightMotor = RobotMap.rightIntakeMotor;
-	DoubleSolenoid LA = RobotMap.leftActuator;
-	DoubleSolenoid RA = RobotMap.rightActuator;
+	TalonSRX armMotor = RobotMap.intakeArmMotor;
+//	DoubleSolenoid LA = RobotMap.leftActuator;
+//	DoubleSolenoid RA = RobotMap.rightActuator;
 	DigitalInput beamBreak = RobotMap.intakeBeamBreak;
+	public enum State {
+		RETRACTED, IN_MOTION, DOWN;
+	}
+	public State state = State.RETRACTED;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 
@@ -32,18 +37,30 @@ public class IntakeSubsystem extends Subsystem {
     	rightMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, speed);
     }
     
-    public void actuate(boolean in) { //pneumatics
-    	if (in) { //called in because intake
-    		LA.set(DoubleSolenoid.Value.kForward);
-    		RA.set(DoubleSolenoid.Value.kForward);
-    	} else {
-    		LA.set(DoubleSolenoid.Value.kReverse);
-    		RA.set(DoubleSolenoid.Value.kReverse);
-    	}
+//    public void actuate(boolean in) { //pneumatics
+//    	if (in) { //called in because intake
+//    		LA.set(DoubleSolenoid.Value.kForward);
+//    		RA.set(DoubleSolenoid.Value.kForward);
+//    	} else {
+//    		LA.set(DoubleSolenoid.Value.kReverse);
+//    		RA.set(DoubleSolenoid.Value.kReverse);
+//    	}
+//    }
+    
+    public void moveArm(double speed) {
+    	armMotor.set(RobotMap.PERCENT_OUTPUT, speed);
     }
     
     public boolean hasCube() {
     	return beamBreak.get();
+    }
+    
+    public void setState(State state) {
+    	this.state = state;
+    }
+    
+    public boolean stalled() {
+    	return (armMotor.getOutputCurrent() > 100.0);
     }
 }
 

@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1700.robot;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -22,11 +23,15 @@ public class RobotMap {
 	//INTAKE TALONS
 	public static TalonSRX elevatorMotor = new TalonSRX(5),
 						   leftIntakeMotor = new TalonSRX(6),
-						   rightIntakeMotor = new TalonSRX(7);
+						   rightIntakeMotor = new TalonSRX(7),
+						   intakeArmMotor = new TalonSRX(8);
+	
+	//TALON CONTROL MODES
+	public static final ControlMode PERCENT_OUTPUT = com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput;
 	
 	//PNEUMATICS
-	public static DoubleSolenoid leftActuator = new DoubleSolenoid(0, 1),
-								 rightActuator = new DoubleSolenoid(2, 3);
+//	public static DoubleSolenoid leftActuator = new DoubleSolenoid(0, 1),
+//								 rightActuator = new DoubleSolenoid(2, 3);
 	
 	//DIGITAL SENSORS
 	public static DigitalInput topLimitSwitch = new DigitalInput(8),

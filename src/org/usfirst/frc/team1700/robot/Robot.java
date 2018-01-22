@@ -12,6 +12,7 @@ import org.usfirst.frc.team1700.robot.commands.DriveCommand;
 import org.usfirst.frc.team1700.robot.commands.ElevatorDownCommand;
 import org.usfirst.frc.team1700.robot.commands.ElevatorStopCommand;
 import org.usfirst.frc.team1700.robot.commands.ElevatorUpCommand;
+import org.usfirst.frc.team1700.robot.commands.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
@@ -109,6 +110,7 @@ public class Robot extends IterativeRobot {
 		new DriveCommand();
 		System.out.println("TeleopInit!!");
 		new RunIntakeCommand();
+		new FoldIntakeCommand(false);
 	}
 
 	/**
@@ -123,6 +125,8 @@ public class Robot extends IterativeRobot {
 		OI.elevatorDown.whenReleased(new ElevatorStopCommand());
 		OI.letGo.whileHeld(new ReleaseIntakeCommand());
 		OI.letGo.whenReleased(new RunIntakeCommand());
+		OI.foldUp.whileHeld(new FoldIntakeCommand(true));
+		OI.foldUp.whenReleased(new FoldIntakeCommand(false));
 	}
 
 	/**
