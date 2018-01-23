@@ -19,6 +19,8 @@ public class IntakeSubsystem extends Subsystem {
 	TalonSRX armMotor = RobotMap.intakeArmMotor;
 //	DoubleSolenoid LA = RobotMap.leftActuator;
 //	DoubleSolenoid RA = RobotMap.rightActuator;
+	DigitalInput topLS = RobotMap.intakeArmUpLimitSwitch;
+	DigitalInput bottomLS = RobotMap.intakeArmDownLimitSwitch;
 	DigitalInput beamBreak = RobotMap.intakeBeamBreak;
 	public enum State {
 		RETRACTED, IN_MOTION, DOWN;
@@ -59,8 +61,8 @@ public class IntakeSubsystem extends Subsystem {
     	this.state = state;
     }
     
-    public boolean stalled() {
-    	return (armMotor.getOutputCurrent() > 100.0);
+    public boolean doneMoving() {
+    	return (armMotor.getOutputCurrent() > 100.0 || topLS.get() || bottomLS.get());
     }
 }
 

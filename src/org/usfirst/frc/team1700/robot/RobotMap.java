@@ -36,7 +36,9 @@ public class RobotMap {
 	//DIGITAL SENSORS
 	public static DigitalInput topLimitSwitch = new DigitalInput(8),
 							   bottomLimitSwitch = new DigitalInput(9),
-							   intakeBeamBreak = new DigitalInput(7);
+							   intakeBeamBreak = new DigitalInput(7),
+							   intakeArmUpLimitSwitch = new DigitalInput(6),
+							   intakeArmDownLimitSwitch = new DigitalInput(5);
 							   
 	public static Encoder	   leftDriveEncoder = new Encoder(0,1),
 							   rightDriveEncoder = new Encoder(2,3),
