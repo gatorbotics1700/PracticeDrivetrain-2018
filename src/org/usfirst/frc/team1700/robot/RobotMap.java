@@ -2,10 +2,12 @@ package org.usfirst.frc.team1700.robot;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SerialPort;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -32,6 +34,9 @@ public class RobotMap {
 	//PNEUMATICS
 //	public static DoubleSolenoid leftActuator = new DoubleSolenoid(0, 1),
 //								 rightActuator = new DoubleSolenoid(2, 3);
+	
+	//NAVX
+	AHRS ahrs = new AHRS(SerialPort.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 	
 	//DIGITAL SENSORS
 	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(8),
