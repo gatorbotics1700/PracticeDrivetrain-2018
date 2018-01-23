@@ -34,8 +34,8 @@ public class RobotMap {
 //								 rightActuator = new DoubleSolenoid(2, 3);
 	
 	//DIGITAL SENSORS
-	public static DigitalInput topLimitSwitch = new DigitalInput(8),
-							   bottomLimitSwitch = new DigitalInput(9),
+	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(8),
+							   elevatorBottomLimitSwitch = new DigitalInput(9),
 							   intakeBeamBreak = new DigitalInput(7),
 							   intakeArmUpLimitSwitch = new DigitalInput(6),
 							   intakeArmDownLimitSwitch = new DigitalInput(5);

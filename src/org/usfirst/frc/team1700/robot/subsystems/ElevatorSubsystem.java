@@ -14,8 +14,8 @@ public class ElevatorSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
 	TalonSRX EM = RobotMap.elevatorMotor;
-	DigitalInput UL = RobotMap.topLimitSwitch;
-	DigitalInput BL = RobotMap.bottomLimitSwitch;
+	DigitalInput UL = RobotMap.elevatorTopLimitSwitch;
+	DigitalInput BL = RobotMap.elevatorBottomLimitSwitch;
 	Encoder enc = RobotMap.elevatorEncoder;
 
     public void initDefaultCommand() {
