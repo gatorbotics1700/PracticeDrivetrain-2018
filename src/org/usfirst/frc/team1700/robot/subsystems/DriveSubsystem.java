@@ -4,6 +4,7 @@ import org.usfirst.frc.team1700.robot.RobotMap;
 import org.usfirst.frc.team1700.robot.commands.DriveCommand;
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -20,6 +21,7 @@ public class DriveSubsystem extends Subsystem {
 	TalonSRX RB = RobotMap.rightBackDrive;
 	Encoder LE = RobotMap.leftDriveEncoder;
 	Encoder RE = RobotMap.rightDriveEncoder;
+	public AHRS navx = RobotMap.ahrs;
 	public double ticksToInches = 10; //placeholder; change later
 
 	public void initDefaultCommand() {
