@@ -1,6 +1,10 @@
 package org.usfirst.frc.team1700.robot.commands;
 
 import org.usfirst.frc.team1700.robot.Robot;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorDownCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -31,6 +35,21 @@ public class CenterSwitchAutoCG extends CommandGroup {
         // arm.
     	addSequential(new DriveToDistanceCommand(100)); //distance given in inches
     	//new DriveToAngleCommand(90);
+    	
+
+    	//Start off in center
+    	//Turn in the direction of our switch
+	//Drive for some amount of time
+	//Turn back to the original position
+	//Drive until we are next to the switch
+	//Move the elevator up
+    	int ticks = 5; //TODO: Replace this with actual number!
+    	addSequential(new ElevatorToTicksCommand(ticks));
+	//Dump the cube on the witch
+    	addSequential(new ReleaseIntakeCommand());
+	//Retract the elevator
+    	addSequential(new ElevatorDownCommand());
+    	
     	
     }
 }
