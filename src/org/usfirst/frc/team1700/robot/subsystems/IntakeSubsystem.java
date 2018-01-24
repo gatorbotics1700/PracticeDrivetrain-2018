@@ -22,12 +22,16 @@ public class IntakeSubsystem extends Subsystem {
 	DigitalInput topLS = RobotMap.intakeArmUpLimitSwitch;
 	DigitalInput bottomLS = RobotMap.intakeArmDownLimitSwitch;
 	DigitalInput beamBreak = RobotMap.intakeBeamBreak;
-	public enum State {
+	public enum IntakeState {
 		RETRACTED, IN_MOTION, DOWN;
 	}
-	public State state = State.RETRACTED;
+	public IntakeState intakeState;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+	
+	public IntakeSubsystem() {
+		intakeState = IntakeState.RETRACTED;
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -57,8 +61,8 @@ public class IntakeSubsystem extends Subsystem {
     	return beamBreak.get();
     }
     
-    public void setState(State state) {
-    	this.state = state;
+    public void setState(IntakeState state) {
+    	this.intakeState = state;
     }
     
     public boolean doneMoving() {

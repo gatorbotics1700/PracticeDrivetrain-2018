@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1700.robot.commands;
 
 import org.usfirst.frc.team1700.robot.Robot;
-import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem.State;
+import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem.IntakeState;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -25,12 +25,12 @@ public class FoldIntakeCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (retracting && Robot.intakeSubsystem.state == State.DOWN) {
+    	if (retracting && Robot.intakeSubsystem.intakeState == IntakeState.DOWN) {
     		Robot.intakeSubsystem.moveArm(-0.5);
-    		Robot.intakeSubsystem.setState(State.IN_MOTION);
-    	} else if (!retracting && Robot.intakeSubsystem.state == State.RETRACTED){
+    		Robot.intakeSubsystem.setState(IntakeState.IN_MOTION);
+    	} else if (!retracting && Robot.intakeSubsystem.intakeState == IntakeState.RETRACTED){
     		Robot.intakeSubsystem.moveArm(0.5);
-    		Robot.intakeSubsystem.setState(State.IN_MOTION);
+    		Robot.intakeSubsystem.setState(IntakeState.IN_MOTION);
     	}
     }
 
@@ -43,16 +43,16 @@ public class FoldIntakeCommand extends Command {
     protected void end() {
     	Robot.intakeSubsystem.moveArm(0);
     	if (retracting) {
-    		Robot.intakeSubsystem.setState(State.RETRACTED);
+    		Robot.intakeSubsystem.setState(IntakeState.RETRACTED);
     	} else {
-    		Robot.intakeSubsystem.setState(State.DOWN);
+    		Robot.intakeSubsystem.setState(IntakeState.DOWN);
     	}
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	if (Robot.intakeSubsystem.state == State.IN_MOTION) {
+    	if (Robot.intakeSubsystem.intakeState == IntakeState.IN_MOTION) {
     		System.out.println("Arm still moving in code, check whether it's moving in real life!");
     	}
     }
