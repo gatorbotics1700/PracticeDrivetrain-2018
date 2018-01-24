@@ -1,6 +1,8 @@
 package org.usfirst.frc.team1700.robot.subsystems;
 
 import org.usfirst.frc.team1700.robot.RobotMap;
+
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -17,22 +19,42 @@ public class ElevatorSubsystem extends Subsystem {
 	DigitalInput UL = RobotMap.elevatorTopLimitSwitch;
 	DigitalInput BL = RobotMap.elevatorBottomLimitSwitch;
 	Encoder enc = RobotMap.elevatorEncoder;
+	public enum ElevatorState {
+		GROUND, SWITCH, SCALE;
+	}
+	public ElevatorState elevatorState;
+
+	public ElevatorSubsystem() {
+		EM.selectProfileSlot(0, 0);
+		EM.config_kF(0, 0.2, 10); //slot, value, timeoutMS
+		EM.config_kP(0, 0.2, 10);
+		EM.config_kI(0, 0, 10);
+		EM.config_kD(0, 0, 10);
+		elevatorState = ElevatorState.GROUND;
+		enc.reset();
+	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
         //setDefaultCommand(new MySpecialCommand());
     }
     public void elevatorMove(double speed) {
-    		EM.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, speed );
+    		EM.set(RobotMap.PERCENT_OUTPUT, speed);
     }
     
-    public boolean touchingSwitch() {
-    		return UL.get() || BL.get();
-    		
+    public boolean touchingSwitch(boolean top) {
+    		if (BL.get()) {
+    			enc.reset();
+    		}
+    		return (UL.get() && top) || (BL.get() && !top);
     }
     
     public int getEncoderValue() {
     	return enc.get();
+    }
+    
+    public void driveToEncoderTicks(int ticks) {
+    	EM.set(RobotMap.POSITION, ticks);
     }
 }
 

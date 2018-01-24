@@ -9,12 +9,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1700.robot.commands.DriveCommand;
-import org.usfirst.frc.team1700.robot.commands.ElevatorDownCommand;
-import org.usfirst.frc.team1700.robot.commands.ElevatorStopCommand;
-import org.usfirst.frc.team1700.robot.commands.ElevatorUpCommand;
-import org.usfirst.frc.team1700.robot.commands.FoldIntakeCommand;
-import org.usfirst.frc.team1700.robot.commands.ReleaseIntakeCommand;
-import org.usfirst.frc.team1700.robot.commands.RunIntakeCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorDownCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem;

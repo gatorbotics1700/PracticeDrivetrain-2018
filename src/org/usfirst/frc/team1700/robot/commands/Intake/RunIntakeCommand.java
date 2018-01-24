@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1700.robot.commands;
+package org.usfirst.frc.team1700.robot.commands.Intake;
 
 import org.usfirst.frc.team1700.robot.Robot;
 
@@ -7,33 +7,36 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ElevatorUpCommand extends Command {
+public class RunIntakeCommand extends Command {
 
-    public ElevatorUpCommand() {
+    public RunIntakeCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    		requires(Robot.elevatorSubsystem);
+    	requires(Robot.intakeSubsystem);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() { //at the beginning of intake, the claws should be open so they can receive the cube
+    
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		Robot.elevatorSubsystem.elevatorMove(1);
-    		//Caution- elevator will move up forever
-    		//1 = up, 0 = stopped, -1 = down
+ 
+    	// turn wheels in intake direction
+    	Robot.intakeSubsystem.runIntake(1);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.elevatorSubsystem.touchingSwitch();
+        return Robot.intakeSubsystem.hasCube();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-		Robot.elevatorSubsystem.elevatorMove(0);
+    	System.out.println("Just finished Running Intake!");
+    	// stop wheels
+    	Robot.intakeSubsystem.runIntake(0);
     }
 
     // Called when another command which requires one or more of the same

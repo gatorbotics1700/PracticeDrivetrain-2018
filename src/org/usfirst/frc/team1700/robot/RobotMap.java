@@ -29,7 +29,8 @@ public class RobotMap {
 						   intakeArmMotor = new TalonSRX(8);
 	
 	//TALON CONTROL MODES
-	public static final ControlMode PERCENT_OUTPUT = com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput;
+	public static final ControlMode PERCENT_OUTPUT = com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput,
+									POSITION = com.ctre.phoenix.motorcontrol.ControlMode.Position;
 	
 	//PNEUMATICS
 //	public static DoubleSolenoid leftActuator = new DoubleSolenoid(0, 1),
@@ -48,5 +49,4 @@ public class RobotMap {
 	public static Encoder	   leftDriveEncoder = new Encoder(0,1),
 							   rightDriveEncoder = new Encoder(2,3),
 							   elevatorEncoder = new Encoder(4,5);
-					   
 }
