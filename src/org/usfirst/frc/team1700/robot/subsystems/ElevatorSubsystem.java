@@ -19,10 +19,10 @@ public class ElevatorSubsystem extends Subsystem {
 	DigitalInput UL = RobotMap.elevatorTopLimitSwitch;
 	DigitalInput BL = RobotMap.elevatorBottomLimitSwitch;
 	Encoder enc = RobotMap.elevatorEncoder;
-	public enum ElevatorState {
-		GROUND, SWITCH, SCALE;
-	}
-	public ElevatorState elevatorState;
+	
+	//TODO: Test and set these
+	public int scaleTicks = 100; // # ticks to reach scale level
+	public int switchTicks = 50;
 
 	public ElevatorSubsystem() {
 		EM.selectProfileSlot(0, 0);
