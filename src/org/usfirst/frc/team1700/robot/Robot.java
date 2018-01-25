@@ -79,8 +79,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
-		DriverStation.getInstance(); //USE THIS TO DETERMINE WHICH SIDE THE SCALE AND SWITCH ARE ON
+		autonomousCommand = chooser.getSelected(); //USE THIS TO DETERMINE WHICH SIDE THE SCALE AND SWITCH ARE ON
 
 		// schedule the autonomous command (example)
 		if (autonomousCommand != null)
