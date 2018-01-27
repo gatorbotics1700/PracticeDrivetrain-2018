@@ -30,7 +30,6 @@ public class ElevatorSubsystem extends Subsystem {
 		EM.config_kP(0, 0.2, 10);
 		EM.config_kI(0, 0, 10);
 		EM.config_kD(0, 0, 10);
-		elevatorState = ElevatorState.GROUND;
 		enc.reset();
 	}
 

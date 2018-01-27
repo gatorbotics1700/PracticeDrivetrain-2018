@@ -52,10 +52,10 @@ public class CenterSwitchAutoCG extends CommandGroup {
 		addSequential(new DriveToAngleCommand(angle));
 		addSequential(new DriveToDistanceCommand(50));
 		addSequential(new DriveToAngleCommand(-angle));
-    	addSequential(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
-    	addSequential(new FoldIntakeCommand(false)); // unfolds intake
-    	addSequential(new ReleaseIntakeCommand());
+    	//addSequential(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
+    	//addSequential(new FoldIntakeCommand(false)); // unfolds intake
+    	//addSequential(new ReleaseIntakeCommand());
 	//Retract the elevator
-    	addSequential(new ElevatorDownCommand());
+    	//addSequential(new ElevatorDownCommand());
     }
 }
