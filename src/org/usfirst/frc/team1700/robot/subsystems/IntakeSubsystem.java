@@ -13,15 +13,15 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 public class IntakeSubsystem extends Subsystem {
-	
-	TalonSRX leftMotor = RobotMap.leftIntakeMotor;
-	TalonSRX rightMotor = RobotMap.rightIntakeMotor;
-	TalonSRX armMotor = RobotMap.intakeArmMotor;
+//	
+//	TalonSRX leftMotor = RobotMap.leftIntakeMotor;
+//	TalonSRX rightMotor = RobotMap.rightIntakeMotor;
+//	TalonSRX armMotor = RobotMap.intakeArmMotor;
 //	DoubleSolenoid LA = RobotMap.leftActuator;
 //	DoubleSolenoid RA = RobotMap.rightActuator;
-	DigitalInput topLS = RobotMap.intakeArmUpLimitSwitch;
-	DigitalInput bottomLS = RobotMap.intakeArmDownLimitSwitch;
-	DigitalInput beamBreak = RobotMap.intakeBeamBreak;
+//	DigitalInput topLS = RobotMap.intakeArmUpLimitSwitch;
+//	DigitalInput bottomLS = RobotMap.intakeArmDownLimitSwitch;
+//	DigitalInput beamBreak = RobotMap.intakeBeamBreak;
 	public enum IntakeState {
 		RETRACTED, IN_MOTION, DOWN;
 	}
@@ -39,8 +39,8 @@ public class IntakeSubsystem extends Subsystem {
     }
     
     public void runIntake(double speed) { //motors start running
-    	leftMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, speed); 
-    	rightMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, speed);
+//    	leftMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, speed); 
+//    	rightMotor.set(com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput, speed);
     }
     
 //    public void actuate(boolean in) { //pneumatics
@@ -54,11 +54,12 @@ public class IntakeSubsystem extends Subsystem {
 //    }
     
     public void moveArm(double speed) {
-    	armMotor.set(RobotMap.PERCENT_OUTPUT, speed);
+//    	armMotor.set(RobotMap.PERCENT_OUTPUT, speed);
     }
     
     public boolean hasCube() {
-    	return beamBreak.get();
+//    	return beamBreak.get();
+    	return true;
     }
     
     public void setState(IntakeState state) {
@@ -66,7 +67,8 @@ public class IntakeSubsystem extends Subsystem {
     }
     
     public boolean doneMoving() {
-    	return (armMotor.getOutputCurrent() > 100.0 || topLS.get() || bottomLS.get());
+//    	return (armMotor.getOutputCurrent() > 100.0 || topLS.get() || bottomLS.get());
+    	return true;
     }
 }
 
