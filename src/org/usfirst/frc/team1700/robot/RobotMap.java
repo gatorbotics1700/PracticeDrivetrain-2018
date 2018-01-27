@@ -23,10 +23,10 @@ public class RobotMap {
 					       rightBackDrive = new TalonSRX(4);
 	
 	//INTAKE TALONS
-	public static TalonSRX elevatorMotor = new TalonSRX(5),
-						   leftIntakeMotor = new TalonSRX(6),
-						   rightIntakeMotor = new TalonSRX(7),
-						   intakeArmMotor = new TalonSRX(8);
+//	public static TalonSRX elevatorMotor = new TalonSRX(5),
+//						   leftIntakeMotor = new TalonSRX(6),
+//						   rightIntakeMotor = new TalonSRX(7),
+//						   intakeArmMotor = new TalonSRX(8);
 	
 	//TALON CONTROL MODES
 	public static final ControlMode PERCENT_OUTPUT = com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput,
@@ -40,13 +40,13 @@ public class RobotMap {
 	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 	
 	//DIGITAL SENSORS
-	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(8),
-							   elevatorBottomLimitSwitch = new DigitalInput(9),
-							   intakeBeamBreak = new DigitalInput(7),
-							   intakeArmUpLimitSwitch = new DigitalInput(6),
-							   intakeArmDownLimitSwitch = new DigitalInput(5);
+//	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(8),
+//							   elevatorBottomLimitSwitch = new DigitalInput(9),
+//							   intakeBeamBreak = new DigitalInput(7),
+//							   intakeArmUpLimitSwitch = new DigitalInput(6),
+//							   intakeArmDownLimitSwitch = new DigitalInput(5);
 							   
 	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(8), new DigitalInput(9)),
-							   rightDriveEncoder = new Encoder(new DigitalInput(6), new DigitalInput(7)),
-							   elevatorEncoder = new Encoder(4,5);
+							   rightDriveEncoder = new Encoder(new DigitalInput(6), new DigitalInput(7));
+//							   elevatorEncoder = new Encoder(4,5);
 }

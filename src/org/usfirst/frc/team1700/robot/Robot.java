@@ -115,14 +115,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		OI.elevatorUp.whileHeld(new ElevatorUpCommand());
-		OI.elevatorDown.whileHeld(new ElevatorDownCommand());
-		OI.elevatorUp.whenReleased(new ElevatorStopCommand());
-		OI.elevatorDown.whenReleased(new ElevatorStopCommand());
-		OI.letGo.whileHeld(new ReleaseIntakeCommand());
-		OI.letGo.whenReleased(new RunIntakeCommand());
-		OI.foldUp.whileHeld(new FoldIntakeCommand(true));
-		OI.foldUp.whenReleased(new FoldIntakeCommand(false));
+//		OI.elevatorUp.whileHeld(new ElevatorUpCommand());
+//		OI.elevatorDown.whileHeld(new ElevatorDownCommand());
+//		OI.elevatorUp.whenReleased(new ElevatorStopCommand());
+//		OI.elevatorDown.whenReleased(new ElevatorStopCommand());
+//		OI.letGo.whileHeld(new ReleaseIntakeCommand());
+//		OI.letGo.whenReleased(new RunIntakeCommand());
+//		OI.foldUp.whileHeld(new FoldIntakeCommand(true));
+//		OI.foldUp.whenReleased(new FoldIntakeCommand(false));
 	}
 
 	/**

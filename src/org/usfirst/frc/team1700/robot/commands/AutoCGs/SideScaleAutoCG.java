@@ -37,8 +37,8 @@ public class SideScaleAutoCG extends CommandGroup {
 		} else {
 			this.cancel();
 		}
-		addSequential(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
-		addSequential(new FoldIntakeCommand(false));
-		addSequential(new ReleaseIntakeCommand());
+//		addSequential(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
+//		addSequential(new FoldIntakeCommand(false));
+//		addSequential(new ReleaseIntakeCommand());
     }
 }
