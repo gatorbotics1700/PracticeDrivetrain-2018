@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAutoCG;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.SideScaleAutoCG;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorDownCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
@@ -46,7 +48,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto", new DriveCommand());
+		chooser.addDefault("Default Auto", new SideScaleAutoCG());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 	}
@@ -79,11 +81,10 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected(); //USE THIS TO DETERMINE WHICH SIDE THE SCALE AND SWITCH ARE ON
-
-		// schedule the autonomous command (example)
-		if (autonomousCommand != null)
+		autonomousCommand = chooser.getSelected();
+		if (autonomousCommand != null) {
 			autonomousCommand.start();
+		}
 	}
 
 	/**
@@ -92,7 +93,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
-		//DriveToDistance(12*12);
 	}
 
 	@Override

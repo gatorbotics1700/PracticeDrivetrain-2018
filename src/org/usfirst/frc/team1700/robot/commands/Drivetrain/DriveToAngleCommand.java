@@ -24,22 +24,26 @@ public class DriveToAngleCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    		Robot.driveSubsystem.navx.reset();
+    		Robot.driveSubsystem.resetNavX();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     		if (driveangle > 0) {
-    			Robot.driveSubsystem.driveTank(0.1, -0.1);
+    			Robot.driveSubsystem.driveTank(-0.5, 0.5);
     		}
     		else {
-    			Robot.driveSubsystem.driveTank(-0.1, 0.1);
+    			Robot.driveSubsystem.driveTank(0.5, -0.5);
     		}
+    	System.out.println(driveangle);
+    	double navxAngle = Robot.driveSubsystem.getNavXAngle() %360;
+    	System.out.println(navxAngle);
+    	System.out.println((driveangle - range <= navxAngle) && (navxAngle <= driveangle + range));
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    		double navxAngle = (Robot.driveSubsystem.navx.getAngle() - 180) %360 - 180;
+    	double navxAngle = Robot.driveSubsystem.getNavXAngle()%360;
 		return (driveangle - range <= navxAngle) && (navxAngle <= driveangle + range);
     }
 

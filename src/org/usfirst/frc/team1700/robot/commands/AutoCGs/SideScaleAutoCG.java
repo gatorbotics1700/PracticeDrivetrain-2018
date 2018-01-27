@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class SideScaleAutoCG extends CommandGroup {
 
-    public SideScaleAutoCG(boolean left) {
+    public SideScaleAutoCG() {
     	requires(Robot.driveSubsystem);
     	requires(Robot.elevatorSubsystem);
     	requires(Robot.intakeSubsystem);
@@ -24,13 +24,13 @@ public class SideScaleAutoCG extends CommandGroup {
     	int inchesFromScale = 300;
     	
     	addSequential(new DriveToDistanceCommand(inchesFromScale));
-    	String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		if(gameData.charAt(0) == 'L' && left)
+    	String gameData = "L";
+		if(gameData.charAt(0) == 'L')
 		{
 			//Put left auto code here
 			addSequential(new DriveToAngleCommand(90));
     		
-		} else if (gameData.charAt(0) !='L' && !left) {
+		} else if (gameData.charAt(0) !='L') {
 			addSequential(new DriveToAngleCommand(-90));
 			//Put right auto code here
     		

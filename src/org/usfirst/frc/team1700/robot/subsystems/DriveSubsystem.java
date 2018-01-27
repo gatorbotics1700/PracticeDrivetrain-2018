@@ -22,7 +22,7 @@ public class DriveSubsystem extends Subsystem {
 	Encoder LE = RobotMap.leftDriveEncoder;
 	Encoder RE = RobotMap.rightDriveEncoder;
 	public AHRS navx = RobotMap.ahrs;
-	public double ticksToInches = 10; //placeholder; change later
+	public double ticksToInches = 1; //placeholder; change later
 
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -35,6 +35,14 @@ public class DriveSubsystem extends Subsystem {
 		LB.set(RobotMap.PERCENT_OUTPUT, leftSpeed);
 		RF.set(RobotMap.PERCENT_OUTPUT, -rightSpeed);
 		RB.set(RobotMap.PERCENT_OUTPUT, -rightSpeed);
+	}
+	
+	public double getNavXAngle() {
+		return navx.getAngle();
+	}
+	
+	public void resetNavX() {
+		navx.reset();
 	}
 	
 	public int getLeftEncoderValue() {

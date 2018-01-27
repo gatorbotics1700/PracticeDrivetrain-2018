@@ -20,11 +20,16 @@ public class DriveToDistanceCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.driveSubsystem.resetEncoders();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveSubsystem.driveTank(0.2, 0.2);
+    	Robot.driveSubsystem.driveTank(-0.2, -0.2);
+    	System.out.println((Robot.driveSubsystem.getLeftEncoderValue() > distance/Robot.driveSubsystem.ticksToInches ||
+        		Robot.driveSubsystem.getRightEncoderValue() > distance/Robot.driveSubsystem.ticksToInches));
+    	System.out.println(Robot.driveSubsystem.getLeftEncoderValue());
+    	System.out.println(Robot.driveSubsystem.getRightEncoderValue());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -17,14 +17,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
  */
 public class CenterSwitchAutoCG extends CommandGroup {
 
-    public CenterSwitchAutoCG(boolean left) {
+    public CenterSwitchAutoCG() {
     	requires(Robot.driveSubsystem);
     	requires(Robot.elevatorSubsystem);
     	requires(Robot.intakeSubsystem);
     	
     	//TODO: Set all constants
     	int angle;
-    	String gameData = DriverStation.getInstance().getGameSpecificMessage();
+    	//String gameData = DriverStation.getInstance().getGameSpecificMessage();
+    	String gameData = "L";
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
