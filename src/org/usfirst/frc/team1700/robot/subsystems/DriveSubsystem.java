@@ -43,6 +43,8 @@ public class DriveSubsystem extends Subsystem {
 	
 	public void resetNavX() {
 		navx.reset();
+		System.out.println("UPDATE RATE:");
+		System.out.println(navx.getActualUpdateRate());
 	}
 	
 	public int getLeftEncoderValue() {
