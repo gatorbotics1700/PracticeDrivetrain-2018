@@ -37,7 +37,7 @@ public class RobotMap {
 //								 rightActuator = new DoubleSolenoid(2, 3);
 	
 	//NAVX
-	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+	public static AHRS ahrs = new AHRS(SerialPort.Port.kMXP, 200); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 	
 	//DIGITAL SENSORS
 //	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(8),
