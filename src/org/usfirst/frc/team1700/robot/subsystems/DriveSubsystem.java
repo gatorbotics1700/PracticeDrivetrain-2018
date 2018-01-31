@@ -31,10 +31,10 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	public void driveTank(double leftSpeed, double rightSpeed) {
-		LF.set(RobotMap.PERCENT_OUTPUT, leftSpeed);
-		LB.set(RobotMap.PERCENT_OUTPUT, leftSpeed);
-		RF.set(RobotMap.PERCENT_OUTPUT, -rightSpeed);
-		RB.set(RobotMap.PERCENT_OUTPUT, -rightSpeed);
+		LF.set(RobotMap.PERCENT_OUTPUT, -leftSpeed);
+		LB.set(RobotMap.PERCENT_OUTPUT, -leftSpeed);
+		RF.set(RobotMap.PERCENT_OUTPUT, rightSpeed);
+		RB.set(RobotMap.PERCENT_OUTPUT, rightSpeed);
 	}
 	
 	public double getNavXAngle() {
