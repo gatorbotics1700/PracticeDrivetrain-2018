@@ -7,12 +7,14 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
  */
-public class DriveSubsystem extends Subsystem {
+public class DriveSubsystem extends PIDSubsystem {
+
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 	TalonSRX LF = RobotMap.leftFrontDrive;
@@ -24,10 +26,19 @@ public class DriveSubsystem extends Subsystem {
 	public AHRS navx = RobotMap.ahrs;
 	public double ticksToInches = 1; //placeholder; change later
 
+
+	public DriveSubsystem() {
+		super("Drive", 2.0,0.0,0.0);// change values later
+		setSetpoint(0.0);
+		setAbsoluteTolerance(1.0);
+		getPIDController().disable();
+		// TODO Auto-generated constructor stub
+	}
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new DriveCommand());
+		setDefaultCommand(new DriveCommand());	
 	}
 	
 	public void driveTank(double leftSpeed, double rightSpeed) {
@@ -58,6 +69,31 @@ public class DriveSubsystem extends Subsystem {
 	public void resetEncoders() {
 		LE.reset();
 		RE.reset();
+	}
+
+	@Override
+	protected double returnPIDInput() {
+		// TODO Auto-generated method stub
+		return navx.getAngle();
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		// TODO Auto-generated method stub
+		this.driveTank(output, -output);
+	}
+	
+	public void setDesiredAngle(double angle) {
+		if (angle != 0.0) {
+			getPIDController().enable();
+			setSetpoint(angle);
+		} else {
+			getPIDController().disable();
+		}
+	}
+	
+	public boolean atAngle() {
+		return onTarget();
 	}
 	
 }
