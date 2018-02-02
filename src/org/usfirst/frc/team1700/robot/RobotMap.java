@@ -47,7 +47,7 @@ public class RobotMap {
 //							   intakeArmUpLimitSwitch = new DigitalInput(6),
 //							   intakeArmDownLimitSwitch = new DigitalInput(5);
 							   
-	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(8), new DigitalInput(9)),
-							   rightDriveEncoder = new Encoder(new DigitalInput(6), new DigitalInput(7));
+	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(0), new DigitalInput(1)),
+							   rightDriveEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3));
 //							   elevatorEncoder = new Encoder(4,5);
 }

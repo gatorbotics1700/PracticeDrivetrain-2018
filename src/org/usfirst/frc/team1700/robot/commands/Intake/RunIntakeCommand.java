@@ -34,7 +34,6 @@ public class RunIntakeCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	System.out.println("Just finished Running Intake!");
     	// stop wheels
     	Robot.intakeSubsystem.runIntake(0);
     }

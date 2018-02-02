@@ -28,7 +28,7 @@ public class DriveSubsystem extends PIDSubsystem {
 
 
 	public DriveSubsystem() {
-		super("Drive", 2.0,0.0,0.0);// change values later
+		super("Drive", 1.0,0.0,0.0);// change values later
 		setSetpoint(0.0);
 		setAbsoluteTolerance(1.0);
 		getPIDController().disable();
@@ -53,9 +53,12 @@ public class DriveSubsystem extends PIDSubsystem {
 	}
 	
 	public void resetNavX() {
-		navx.reset();
+		System.out.println("UR BEFORE RESET:");
+		System.out.println(navx.getActualUpdateRate());
+		navx.resetDisplacement();
 		System.out.println("UPDATE RATE:");
 		System.out.println(navx.getActualUpdateRate());
+		System.out.println(navx.getUpdateCount());
 	}
 	
 	public int getLeftEncoderValue() {
@@ -74,18 +77,24 @@ public class DriveSubsystem extends PIDSubsystem {
 	@Override
 	protected double returnPIDInput() {
 		// TODO Auto-generated method stub
-		return navx.getAngle();
+		System.out.println("ANGLE:");
+		System.out.println(-navx.getAngle()%360);
+		return -navx.getAngle()%360;
 	}
 
 	@Override
 	protected void usePIDOutput(double output) {
 		// TODO Auto-generated method stub
-		this.driveTank(output, -output);
+		System.out.println("PID OUTPUT:");
+		System.out.println(output);
+		this.driveTank(0.5*output, -0.5*output);
 	}
 	
 	public void setDesiredAngle(double angle) {
 		if (angle != 0.0) {
 			getPIDController().enable();
+			System.out.println("DESIRED ANGLE:");
+			System.out.println(angle);
 			setSetpoint(angle);
 		} else {
 			getPIDController().disable();
@@ -93,6 +102,7 @@ public class DriveSubsystem extends PIDSubsystem {
 	}
 	
 	public boolean atAngle() {
+		System.out.println(onTarget());
 		return onTarget();
 	}
 	
