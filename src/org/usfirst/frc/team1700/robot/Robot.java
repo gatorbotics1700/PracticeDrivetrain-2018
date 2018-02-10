@@ -14,6 +14,7 @@ import org.usfirst.frc.team1700.robot.commands.AutoCGs.SideScaleAutoCG;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorDownCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
@@ -51,6 +52,7 @@ public class Robot extends IterativeRobot {
 		chooser.addDefault("Default Auto", new SideScaleAutoCG());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
+		System.out.println("ROBOT INITIATED!! :)");
 	}
 
 	/**
@@ -85,6 +87,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
+		System.out.println("AUTO INIT!!");
 	}
 
 	/**
@@ -104,7 +107,7 @@ public class Robot extends IterativeRobot {
 		if (autonomousCommand != null)
 			autonomousCommand.cancel();
 		new DriveCommand();
-		System.out.println("TeleopInit!!");
+		System.out.println("\nTELEOPINIT!!\n");
 		new RunIntakeCommand();
 		new FoldIntakeCommand(false);
 	}
@@ -115,10 +118,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-//		OI.elevatorUp.whileHeld(new ElevatorUpCommand());
-//		OI.elevatorDown.whileHeld(new ElevatorDownCommand());
-//		OI.elevatorUp.whenReleased(new ElevatorStopCommand());
-//		OI.elevatorDown.whenReleased(new ElevatorStopCommand());
+		OI.elevatorUp.whileHeld(new ElevatorUpCommand());
+		OI.elevatorDown.whileHeld(new ElevatorDownCommand());
+		OI.elevatorUp.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
+		OI.elevatorDown.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
 //		OI.letGo.whileHeld(new ReleaseIntakeCommand());
 //		OI.letGo.whenReleased(new RunIntakeCommand());
 //		OI.foldUp.whileHeld(new FoldIntakeCommand(true));

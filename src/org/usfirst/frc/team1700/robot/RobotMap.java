@@ -24,10 +24,9 @@ public class RobotMap {
 					       rightBackDrive = new TalonSRX(4);
 	
 	//INTAKE TALONS
-//	public static TalonSRX elevatorMotor = new TalonSRX(5),
-//						   leftIntakeMotor = new TalonSRX(6),
-//						   rightIntakeMotor = new TalonSRX(7),
-//						   intakeArmMotor = new TalonSRX(8);
+	public static TalonSRX elevatorMotor = new TalonSRX(6),
+						   leftIntakeMotor = new TalonSRX(5),
+						   rightIntakeMotor = new TalonSRX(7);
 	
 	//TALON CONTROL MODES
 	public static final ControlMode PERCENT_OUTPUT = com.ctre.phoenix.motorcontrol.ControlMode.PercentOutput,
@@ -48,6 +47,6 @@ public class RobotMap {
 //							   intakeArmDownLimitSwitch = new DigitalInput(5);
 							   
 	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(0), new DigitalInput(1)),
-							   rightDriveEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3));
-//							   elevatorEncoder = new Encoder(4,5);
+							   rightDriveEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3)),
+							   elevatorEncoder = new Encoder(new DigitalInput(4),new DigitalInput (5));
 }

@@ -17,13 +17,14 @@ public class ElevatorUpCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	Robot.elevatorSubsystem.disablePID();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    		Robot.elevatorSubsystem.elevatorMove(1);
-    		//Caution- elevator will move up forever
-    		//1 = up, 0 = stopped, -1 = down
+		Robot.elevatorSubsystem.elevatorMove(0.1);
+		//Caution- elevator will move up forever
+		//1 = up, 0 = stopped, -1 = down
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -30,7 +30,7 @@ public class DriveSubsystem extends PIDSubsystem {
 	public DriveSubsystem() {
 		super("Drive", 1.0,0.0,0.0);// change values later
 		setSetpoint(0.0);
-		setAbsoluteTolerance(1.0);
+		setAbsoluteTolerance(0.5);
 		getPIDController().disable();
 		// TODO Auto-generated constructor stub
 	}
@@ -38,7 +38,7 @@ public class DriveSubsystem extends PIDSubsystem {
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
-		setDefaultCommand(new DriveCommand());	
+		setDefaultCommand(new DriveCommand());
 	}
 	
 	public void driveTank(double leftSpeed, double rightSpeed) {

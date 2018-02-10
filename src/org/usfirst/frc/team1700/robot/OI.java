@@ -39,8 +39,8 @@ public class OI {
 	public static Joystick leftJoy = new Joystick(0);
 	public static Joystick rightJoy = new Joystick(1);
 	public static Joystick coJoy = new Joystick(2);
-	public static Button elevatorUp = new JoystickButton(coJoy, 2);
-	public static Button elevatorDown = new JoystickButton(coJoy, 3);
+	public static Button elevatorUp = new JoystickButton(coJoy, 3);
+	public static Button elevatorDown = new JoystickButton(coJoy, 2);
 	public static Button letGo = new JoystickButton(coJoy, 4);
 	public static Button foldUp = new JoystickButton(coJoy, 1);
 }
