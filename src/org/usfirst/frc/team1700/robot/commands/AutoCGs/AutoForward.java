@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1700.robot.commands;
+package org.usfirst.frc.team1700.robot.commands.AutoCGs;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 

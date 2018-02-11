@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class DriveSubsystem extends PIDSubsystem {
+public class DriveSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
@@ -26,14 +26,6 @@ public class DriveSubsystem extends PIDSubsystem {
 	public AHRS navx = RobotMap.ahrs;
 	public double ticksToInches = 1; //placeholder; change later
 
-
-	public DriveSubsystem() {
-		super("Drive", 1.0,0.0,0.0);// change values later
-		setSetpoint(0.0);
-		setAbsoluteTolerance(0.5);
-		getPIDController().disable();
-		// TODO Auto-generated constructor stub
-	}
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -53,12 +45,7 @@ public class DriveSubsystem extends PIDSubsystem {
 	}
 	
 	public void resetNavX() {
-		System.out.println("UR BEFORE RESET:");
-		System.out.println(navx.getActualUpdateRate());
 		navx.resetDisplacement();
-		System.out.println("UPDATE RATE:");
-		System.out.println(navx.getActualUpdateRate());
-		System.out.println(navx.getUpdateCount());
 	}
 	
 	public int getLeftEncoderValue() {
@@ -73,37 +60,9 @@ public class DriveSubsystem extends PIDSubsystem {
 		LE.reset();
 		RE.reset();
 	}
-
-	@Override
-	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
-		System.out.println("ANGLE:");
-		System.out.println(-navx.getAngle()%360);
-		return -navx.getAngle()%360;
-	}
-
-	@Override
-	protected void usePIDOutput(double output) {
-		// TODO Auto-generated method stub
-		System.out.println("PID OUTPUT:");
-		System.out.println(output);
-		this.driveTank(0.5*output, -0.5*output);
-	}
 	
-	public void setDesiredAngle(double angle) {
-		if (angle != 0.0) {
-			getPIDController().enable();
-			System.out.println("DESIRED ANGLE:");
-			System.out.println(angle);
-			setSetpoint(angle);
-		} else {
-			getPIDController().disable();
-		}
-	}
-	
-	public boolean atAngle() {
-		System.out.println(onTarget());
-		return onTarget();
+	public boolean nearZero(double number, double tolerance) {
+		return (Math.abs(number)<tolerance);
 	}
 	
 }
