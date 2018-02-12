@@ -3,9 +3,11 @@ package org.usfirst.frc.team1700.robot.commands.AutoCGs;
 import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToAngleCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToDistanceCommand;
+import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveUntilOverCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
+import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem.IntakeState;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -23,29 +25,26 @@ public class CrossScaleAutoCG extends CommandGroup {
     	int inchesFromSwitchTurn = 200;
     	int scaleLength = 180;
     	int remainingDistanceToScale = 200;
+    	int angle = 90;
     	
     	addSequential(new DriveToDistanceCommand(inchesFromSwitchTurn));
     	String gameData = "L";
     	if (gameData.charAt(0)=='L') {
-    		addSequential(new DriveToAngleCommand(-90));
-    		addSequential(new DriveToDistanceCommand(scaleLength));
-    		addSequential(new DriveToAngleCommand(90));
-    		addSequential(new DriveToDistanceCommand(remainingDistanceToScale));
-    		addSequential(new DriveToAngleCommand(90));
+    		angle = -90;
     	}
-    	else if (gameData.charAt(0)=='R'){
-    		addSequential(new DriveToAngleCommand(90));
-    		addSequential(new DriveToDistanceCommand(scaleLength));
-    		addSequential(new DriveToAngleCommand(-90));
-    		addSequential(new DriveToDistanceCommand(remainingDistanceToScale));
-    		addSequential(new DriveToAngleCommand(-90));
-    	}
-    	else {
-			this.cancel();
-		}
+		addSequential(new DriveToAngleCommand(angle));
+		addSequential(new DriveToDistanceCommand(scaleLength));
+		addSequential(new DriveToAngleCommand(-angle));
+		addSequential(new DriveToDistanceCommand(remainingDistanceToScale));
+		addSequential(new DriveToAngleCommand(-angle));
     	addSequential(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
     	addSequential(new FoldIntakeCommand(false));
-    	addSequential(new ReleaseIntakeCommand());
+    	addSequential(new DriveUntilOverCommand());
+    	if (Robot.intakeSubsystem.intakeState == IntakeState.OVER) {
+    		addSequential(new ReleaseIntakeCommand());
+    	} else {
+    		this.cancel();
+    	}
     	
         // Add Commands here:
         // e.g. addSequential(new Command1());

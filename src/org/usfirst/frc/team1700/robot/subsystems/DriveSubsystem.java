@@ -3,6 +3,7 @@ package org.usfirst.frc.team1700.robot.subsystems;
 import org.usfirst.frc.team1700.robot.RobotMap;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -34,10 +35,10 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	public void driveTank(double leftSpeed, double rightSpeed) {
-		LF.set(RobotMap.PERCENT_OUTPUT, -leftSpeed);
-		LB.set(RobotMap.PERCENT_OUTPUT, -leftSpeed);
-		RF.set(RobotMap.PERCENT_OUTPUT, rightSpeed);
-		RB.set(RobotMap.PERCENT_OUTPUT, rightSpeed);
+		LF.set(ControlMode.PercentOutput, -leftSpeed);
+		LB.set(ControlMode.PercentOutput, -leftSpeed);
+		RF.set(ControlMode.PercentOutput, rightSpeed);
+		RB.set(ControlMode.PercentOutput, rightSpeed);
 	}
 	
 	public double getNavXAngle() {

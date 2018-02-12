@@ -122,10 +122,10 @@ public class Robot extends IterativeRobot {
 		OI.elevatorDown.whileHeld(new ElevatorDownCommand());
 		OI.elevatorUp.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
 		OI.elevatorDown.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
-//		OI.letGo.whileHeld(new ReleaseIntakeCommand());
-//		OI.letGo.whenReleased(new RunIntakeCommand());
-//		OI.foldUp.whileHeld(new FoldIntakeCommand(true));
-//		OI.foldUp.whenReleased(new FoldIntakeCommand(false));
+		OI.letGo.whileHeld(new ReleaseIntakeCommand());
+		OI.letGo.whenReleased(new RunIntakeCommand());
+		OI.foldUp.whileHeld(new FoldIntakeCommand(true));
+		OI.foldUp.whenReleased(new FoldIntakeCommand(false));
 	}
 
 	/**

@@ -22,8 +22,8 @@ public abstract class DriveAutoCommand extends Command {
 	private double maxAngleSpeed = 0.5;
 	private double distanceProportion = 1.0;
 	private double maxDistanceSpeed = 0.5;
-	private double angleTolerance;
-	private double distanceTolerance;
+	private double angleTolerance = 0.5;
+	private double distanceTolerance = 1;
 
     // Called just before this Command runs the first time
     protected void initialize() {

@@ -25,28 +25,15 @@ public class FoldIntakeCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (retracting && Robot.intakeSubsystem.intakeState == IntakeState.DOWN) {
-    		Robot.intakeSubsystem.moveArm(-0.5);
-    		Robot.intakeSubsystem.setState(IntakeState.IN_MOTION);
-    	} else if (!retracting && Robot.intakeSubsystem.intakeState == IntakeState.RETRACTED){
-    		Robot.intakeSubsystem.moveArm(0.5);
-    		Robot.intakeSubsystem.setState(IntakeState.IN_MOTION);
-    	}
+    	Robot.intakeSubsystem.actuate(retracting);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.intakeSubsystem.doneMoving();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intakeSubsystem.moveArm(0);
-    	if (retracting) {
-    		Robot.intakeSubsystem.setState(IntakeState.RETRACTED);
-    	} else {
-    		Robot.intakeSubsystem.setState(IntakeState.DOWN);
-    	}
     }
 
     // Called when another command which requires one or more of the same

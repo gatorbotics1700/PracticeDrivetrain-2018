@@ -3,6 +3,7 @@ package org.usfirst.frc.team1700.robot.subsystems;
 import org.usfirst.frc.team1700.robot.RobotMap;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -47,7 +48,7 @@ public class ElevatorSubsystem extends PIDSubsystem {
     }
     
     public void elevatorMove(double speed) {
-		EM.set(RobotMap.PERCENT_OUTPUT, speed);
+		EM.set(ControlMode.PercentOutput, speed);
     }
     
     public void disablePID() {
