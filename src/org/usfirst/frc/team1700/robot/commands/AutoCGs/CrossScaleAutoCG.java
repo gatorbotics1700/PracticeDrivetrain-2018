@@ -22,16 +22,21 @@ public class CrossScaleAutoCG extends CommandGroup {
     	requires(Robot.intakeSubsystem);
         
     	//TODO: Actually find these values
+    	//these values will dictate when the robot turns (we need the precise values) 
     	int inchesFromSwitchTurn = 200;
     	int scaleLength = 180;
     	int remainingDistanceToScale = 200;
     	int angle = 90;
     	
+    	//this command causes the robot to drive forward until it reaches 
+    	//the point where it should turn at the switch
     	addSequential(new DriveToDistanceCommand(inchesFromSwitchTurn));
     	String gameData = "L";
     	if (gameData.charAt(0)=='L') {
     		angle = -90;
     	}
+    	//all of these commands do a similar thing to the one above, dictating when 
+    	//the robot should drive forward and when it should turn
 		addSequential(new DriveToAngleCommand(angle));
 		addSequential(new DriveToDistanceCommand(scaleLength));
 		addSequential(new DriveToAngleCommand(-angle));
@@ -40,6 +45,9 @@ public class CrossScaleAutoCG extends CommandGroup {
     	addSequential(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
     	addSequential(new FoldIntakeCommand(false));
     	addSequential(new DriveUntilOverCommand());
+    	
+    	//when the intake state equals above switch/scale, this code will make the robot
+    	//drop the cube
     	if (Robot.intakeSubsystem.intakeState == IntakeState.OVER) {
     		addSequential(new ReleaseIntakeCommand());
     	} else {
