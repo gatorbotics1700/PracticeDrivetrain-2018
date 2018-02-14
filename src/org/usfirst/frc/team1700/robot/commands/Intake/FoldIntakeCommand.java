@@ -30,6 +30,7 @@ public class FoldIntakeCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	return true;
     }
 
     // Called once after isFinished returns true
@@ -39,8 +40,5 @@ public class FoldIntakeCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	if (Robot.intakeSubsystem.intakeState == IntakeState.IN_MOTION) {
-    		System.out.println("Arm still moving in code, check whether it's moving in real life!");
-    	}
     }
 }

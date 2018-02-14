@@ -7,6 +7,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -24,6 +25,7 @@ public class IntakeSubsystem extends Subsystem {
 	DoubleSolenoid RA = RobotMap.rightActuator;
 	AnalogInput leftUltra = RobotMap.leftUltrasonic;
 	AnalogInput rightUltra = RobotMap.rightUltrasonic;
+	Compressor compressor = RobotMap.compressor;
 	
 	public enum IntakeState {
 		OVER, NOT_YET;
@@ -31,8 +33,10 @@ public class IntakeSubsystem extends Subsystem {
 	public IntakeState intakeState;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
+
 	public IntakeSubsystem() {
 		intakeState = IntakeState.NOT_YET;
+		compressor.setClosedLoopControl(true);
 	}
 
     public void initDefaultCommand() {

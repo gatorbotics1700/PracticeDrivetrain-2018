@@ -5,6 +5,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
@@ -32,6 +33,8 @@ public class RobotMap {
 	// PNEUMATICS
 	public static DoubleSolenoid leftActuator = new DoubleSolenoid(0, 1),
 								 rightActuator = new DoubleSolenoid(2, 3);
+	
+	public static Compressor compressor = new Compressor(0); 
 	
 	// NAVX
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) 200); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
