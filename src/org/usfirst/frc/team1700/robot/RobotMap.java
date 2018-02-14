@@ -7,6 +7,7 @@ import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
@@ -41,13 +42,15 @@ public class RobotMap {
 	
 	// DIGITAL SENSORS
 	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(8),
-							   elevatorBottomLimitSwitch = new DigitalInput(9),
+//							   elevatorBottomLimitSwitch = new DigitalInput(9),
 							   intakeLeftLimitSwitch = new DigitalInput(6),
 							   intakeRightLimitSwitch = new DigitalInput(7);
 							   
-	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(0), new DigitalInput(1)),
+	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(9), new DigitalInput(1)),
 							   rightDriveEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3)),
 							   elevatorEncoder = new Encoder(new DigitalInput(4),new DigitalInput (5));
+	
+	public static DigitalOutput ultrasonicActivator = new DigitalOutput(0);
 	
 	// ANALOG SENSORS
 	public static AnalogInput leftUltrasonic = new AnalogInput(0),
