@@ -26,7 +26,9 @@ public class DriveSubsystem extends Subsystem {
 	Encoder RE = RobotMap.rightDriveEncoder;
 	public AHRS navx = RobotMap.ahrs;
 	public double ticksToInches = 1; //placeholder; change later
-
+	public enum AngleType {
+		PITCH, YAW, ROLL;
+	}
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -41,8 +43,17 @@ public class DriveSubsystem extends Subsystem {
 		RB.set(ControlMode.PercentOutput, rightSpeed);
 	}
 	
-	public double getNavXAngle() {
-		return navx.getAngle();
+	public double getNavXAngle(AngleType angleType) {
+		if (angleType == AngleType.YAW) {
+			return navx.getYaw();
+		} else if (angleType == AngleType.PITCH) {
+			return navx.getPitch();
+		} else if (angleType == AngleType.ROLL) {
+			return navx.getRoll();
+		} else {
+			System.out.println("ERROR: The angle type specified does not exist!");
+			return 1000;
+		}
 	}
 	
 	public void resetNavX() {

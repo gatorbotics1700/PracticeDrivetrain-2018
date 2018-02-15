@@ -22,6 +22,7 @@ import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem;
+import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -122,6 +123,10 @@ public class Robot extends IterativeRobot {
 		OI.elevatorDown.whileHeld(new ElevatorDownCommand());
 		OI.elevatorUp.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
 		OI.elevatorDown.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
+		if (Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.PITCH)) <= 1 || Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.ROLL)) <= 1) {
+			new ElevatorDownCommand();
+			new FoldIntakeCommand(true);
+		}
 		OI.letGo.whileHeld(new ReleaseIntakeCommand());
 		OI.letGo.whenReleased(new RunIntakeCommand());
 		OI.foldUp.whileHeld(new FoldIntakeCommand(true));
