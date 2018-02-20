@@ -110,6 +110,7 @@ public class Robot extends IterativeRobot {
 		System.out.println("\nTELEOPINIT!!\n");
 		new RunIntakeCommand();
 		new FoldIntakeCommand(false);
+		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
 	}
 
 	/**
@@ -118,9 +119,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		OI.elevatorUp.whileHeld(new ElevatorUpCommand());
-		OI.elevatorDown.whileHeld(new ElevatorDownCommand());
-		OI.elevatorUp.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
 		OI.elevatorDown.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
 		OI.letGo.whileHeld(new ReleaseIntakeCommand());
 		OI.letGo.whenReleased(new RunIntakeCommand());

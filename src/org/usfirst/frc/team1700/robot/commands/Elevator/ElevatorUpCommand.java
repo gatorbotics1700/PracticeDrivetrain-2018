@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1700.robot.commands.Elevator;
 
+import org.usfirst.frc.team1700.robot.OI;
 import org.usfirst.frc.team1700.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,7 +13,7 @@ public class ElevatorUpCommand extends Command {
     public ElevatorUpCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    		requires(Robot.elevatorSubsystem);
+    	requires(Robot.elevatorSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +23,7 @@ public class ElevatorUpCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.elevatorSubsystem.elevatorMove(0.1);
+		Robot.elevatorSubsystem.elevatorMove(OI.coJoy.getRawAxis(1));
 		//Caution- elevator will move up forever
 		//1 = up, 0 = stopped, -1 = down
     }
