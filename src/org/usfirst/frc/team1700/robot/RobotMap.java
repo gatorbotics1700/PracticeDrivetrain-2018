@@ -28,7 +28,7 @@ public class RobotMap {
 	public static TalonSRX leftBackDrive = new TalonSRX(5),
 					       rightBackDrive = new TalonSRX(6);
 	
-	// INTAKE TALONS
+	// OTHER TALONS
 	public static TalonSRX elevatorMotor = new TalonSRX(7),
 						   leftIntakeMotor = new TalonSRX(1),
 						   rightIntakeMotor = new TalonSRX(2);

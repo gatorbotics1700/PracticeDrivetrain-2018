@@ -16,8 +16,7 @@ public class RunIntakeCommand extends Command {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() { //at the beginning of intake, the claws should be open so they can receive the cube
-    	Robot.intakeSubsystem.grab(false);
+    protected void initialize() {
     }
 
     // Called repeatedly when this Command is scheduled to run

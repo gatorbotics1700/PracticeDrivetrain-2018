@@ -29,7 +29,7 @@ public abstract class DriveAutoCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	this.requires(Robot.driveSubsystem);
-    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW);
+    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.ROLL);
     	currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
     	angle += currentAngle;
     	distance += currentDistance;
@@ -65,7 +65,7 @@ public abstract class DriveAutoCommand extends Command {
     	}
     	
     	// If the robot is tilting forward or backward, stop!
-    	if (Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.PITCH)) <= 1 || Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.ROLL)) <= 1) {
+    	if (Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.YAW)) <= 30 || Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.YAW)) <= 30) {
     		leftSpeed = 0;
     		rightSpeed = 0;
     	} else {

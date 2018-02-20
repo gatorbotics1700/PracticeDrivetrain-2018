@@ -38,12 +38,11 @@ public class IntakeSubsystem extends Subsystem {
 
 	public IntakeSubsystem() {
 		intakeState = IntakeState.NOT_YET;
-		compressor.setClosedLoopControl(true);
+//		compressor.setClosedLoopControl(true);
 	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        setDefaultCommand(new RunIntakeCommand());
     }
     
     public void runIntake(double speed) { //motors start running

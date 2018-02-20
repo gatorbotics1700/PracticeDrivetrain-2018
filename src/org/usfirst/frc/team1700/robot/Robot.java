@@ -110,7 +110,6 @@ public class Robot extends IterativeRobot {
 		new DriveCommand();
 		System.out.println("\nTELEOPINIT!!\n");
 		new RunIntakeCommand();
-		new FoldIntakeCommand(false);
 		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
 	}
 
@@ -125,8 +124,8 @@ public class Robot extends IterativeRobot {
 			new ElevatorDownCommand();
 			new FoldIntakeCommand(true);
 		}
-		OI.letGo.whileHeld(new ReleaseIntakeCommand());
-		OI.letGo.whenReleased(new RunIntakeCommand());
+//		OI.letGo.whileHeld(new ReleaseIntakeCommand());
+//		OI.letGo.whenReleased(new RunIntakeCommand());
 		OI.foldUp.whileHeld(new FoldIntakeCommand(true));
 		OI.foldUp.whenReleased(new FoldIntakeCommand(false));
 	}
