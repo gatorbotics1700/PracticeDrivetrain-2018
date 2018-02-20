@@ -5,6 +5,7 @@ import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -18,15 +19,17 @@ public class DriveSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	TalonSRX LF = RobotMap.leftFrontDrive;
+	VictorSPX LF = RobotMap.leftFrontDrive;
 	TalonSRX LB = RobotMap.leftBackDrive;
-	TalonSRX RF = RobotMap.rightFrontDrive;
+	VictorSPX RF = RobotMap.rightFrontDrive;
 	TalonSRX RB = RobotMap.rightBackDrive;
 	Encoder LE = RobotMap.leftDriveEncoder;
 	Encoder RE = RobotMap.rightDriveEncoder;
 	public AHRS navx = RobotMap.ahrs;
 	public double ticksToInches = 1; //placeholder; change later
-
+	public enum AngleType {
+		PITCH, YAW, ROLL;
+	}
 	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
@@ -41,8 +44,17 @@ public class DriveSubsystem extends Subsystem {
 		RB.set(ControlMode.PercentOutput, rightSpeed);
 	}
 	
-	public double getNavXAngle() {
-		return navx.getAngle();
+	public double getNavXAngle(AngleType angleType) {
+		if (angleType == AngleType.YAW) {
+			return navx.getYaw();
+		} else if (angleType == AngleType.PITCH) {
+			return navx.getPitch();
+		} else if (angleType == AngleType.ROLL) {
+			return navx.getRoll();
+		} else {
+			System.out.println("ERROR: The angle type specified does not exist!");
+			return 0;
+		}
 	}
 	
 	public void resetNavX() {

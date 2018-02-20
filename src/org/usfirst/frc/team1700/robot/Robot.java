@@ -20,6 +20,7 @@ import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem;
 
@@ -120,6 +121,10 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		OI.elevatorDown.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
+		if (Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.PITCH)) <= 1 || Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.ROLL)) <= 1) {
+			new ElevatorDownCommand();
+			new FoldIntakeCommand(true);
+		}
 		OI.letGo.whileHeld(new ReleaseIntakeCommand());
 		OI.letGo.whenReleased(new RunIntakeCommand());
 		OI.foldUp.whileHeld(new FoldIntakeCommand(true));

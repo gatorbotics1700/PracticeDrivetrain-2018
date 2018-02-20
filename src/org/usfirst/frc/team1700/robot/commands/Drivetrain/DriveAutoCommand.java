@@ -1,6 +1,7 @@
 package org.usfirst.frc.team1700.robot.commands.Drivetrain;
 
 import org.usfirst.frc.team1700.robot.Robot;
+import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -28,7 +29,7 @@ public abstract class DriveAutoCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	this.requires(Robot.driveSubsystem);
-    	currentAngle = Robot.driveSubsystem.getNavXAngle();
+    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW);
     	currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
     	angle += currentAngle;
     	distance += currentDistance;
@@ -63,8 +64,14 @@ public abstract class DriveAutoCommand extends Command {
     		distanceSpeed = Math.copySign(Math.max(minSpeed, distDifference*distanceProportion), distDifference);
     	}
     	
-    	leftSpeed = distanceSpeed + angleSpeed;
-    	rightSpeed = distanceSpeed - angleSpeed;
+    	// If the robot is tilting forward or backward, stop!
+    	if (Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.PITCH)) <= 1 || Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.ROLL)) <= 1) {
+    		leftSpeed = 0;
+    		rightSpeed = 0;
+    	} else {
+	    	leftSpeed = distanceSpeed + angleSpeed;
+	    	rightSpeed = distanceSpeed - angleSpeed;
+    	}
     	
     	Robot.driveSubsystem.driveTank(leftSpeed, rightSpeed);
     }

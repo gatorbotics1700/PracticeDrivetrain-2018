@@ -43,4 +43,5 @@ public class OI {
 	public static Button elevatorDown = new JoystickButton(coJoy, 2);
 	public static Button letGo = new JoystickButton(coJoy, 4);
 	public static Button foldUp = new JoystickButton(coJoy, 1);
+	
 }
