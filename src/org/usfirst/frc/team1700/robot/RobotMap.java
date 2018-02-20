@@ -2,6 +2,7 @@ package org.usfirst.frc.team1700.robot;
 
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -21,10 +22,12 @@ import edu.wpi.first.wpilibj.SerialPort;
  */
 public class RobotMap {
 	// DRIVE TALONS
-	public static TalonSRX leftFrontDrive = new TalonSRX(1),
-					       leftBackDrive = new TalonSRX(2),
-					       rightFrontDrive = new TalonSRX(3),
-					       rightBackDrive = new TalonSRX(4);
+	public static VictorSPX leftFrontDrive = new VictorSPX(3),
+					        rightFrontDrive = new VictorSPX(4);
+					       
+
+	public static TalonSRX leftBackDrive = new TalonSRX(5),
+					       rightBackDrive = new TalonSRX(6);
 	
 	// INTAKE TALONS
 	public static TalonSRX elevatorMotor = new TalonSRX(6),
@@ -42,7 +45,7 @@ public class RobotMap {
 	
 	// DIGITAL SENSORS
 	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(8),
-//							   elevatorBottomLimitSwitch = new DigitalInput(9),
+							   elevatorBottomLimitSwitch = new DigitalInput(11),
 							   intakeLeftLimitSwitch = new DigitalInput(6),
 							   intakeRightLimitSwitch = new DigitalInput(7);
 							   

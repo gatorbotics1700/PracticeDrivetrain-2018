@@ -5,6 +5,7 @@ import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -18,9 +19,9 @@ public class DriveSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	TalonSRX LF = RobotMap.leftFrontDrive;
+	VictorSPX LF = RobotMap.leftFrontDrive;
 	TalonSRX LB = RobotMap.leftBackDrive;
-	TalonSRX RF = RobotMap.rightFrontDrive;
+	VictorSPX RF = RobotMap.rightFrontDrive;
 	TalonSRX RB = RobotMap.rightBackDrive;
 	Encoder LE = RobotMap.leftDriveEncoder;
 	Encoder RE = RobotMap.rightDriveEncoder;
@@ -52,7 +53,7 @@ public class DriveSubsystem extends Subsystem {
 			return navx.getRoll();
 		} else {
 			System.out.println("ERROR: The angle type specified does not exist!");
-			return 1000;
+			return 0;
 		}
 	}
 	

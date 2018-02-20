@@ -20,9 +20,9 @@ import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem;
-import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 
 import com.kauailabs.navx.frc.AHRS;
 
