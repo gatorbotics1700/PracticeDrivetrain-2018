@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.SPI;
-import edu.wpi.first.wpilibj.SerialPort;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -30,13 +29,13 @@ public class RobotMap {
 					       rightBackDrive = new TalonSRX(6);
 	
 	// INTAKE TALONS
-	public static TalonSRX elevatorMotor = new TalonSRX(6),
-						   leftIntakeMotor = new TalonSRX(5),
-						   rightIntakeMotor = new TalonSRX(7);
+	public static TalonSRX elevatorMotor = new TalonSRX(7),
+						   leftIntakeMotor = new TalonSRX(1),
+						   rightIntakeMotor = new TalonSRX(2);
 	
 	// PNEUMATICS
-	public static DoubleSolenoid leftActuator = new DoubleSolenoid(0, 1),
-								 rightActuator = new DoubleSolenoid(2, 3);
+	public static DoubleSolenoid foldingActuator = new DoubleSolenoid(0, 1),
+								 grabbingActuator = new DoubleSolenoid(2, 3);
 	
 	public static Compressor compressor = new Compressor(0); 
 	

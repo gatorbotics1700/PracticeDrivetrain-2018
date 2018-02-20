@@ -22,8 +22,8 @@ public class IntakeSubsystem extends Subsystem {
 	TalonSRX rightMotor = RobotMap.rightIntakeMotor;
 	DigitalInput leftLS = RobotMap.intakeLeftLimitSwitch;
 	DigitalInput rightLS = RobotMap.intakeRightLimitSwitch;
-	DoubleSolenoid LA = RobotMap.leftActuator;
-	DoubleSolenoid RA = RobotMap.rightActuator;
+	DoubleSolenoid foldy = RobotMap.foldingActuator;
+	DoubleSolenoid grabby = RobotMap.grabbingActuator;
 	AnalogInput leftUltra = RobotMap.leftUltrasonic;
 	AnalogInput rightUltra = RobotMap.rightUltrasonic;
 	DigitalOutput ultrasonicActivator = RobotMap.ultrasonicActivator;
@@ -51,13 +51,19 @@ public class IntakeSubsystem extends Subsystem {
     	rightMotor.set(ControlMode.PercentOutput, speed);
     }
     
-    public void actuate(boolean in) { // pneumatics
+    public void fold(boolean in) { // pneumatics
     	if (in) { //called in because intake
-    		LA.set(DoubleSolenoid.Value.kForward);
-    		RA.set(DoubleSolenoid.Value.kForward);
+    		foldy.set(DoubleSolenoid.Value.kForward);
     	} else {
-    		LA.set(DoubleSolenoid.Value.kReverse);
-    		RA.set(DoubleSolenoid.Value.kReverse);
+    		foldy.set(DoubleSolenoid.Value.kReverse);
+    	}
+    }
+    
+    public void grab(boolean in) { // pneumatics
+    	if (in) { //called in because intake
+    		grabby.set(DoubleSolenoid.Value.kForward);
+    	} else {
+    		grabby.set(DoubleSolenoid.Value.kReverse);
     	}
     }
     
