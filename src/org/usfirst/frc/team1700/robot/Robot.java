@@ -109,7 +109,6 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		new DriveCommand();
 		System.out.println("\nTELEOPINIT!!\n");
-		new RunIntakeCommand();
 		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
 	}
 
@@ -119,11 +118,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		OI.elevatorDown.whenReleased(new ElevatorToTicksCommand(elevatorSubsystem.getCurrentPos()));
-		if (Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.PITCH)) <= 1 || Math.abs(Robot.driveSubsystem.getNavXAngle(AngleType.ROLL)) <= 1) {
-			new ElevatorDownCommand();
-			new FoldIntakeCommand(true);
-		}
 //		OI.letGo.whileHeld(new ReleaseIntakeCommand());
 //		OI.letGo.whenReleased(new RunIntakeCommand());
 		OI.foldUp.whileHeld(new FoldIntakeCommand(true));

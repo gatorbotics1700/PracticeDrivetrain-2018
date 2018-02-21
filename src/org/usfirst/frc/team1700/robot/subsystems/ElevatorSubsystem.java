@@ -15,7 +15,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
-public class ElevatorSubsystem extends PIDSubsystem {
+public class ElevatorSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
 	TalonSRX EM = RobotMap.elevatorMotor;
@@ -28,32 +28,15 @@ public class ElevatorSubsystem extends PIDSubsystem {
 	public int switchTicks = 50;
 
 	public ElevatorSubsystem() {
-//		EM.selectProfileSlot(0, 0);
-//		EM.config_kF(0, 0.2, 10); //slot, value, timeoutMS
-//		EM.config_kP(0, 0.2, 10);
-//		EM.config_kI(0, 0, 10);
-//		EM.config_kD(0, 0, 10);
-		super("Elevator", 0.5, 0.0, 0.0);
-		System.out.println("ELEVATOR SUBSYSTEM INITIATED");
-		setSetpoint(0.0);
-		setAbsoluteTolerance(1);
-		getPIDController().disable();
 		enc.reset();
 	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-    	System.out.println("SETTING DEFAULT");
-        setDefaultCommand(new ElevatorToTicksCommand(enc.get()));
     }
     
     public void elevatorMove(double speed) {
 		EM.set(ControlMode.PercentOutput, speed);
-    }
-    
-    public void disablePID() {
-    	System.out.println("DISABLING ELEVATOR PID");
-    	getPIDController().disable();
     }
     
     public boolean touchingSwitch(boolean top) {
@@ -64,24 +47,6 @@ public class ElevatorSubsystem extends PIDSubsystem {
     	return false;
     }
     
-    @Override
-	protected double returnPIDInput() {
-		// TODO Auto-generated method stub
-		return enc.get();
-	}
-
-	@Override
-	protected void usePIDOutput(double output) {
-		// TODO Auto-generated method stub
-		System.out.println("ELEVATOR PID OUTPUT:");
-		System.out.println(output);
-		elevatorMove(output);
-	}
-	
-	public boolean atAngle() {
-		return onTarget();
-	}
-	
 	public int getCurrentPos() {
 		return enc.get();
 	}
@@ -90,11 +55,5 @@ public class ElevatorSubsystem extends PIDSubsystem {
 		enc.reset();
 	}
 	
-	public void moveToHeight(int ticks) {
-		System.out.println("MOVING TO:");
-		setSetpoint(ticks);
-		System.out.println(ticks);
-		getPIDController().enable();
-	}
 }
 
