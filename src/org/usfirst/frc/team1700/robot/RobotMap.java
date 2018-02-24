@@ -30,8 +30,8 @@ public class RobotMap {
 	
 	// OTHER TALONS
 	public static TalonSRX elevatorMotor = new TalonSRX(7),
-						   leftIntakeMotor = new TalonSRX(1),
-						   rightIntakeMotor = new TalonSRX(2);
+						   leftIntakeMotor = new TalonSRX(2),
+						   rightIntakeMotor = new TalonSRX(1);
 	
 	// PNEUMATICS
 	public static DoubleSolenoid foldingActuator = new DoubleSolenoid(0, 1),

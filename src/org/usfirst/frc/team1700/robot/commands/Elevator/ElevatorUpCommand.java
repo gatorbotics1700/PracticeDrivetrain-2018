@@ -30,8 +30,7 @@ public class ElevatorUpCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return false;
-//        return Robot.elevatorSubsystem.touchingSwitch(true);
+        return Robot.elevatorSubsystem.touchingSwitch(true);
     }
 
     // Called once after isFinished returns true

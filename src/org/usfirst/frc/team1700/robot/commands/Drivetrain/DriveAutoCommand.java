@@ -28,7 +28,7 @@ public abstract class DriveAutoCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	this.requires(Robot.driveSubsystem);
+//    	this.requires(Robot.driveSubsystem);
     	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.ROLL);
     	currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
     	angle += currentAngle;

@@ -50,7 +50,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto", new SideScaleAutoCG());
+		chooser.addDefault("Default Auto", new CenterSwitchAutoCG());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		System.out.println("ROBOT INITIATED!! :)");
@@ -105,8 +105,7 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		if (autonomousCommand != null)
-			autonomousCommand.cancel();
+		// autonomousCommand.cancel();
 		new DriveCommand();
 		System.out.println("\nTELEOPINIT!!\n");
 		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
@@ -118,8 +117,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-//		OI.letGo.whileHeld(new ReleaseIntakeCommand());
-//		OI.letGo.whenReleased(new RunIntakeCommand());
 		OI.foldUp.whileHeld(new FoldIntakeCommand(true));
 		OI.foldUp.whenReleased(new FoldIntakeCommand(false));
 	}

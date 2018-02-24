@@ -23,9 +23,6 @@ public class CenterSwitchAutoCG extends CommandGroup {
     	//gives access to drive, elevator, and intake subsystems so that 
     	//we can use the commands from those subsystems without worrying that they will 
     	//occur simultaneously when they are not supposed to
-    	requires(Robot.driveSubsystem);
-    	requires(Robot.elevatorSubsystem);
-    	requires(Robot.intakeSubsystem);
     	
     	//TODO: Set all constants
     	int angle;
@@ -62,16 +59,16 @@ public class CenterSwitchAutoCG extends CommandGroup {
 		
 		//more commands that will make the robot drive to the switch
 		addSequential(new DriveToAngleCommand(angle));
-		addSequential(new DriveToDistanceCommand(50));
-		addSequential(new DriveToAngleCommand(-angle));
-    	addSequential(new DriveUntilOverCommand());
+		addSequential(new DriveToDistanceCommand(200));
+		addSequential(new DriveToAngleCommand(-angle)); 
+//    	addSequential(new DriveUntilOverCommand());
     	
     	//when the intake state equals above switch/scale, this code will make the robot
     	//drop the cube
-    	if (Robot.intakeSubsystem.intakeState == IntakeState.OVER) {
-    		addSequential(new ReleaseIntakeCommand());
-    	} else {
-    		this.cancel();
-    	}
+//    	if (Robot.intakeSubsystem.intakeState == IntakeState.OVER) {
+//    		addSequential(new ReleaseIntakeCommand());
+//    	} else {
+//    		this.cancel();
+//    	}
     }
 }
