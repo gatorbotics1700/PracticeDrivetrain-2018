@@ -2,6 +2,7 @@ package org.usfirst.frc.team1700.robot.subsystems;
 
 import org.usfirst.frc.team1700.robot.RobotMap;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
@@ -33,6 +34,7 @@ public class ElevatorSubsystem extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
+    	setDefaultCommand(new ElevatorUpCommand());
     }
     
     public void elevatorMove(double speed) {

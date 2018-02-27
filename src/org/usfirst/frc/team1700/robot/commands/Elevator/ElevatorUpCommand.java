@@ -23,6 +23,9 @@ public class ElevatorUpCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (Robot.elevatorSubsystem.touchingSwitch(true) || Robot.elevatorSubsystem.touchingSwitch(false)) { 
+    		Robot.elevatorSubsystem.elevatorMove(0);
+    	}
 		Robot.elevatorSubsystem.elevatorMove(OI.coJoy.getRawAxis(1));
 		//Caution- elevator will move up forever
 		//1 = up, 0 = stopped, -1 = down
@@ -30,7 +33,7 @@ public class ElevatorUpCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.elevatorSubsystem.touchingSwitch(true);
+        return false;
     }
 
     // Called once after isFinished returns true
@@ -42,5 +45,6 @@ public class ElevatorUpCommand extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     	Robot.elevatorSubsystem.elevatorMove(0);
+    	System.out.println("ElevatorUpCommand interrupted!");
     }
 }

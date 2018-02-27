@@ -16,7 +16,6 @@ public class ReleaseIntakeCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	// backdrive intake
-    	Robot.intakeSubsystem.grab(false);
     	Robot.intakeSubsystem.runIntake(-1);
     }
 
@@ -33,7 +32,7 @@ public class ReleaseIntakeCommand extends Command {
     // Called once after isFinished returns true
     protected void end() {
     	Robot.intakeSubsystem.runIntake(0);
-    	
+    	Robot.intakeSubsystem.grab(false);
     }
 
     // Called when another command which requires one or more of the same

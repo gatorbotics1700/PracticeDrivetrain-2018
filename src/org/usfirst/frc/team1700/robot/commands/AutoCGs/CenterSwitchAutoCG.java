@@ -4,7 +4,6 @@ import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToAngleCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToDistanceCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveUntilOverCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorDownCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;

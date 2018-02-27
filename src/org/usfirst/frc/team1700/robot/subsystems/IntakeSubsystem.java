@@ -38,7 +38,7 @@ public class IntakeSubsystem extends Subsystem {
 
 	public IntakeSubsystem() {
 		intakeState = IntakeState.NOT_YET;
-//		compressor.setClosedLoopControl(true);
+		compressor.setClosedLoopControl(false);
 	}
 
     public void initDefaultCommand() {

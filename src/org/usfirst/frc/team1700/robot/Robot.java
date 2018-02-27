@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAutoCG;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.SideScaleAutoCG;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorDownCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
@@ -105,10 +104,17 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		// autonomousCommand.cancel();
-		new DriveCommand();
+		DriverStation.getInstance().reportWarning("1", false);
+		if (autonomousCommand != null) {
+
+			DriverStation.getInstance().reportWarning("2", false);
+			autonomousCommand.cancel();
+			DriverStation.getInstance().reportWarning("3", false);
+		}
+		DriverStation.getInstance().reportWarning("4", false);
 		System.out.println("\nTELEOPINIT!!\n");
-		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
+		DriverStation.getInstance().reportWarning("TeleopInit!", false);
+//		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
 	}
 
 	/**
@@ -117,8 +123,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		OI.foldUp.whileHeld(new FoldIntakeCommand(true));
-		OI.foldUp.whenReleased(new FoldIntakeCommand(false));
+//		new DriveCommand();
+//		new ElevatorUpCommand();
+		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
+		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
 	}
 
 	/**

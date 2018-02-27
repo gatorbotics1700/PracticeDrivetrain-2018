@@ -23,23 +23,27 @@ public class RunIntakeCommand extends Command {
     protected void execute() {
     	Robot.intakeSubsystem.printUltraValues();
     	// turn wheels in intake direction
-    	Robot.intakeSubsystem.runIntake(1);
+    	if (!Robot.intakeSubsystem.hasCube()) {
+    		Robot.intakeSubsystem.runIntake(1);
+    	} else {
+    		Robot.intakeSubsystem.runIntake(0);
+    		Robot.intakeSubsystem.grab(true);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return Robot.intakeSubsystem.hasCube();
+        return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
     	// stop wheels
-    	Robot.intakeSubsystem.runIntake(0);
-    	Robot.intakeSubsystem.grab(true);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.intakeSubsystem.runIntake(0);;
     }
 }
