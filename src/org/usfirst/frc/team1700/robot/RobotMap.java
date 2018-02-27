@@ -2,7 +2,7 @@ package org.usfirst.frc.team1700.robot;
 
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.AnalogInput;
@@ -21,8 +21,8 @@ import edu.wpi.first.wpilibj.SPI;
  */
 public class RobotMap {
 	// DRIVE TALONS
-	public static VictorSPX leftFrontDrive = new VictorSPX(3),
-					        rightFrontDrive = new VictorSPX(4);
+	public static TalonSRX leftFrontDrive = new TalonSRX(3),
+					        rightFrontDrive = new TalonSRX(4);
 					       
 
 	public static TalonSRX leftBackDrive = new TalonSRX(5),

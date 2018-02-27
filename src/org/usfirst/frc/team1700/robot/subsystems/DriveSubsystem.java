@@ -5,7 +5,7 @@ import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -19,9 +19,9 @@ public class DriveSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	VictorSPX LF = RobotMap.leftFrontDrive;
+	TalonSRX LF = RobotMap.leftFrontDrive;
 	TalonSRX LB = RobotMap.leftBackDrive;
-	VictorSPX RF = RobotMap.rightFrontDrive;
+	TalonSRX RF = RobotMap.rightFrontDrive;
 	TalonSRX RB = RobotMap.rightBackDrive;
 	Encoder LE = RobotMap.leftDriveEncoder;
 	Encoder RE = RobotMap.rightDriveEncoder;
