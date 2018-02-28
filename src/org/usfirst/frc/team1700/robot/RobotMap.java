@@ -34,10 +34,10 @@ public class RobotMap {
 						   rightIntakeMotor = new TalonSRX(1);
 	
 	// PNEUMATICS
-	public static DoubleSolenoid foldingActuator = new DoubleSolenoid(0, 1),
-								 grabbingActuator = new DoubleSolenoid(2, 3);
-	
-	public static Compressor compressor = new Compressor(0); 
+//	public static DoubleSolenoid foldingActuator = new DoubleSolenoid(0, 1),
+//								 grabbingActuator = new DoubleSolenoid(2, 3);
+//	
+//	public static Compressor compressor = new Compressor(0); 
 	
 	// NAVX
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) 200); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */

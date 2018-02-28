@@ -127,6 +127,8 @@ public class Robot extends IterativeRobot {
 //		new ElevatorUpCommand();
 		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
 		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
+		OI.letGo.whileHeld(new ReleaseIntakeCommand()); 
+		OI.letGo.whenReleased(new RunIntakeCommand());
 	}
 
 	/**

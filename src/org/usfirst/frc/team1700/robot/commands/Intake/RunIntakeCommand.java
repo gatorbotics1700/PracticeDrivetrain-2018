@@ -2,6 +2,7 @@ package org.usfirst.frc.team1700.robot.commands.Intake;
 
 import org.usfirst.frc.team1700.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -27,8 +28,10 @@ public class RunIntakeCommand extends Command {
     		Robot.intakeSubsystem.runIntake(1);
     	} else {
     		Robot.intakeSubsystem.runIntake(0);
+    		DriverStation.getInstance().reportWarning("Running intake at zero", false);
     		Robot.intakeSubsystem.grab(true);
     	}
+    	DriverStation.getInstance().reportWarning("Intake is running!", false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
