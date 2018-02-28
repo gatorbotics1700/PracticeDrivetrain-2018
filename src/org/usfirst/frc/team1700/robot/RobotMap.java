@@ -21,17 +21,17 @@ import edu.wpi.first.wpilibj.SPI;
  */
 public class RobotMap {
 	// DRIVE TALONS
-	public static TalonSRX leftFrontDrive = new TalonSRX(3),
-					        rightFrontDrive = new TalonSRX(4);
+	public static TalonSRX leftFrontDrive = new TalonSRX(1),
+					        rightFrontDrive = new TalonSRX(3);
 					       
 
-	public static TalonSRX leftBackDrive = new TalonSRX(5),
-					       rightBackDrive = new TalonSRX(6);
+	public static TalonSRX leftBackDrive = new TalonSRX(2),
+					       rightBackDrive = new TalonSRX(4);
 	
 	// OTHER TALONS
-	public static TalonSRX elevatorMotor = new TalonSRX(7),
-						   leftIntakeMotor = new TalonSRX(2),
-						   rightIntakeMotor = new TalonSRX(1);
+	public static TalonSRX elevatorMotor = new TalonSRX(5),
+						   leftIntakeMotor = new TalonSRX(6),
+						   rightIntakeMotor = new TalonSRX(7);
 	
 	// PNEUMATICS
 //	public static DoubleSolenoid foldingActuator = new DoubleSolenoid(0, 1),
