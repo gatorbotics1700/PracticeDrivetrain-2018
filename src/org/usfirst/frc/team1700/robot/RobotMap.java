@@ -43,10 +43,10 @@ public class RobotMap {
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) 200); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 	
 	// DIGITAL SENSORS
-	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(8),
-							   elevatorBottomLimitSwitch = new DigitalInput(11),
-							   intakeLeftLimitSwitch = new DigitalInput(6),
-							   intakeRightLimitSwitch = new DigitalInput(7);
+	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(6),
+							   elevatorBottomLimitSwitch = new DigitalInput(7),
+							   intakeLeftLimitSwitch = new DigitalInput(8),
+							   intakeRightLimitSwitch = new DigitalInput(10);
 							   
 	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(9), new DigitalInput(1)),
 							   rightDriveEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3)),

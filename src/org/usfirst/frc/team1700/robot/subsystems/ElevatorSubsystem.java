@@ -20,8 +20,8 @@ public class ElevatorSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
 	TalonSRX EM = RobotMap.elevatorMotor;
-	//DigitalInput UL = RobotMap.elevatorTopLimitSwitch;
-	//DigitalInput BL = RobotMap.elevatorBottomLimitSwitch;
+	DigitalInput UL = RobotMap.elevatorTopLimitSwitch;
+	DigitalInput BL = RobotMap.elevatorBottomLimitSwitch;
 	Encoder enc = RobotMap.elevatorEncoder;
 	
 	//TODO: Test and set these
@@ -42,11 +42,10 @@ public class ElevatorSubsystem extends Subsystem {
     }
     
     public boolean touchingSwitch(boolean top) {
-//    		if (BL.get()) {
-//    			enc.reset();
-//    		}
-//    		return (UL.get() && top) || (BL.get() && !top);
-    	return false;
+		if (BL.get()) {
+			enc.reset();
+		}
+		return (UL.get() && top) || (BL.get() && !top);
     }
     
 	public int getCurrentPos() {
