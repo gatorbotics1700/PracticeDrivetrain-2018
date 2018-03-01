@@ -27,9 +27,9 @@ public class ElevatorUpCommand extends Command {
     	if (Robot.elevatorSubsystem.touchingSwitch(true) || Robot.elevatorSubsystem.touchingSwitch(false)) { 
     		Robot.elevatorSubsystem.elevatorMove(0);
     		DriverStation.getInstance().reportWarning("Elevator hit top or bottom!", false);
-    		return;
+    	} else {
+    		Robot.elevatorSubsystem.elevatorMove(OI.coJoy.getRawAxis(1));
     	}
-		Robot.elevatorSubsystem.elevatorMove(OI.coJoy.getRawAxis(1));
 		//Caution- elevator will move up forever
 		//1 = up, 0 = stopped, -1 = down
     }
