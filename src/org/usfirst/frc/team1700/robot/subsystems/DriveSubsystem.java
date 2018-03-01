@@ -31,6 +31,10 @@ public class DriveSubsystem extends Subsystem {
 		PITCH, YAW, ROLL;
 	}
 	
+	public DriveSubsystem() {
+		RE.setReverseDirection(true);
+	}
+	
 	public void initDefaultCommand() {
 		// Set the default command for a subsystem here.
 		setDefaultCommand(new DriveCommand());

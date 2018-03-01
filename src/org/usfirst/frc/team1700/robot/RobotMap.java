@@ -45,10 +45,10 @@ public class RobotMap {
 	// DIGITAL SENSORS
 	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(8),
 							   elevatorBottomLimitSwitch = new DigitalInput(11),
-							   intakeLeftLimitSwitch = new DigitalInput(6),
-							   intakeRightLimitSwitch = new DigitalInput(7);
+							   intakeLeftLimitSwitch = new DigitalInput(10),
+							   intakeRightLimitSwitch = new DigitalInput(12);
 							   
-	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(9), new DigitalInput(1)),
+	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(6), new DigitalInput(7)),
 							   rightDriveEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3)),
 							   elevatorEncoder = new Encoder(new DigitalInput(4),new DigitalInput (5));
 	

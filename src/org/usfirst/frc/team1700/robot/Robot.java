@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAutoCG;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.SideScaleAutoCG;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.testAutoCG;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
@@ -49,7 +50,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto", new CenterSwitchAutoCG());
+		chooser.addDefault("Default Auto", new testAutoCG());
 		// chooser.addObject("My Auto", new MyAutoCommand());
 		SmartDashboard.putData("Auto mode", chooser);
 		System.out.println("ROBOT INITIATED!! :)");

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team1700.robot.OI;
 import org.usfirst.frc.team1700.robot.Robot;
+import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 
 /**
  *
@@ -26,11 +27,9 @@ public class DriveCommand extends Command {
 	protected void execute() {
 		double leftSpeed = OI.leftJoy.getRawAxis(1);
 		double rightSpeed = OI.rightJoy.getRawAxis(1);
-		String LencVal = Integer.toString(Robot.driveSubsystem.getLeftEncoderValue());
-		String RencVal = Integer.toString(Robot.driveSubsystem.getRightEncoderValue());
-		DriverStation.getInstance().reportWarning("Left Encoder:" + LencVal, false);
-		DriverStation.getInstance().reportWarning("Right Encoder:" + RencVal, false);
+		String LencVal = Double.toString(Robot.driveSubsystem.getNavXAngle(AngleType.YAW));
 		Robot.driveSubsystem.driveTank(leftSpeed, rightSpeed);
+//		DriverStation.getInstance().reportWarning("NavX is at: " + LencVal, false);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
