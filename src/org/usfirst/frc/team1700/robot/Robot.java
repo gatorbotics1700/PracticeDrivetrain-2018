@@ -50,8 +50,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto", new testAutoCG());
-		// chooser.addObject("My Auto", new MyAutoCommand());
+		chooser.addDefault("Default Auto", new CenterSwitchAutoCG());
+		chooser.addObject("My Auto", new testAutoCG());
 		SmartDashboard.putData("Auto mode", chooser);
 		System.out.println("ROBOT INITIATED!! :)");
 	}
@@ -63,7 +63,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void disabledInit() {
-
 	}
 
 	@Override

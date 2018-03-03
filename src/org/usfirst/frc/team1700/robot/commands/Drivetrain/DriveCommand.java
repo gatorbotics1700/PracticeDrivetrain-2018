@@ -29,7 +29,7 @@ public class DriveCommand extends Command {
 		double rightSpeed = OI.rightJoy.getRawAxis(1);
 		String LencVal = Double.toString(Robot.driveSubsystem.getNavXAngle(AngleType.YAW));
 		Robot.driveSubsystem.driveTank(leftSpeed, rightSpeed);
-//		DriverStation.getInstance().reportWarning("NavX is at: " + LencVal, false);
+		//DriverStation.getInstance().reportWarning("NavX is at: " + LencVal, false);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

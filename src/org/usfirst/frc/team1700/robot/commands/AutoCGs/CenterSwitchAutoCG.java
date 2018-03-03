@@ -25,10 +25,10 @@ public class CenterSwitchAutoCG extends CommandGroup {
     	
     	//TODO: Set all constants
     	int angle;
-    	//String gameData = DriverStation.getInstance().getGameSpecificMessage();
+    	String gameData = DriverStation.getInstance().getGameSpecificMessage();
     	//gameData is now saved as a string L but it will soon be replaced by the code 
     	//above to get the game data 
-    	String gameData = "L";
+//    	String gameData = "L";
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -48,14 +48,7 @@ public class CenterSwitchAutoCG extends CommandGroup {
     	
     	//the robot will drive forward 100 inches
     	addSequential(new DriveToDistanceCommand(100)); //distance given in inches
-		if(gameData.charAt(0) == 'L') {
-			//Put left auto code here
-    		angle = -90;
-		} else {
-			//Put right auto code here
-    		angle = 90;
-		}
-		
+		angle=90;
 		//more commands that will make the robot drive to the switch
 		addSequential(new DriveToAngleCommand(angle));
 		addSequential(new DriveToDistanceCommand(200));

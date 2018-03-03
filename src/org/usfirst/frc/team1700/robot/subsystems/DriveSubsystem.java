@@ -61,6 +61,7 @@ public class DriveSubsystem extends Subsystem {
 	}
 	
 	public void resetNavX() {
+		navx.reset();
 		navx.resetDisplacement();
 	}
 	
