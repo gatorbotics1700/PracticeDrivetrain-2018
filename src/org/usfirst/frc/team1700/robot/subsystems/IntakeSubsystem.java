@@ -85,7 +85,7 @@ public class IntakeSubsystem extends Subsystem {
     }
     
     public boolean hasCube() {
-    	return leftLS.get() && rightLS.get();
+    	return leftLS.get();
     }
     
     public void setState(IntakeState state) {

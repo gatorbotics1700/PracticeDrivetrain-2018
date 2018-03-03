@@ -3,6 +3,7 @@ package org.usfirst.frc.team1700.robot.commands.Elevator;
 import org.usfirst.frc.team1700.robot.OI;
 import org.usfirst.frc.team1700.robot.Robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -25,8 +26,10 @@ public class ElevatorUpCommand extends Command {
     protected void execute() {
     	if (Robot.elevatorSubsystem.touchingSwitch(true) || Robot.elevatorSubsystem.touchingSwitch(false)) { 
     		Robot.elevatorSubsystem.elevatorMove(0);
+    		DriverStation.getInstance().reportWarning("Elevator hit top or bottom!", false);
+    	} else {
+    		Robot.elevatorSubsystem.elevatorMove(OI.coJoy.getRawAxis(1));
     	}
-		Robot.elevatorSubsystem.elevatorMove(OI.coJoy.getRawAxis(1));
 		//Caution- elevator will move up forever
 		//1 = up, 0 = stopped, -1 = down
     }
