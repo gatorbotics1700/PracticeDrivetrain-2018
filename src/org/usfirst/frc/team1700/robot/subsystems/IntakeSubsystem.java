@@ -22,8 +22,8 @@ public class IntakeSubsystem extends Subsystem {
 	TalonSRX rightMotor = RobotMap.rightIntakeMotor;
 	DigitalInput leftLS = RobotMap.intakeLeftLimitSwitch;
 	DigitalInput rightLS = RobotMap.intakeRightLimitSwitch;
-//	DoubleSolenoid foldy = RobotMap.foldingActuator;
-//	DoubleSolenoid grabby = RobotMap.grabbingActuator;
+	DoubleSolenoid fold = RobotMap.carriageSol;
+	DoubleSolenoid grab = RobotMap.intakeArmSol;
 	AnalogInput leftUltra = RobotMap.leftUltrasonic;
 	AnalogInput rightUltra = RobotMap.rightUltrasonic;
 	DigitalOutput ultrasonicActivator = RobotMap.ultrasonicActivator;
@@ -43,29 +43,30 @@ public class IntakeSubsystem extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
+    	setDefaultCommand(new RunIntakeCommand());
     }
     
     public void runIntake(double speed) { //motors start running
     	leftMotor.set(ControlMode.PercentOutput, speed); 
-    	rightMotor.set(ControlMode.PercentOutput, speed);
+    	rightMotor.set(ControlMode.PercentOutput, speed*.25);
     }
     
    public void fold(boolean in) { // pneumatics
 	   if (in) { //called in because intake
-//    		foldy.set(DoubleSolenoid.Value.kForward);
+    		fold.set(DoubleSolenoid.Value.kForward);
     	} else {
-//    		foldy.set(DoubleSolenoid.Value.kReverse);
+    		fold.set(DoubleSolenoid.Value.kReverse);
     	}
     }
    
     
     public void grab(boolean in) { // pneumatics
-//    	if (in) { //called in because intake
-    //		grabby.set(DoubleSolenoid.Value.kForward);
-    //	} else {
-    	//	grabby.set(DoubleSolenoid.Value.kReverse);
+    	if (in) { //called in because intake
+    		grab.set(DoubleSolenoid.Value.kForward);
+    	} else {
+    		grab.set(DoubleSolenoid.Value.kReverse);
     	}
-   // }
+    }
     
     public boolean leftUltrasonicClose() {
     	// return leftUltrasonic.get() < some amount of distance

@@ -18,7 +18,7 @@ public class DriveCommand extends Command {
 	// Called just before this Command runs the first time
 	@Override
 	protected void initialize() {
-		DriverStation.getInstance().reportWarning("Starting drive command.", false);
+//		DriverStation.getInstance().reportWarning("Starting drive command.", false);
 		System.out.println("Starting drive command.");
 	}
 
@@ -47,7 +47,7 @@ public class DriveCommand extends Command {
 	// subsystems is scheduled to run
 	@Override
 	protected void interrupted() {
-		DriverStation.getInstance().reportWarning("DriveCommand interrupted!", false);
+//		DriverStation.getInstance().reportWarning("DriveCommand interrupted!", false);
 		System.out.println("DriveCommand interrupted!");
 	}
 }

@@ -34,19 +34,19 @@ public class RobotMap {
 						   rightIntakeMotor = new TalonSRX(7);
 	
 	// PNEUMATICS
-//	public static DoubleSolenoid foldingActuator = new DoubleSolenoid(0, 1),
-//								 grabbingActuator = new DoubleSolenoid(2, 3);
+	public static DoubleSolenoid intakeArmSol = new DoubleSolenoid(2, 3),
+								 carriageSol = new DoubleSolenoid(4, 5);
 //	
-//	public static Compressor compressor = new Compressor(0); 
+	public static Compressor compressor = new Compressor(0); 
 	
 	// NAVX
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) 200); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 	
 	// DIGITAL SENSORS
-	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(6), //8
-							   elevatorBottomLimitSwitch = new DigitalInput(7), //11
-							   intakeLeftLimitSwitch = new DigitalInput(8),//10
-							   intakeRightLimitSwitch = new DigitalInput(10);//12
+	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(10), //8, 6
+							   elevatorBottomLimitSwitch = new DigitalInput(11), //11, 7
+							   intakeLeftLimitSwitch = new DigitalInput(8),//10, 8
+							   intakeRightLimitSwitch = new DigitalInput(9);//12, 10
 							   
 	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(6), new DigitalInput(7)),
 							   rightDriveEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3)),
@@ -57,4 +57,6 @@ public class RobotMap {
 	// ANALOG SENSORS
 	public static AnalogInput leftUltrasonic = new AnalogInput(0),
 							  rightUltrasonic = new AnalogInput(1);
+	
+	
 }

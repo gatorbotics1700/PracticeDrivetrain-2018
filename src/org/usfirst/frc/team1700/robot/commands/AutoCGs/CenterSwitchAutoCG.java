@@ -8,6 +8,7 @@ import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
+import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem.IntakeState;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -24,8 +25,8 @@ public class CenterSwitchAutoCG extends CommandGroup {
     	//occur simultaneously when they are not supposed to
     	
     	//TODO: Set all constants
-    	int angle;
-    	String gameData = DriverStation.getInstance().getGameSpecificMessage();
+    	//int angle;
+    	//String gameData = DriverStation.getInstance().getGameSpecificMessage();
     	//gameData is now saved as a string L but it will soon be replaced by the code 
     	//above to get the game data 
 //    	String gameData = "L";
@@ -47,13 +48,10 @@ public class CenterSwitchAutoCG extends CommandGroup {
         // arm.
     	
     	//the robot will drive forward 100 inches
-    	addSequential(new DriveToDistanceCommand(100)); //distance given in inches
-		angle=90;
-		//more commands that will make the robot drive to the switch
-		addSequential(new DriveToAngleCommand(angle));
-		addSequential(new DriveToDistanceCommand(200));
-		addSequential(new DriveToAngleCommand(-angle)); 
-//    	addSequential(new DriveUntilOverCommand());
+    	addSequential(new DriveToDistanceCommand(42*DriveSubsystem.ticksToInches, 42*DriveSubsystem.ticksToInches)); //distance given in inches
+		addSequential(new DriveToAngleCommand(-45, 45));
+		addSequential(new DriveToDistanceCommand(50*DriveSubsystem.ticksToInches, 70*DriveSubsystem.ticksToInches));
+		addSequential(new DriveToAngleCommand(45, -45));
     	
     	//when the intake state equals above switch/scale, this code will make the robot
     	//drop the cube
@@ -63,4 +61,5 @@ public class CenterSwitchAutoCG extends CommandGroup {
 //    		this.cancel();
 //    	}
     }
+    
 }

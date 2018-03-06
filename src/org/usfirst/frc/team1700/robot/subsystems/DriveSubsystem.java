@@ -26,7 +26,7 @@ public class DriveSubsystem extends Subsystem {
 	Encoder LE = RobotMap.leftDriveEncoder;
 	Encoder RE = RobotMap.rightDriveEncoder;
 	public AHRS navx = RobotMap.ahrs;
-	public double ticksToInches = 1; //placeholder; change later
+	public static double ticksToInches = 11.94; // 40 ticks/in. * 54/20*50/12 gearbox reduction / (12pi in/shaft rotation)
 	public enum AngleType {
 		PITCH, YAW, ROLL;
 	}
@@ -80,6 +80,10 @@ public class DriveSubsystem extends Subsystem {
 	
 	public boolean nearZero(double number, double tolerance) {
 		return (Math.abs(number)<tolerance);
+	}
+	
+	public Double getVelocity() {
+		return (LE.getRate()+RE.getRate())/2;
 	}
 	
 }

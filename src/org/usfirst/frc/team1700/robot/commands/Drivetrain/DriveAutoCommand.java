@@ -24,22 +24,34 @@ public abstract class DriveAutoCommand extends Command {
 	protected double minAngleSpeed = 0;
 	protected double minSpeed = 0;
 	private double targetAngle = 0;
+	private double calcAngleSpeed;
+	private double calcDistSpeed;
 	
 	// CONSTANTS (change these)
 	
-	private double turningAngleProportion = 0.05;
-	private double maxAngleSpeed = 0.6;
-	private double distanceProportion = 0.025;
-	private double maxDistanceSpeed = 0.5;
+	private double turningAngleProportion = 0.02;
+	private double maxAngleSpeed = 0.7;
+	private double driveD = 0.000;
+	private double driveP = 0.015;
+	private double maxDistanceSpeed = 0.8;
 	private double angleTolerance = 2;
 	private double distanceTolerance = 5;
 	private int count = 0;
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize(Double distance, Double angle, boolean isAngle) {
     //	this.requires(Robot.driveSubsystem);
 //    	Robot.driveSubsystem.resetNavX();
-    	minSpeed = 0;
+    	this.distance = distance;
+    	this.angle = angle;
+    	if (isAngle) {
+    		minAngleSpeed = 0.25;
+    		minSpeed = 0;
+    	} else {
+    		minAngleSpeed = 0;
+    		minSpeed = 0.075;
+    	}
+    	
     	Robot.driveSubsystem.resetEncoders();
     	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW) % 360;
 		currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
@@ -74,27 +86,34 @@ public abstract class DriveAutoCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+//    	count++;
     	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW) % 360;
     	currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
     	distDifference = distance - currentDistance;
     	angleDifference = (targetAngle - currentAngle + 720 + 180) % 360 - 180;
     	
     	// ANGLE SPEED
-    	if (turningAngleProportion*angleDifference > maxAngleSpeed) {
+    	Double calcAngleSpeed = turningAngleProportion*angleDifference;
+    	if (calcAngleSpeed > maxAngleSpeed) {
     		angleSpeed = maxAngleSpeed;
-    	} else if (turningAngleProportion*angleDifference < -maxAngleSpeed) {
+    	} else if (calcAngleSpeed < -maxAngleSpeed) {
     		angleSpeed = -maxAngleSpeed;
     	} else {
-    		angleSpeed = Math.copySign(Math.max(minAngleSpeed, Math.abs(angleDifference*turningAngleProportion)), angleDifference);
+    		angleSpeed = Math.copySign(Math.max(minAngleSpeed, Math.abs(calcAngleSpeed)), angleDifference);
     	}
     	
     	// DISTANCE SPEED
-    	if (distanceProportion*distDifference > maxDistanceSpeed) {
+    	Double calcDistSpeed = driveP*distDifference + driveD*Robot.driveSubsystem.getVelocity();
+//    	String printP = Double.toString(driveP*distDifference),
+//    			printEncVel = Double.toString(Robot.driveSubsystem.getVelocity());
+//    	DriverStation.reportWarning("just p: " + printP, false);
+//    	DriverStation.reportWarning("encoder velocity: " + printEncVel, false);
+    	if (calcDistSpeed > maxDistanceSpeed) {
     		distanceSpeed = maxDistanceSpeed;
-    	} else if (distanceProportion*distDifference < -maxDistanceSpeed) {
+    	} else if (calcDistSpeed < -maxDistanceSpeed) {
     		distanceSpeed = -maxDistanceSpeed;
     	} else {
-    		distanceSpeed = Math.copySign(Math.max(minSpeed, Math.abs(distDifference*distanceProportion)), distDifference);
+    		distanceSpeed = Math.copySign(Math.max(minSpeed, Math.abs(calcDistSpeed)), distDifference);
     	}
     	
     	leftSpeed = -(distanceSpeed + angleSpeed);
@@ -114,6 +133,7 @@ public abstract class DriveAutoCommand extends Command {
     		   printMinAngleSpeed = Double.toString(minAngleSpeed),
     		   printDistSpeed = Double.toString(distanceSpeed),
     		   printCurrAngle = Double.toString(currentAngle),
+    		   printCalcDistSpeed = Double.toString(calcDistSpeed),
     		   printAngleSpeed = Double.toString(angleSpeed);
 //    	//DriverStation.getInstance().reportWarning("We want this distance: " + printDesiredDist, false);
 //    	//DriverStation.getInstance().reportWarning("target angle: " + printDesiredAngle, false);
@@ -128,8 +148,10 @@ public abstract class DriveAutoCommand extends Command {
 //    	DriverStation.getInstance().reportWarning("RightSpeed: " + printRS, false);
 //    	//DriverStation.getInstance().reportWarning("minSpeed: " + printminSpeed, false);
 //    	//DriverStation.getInstance().reportWarning("min angle speed: " + printMinAngleSpeed, false);
-    	//DriverStation.getInstance().reportWarning("distance speed: " + printDistSpeed, false);
-    	//DriverStation.getInstance().reportWarning("angle speed: " + printAngleSpeed, false);
+    	
+//    	DriverStation.getInstance().reportWarning("calc distance speed: " + printCalcDistSpeed, false);
+//    	DriverStation.getInstance().reportWarning("distance speed: " + printDistSpeed, false);
+//    	DriverStation.getInstance().reportWarning("angle speed: " + printAngleSpeed, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -143,6 +165,7 @@ public abstract class DriveAutoCommand extends Command {
 //    	return true;
     	if (count > 5) {
     		count = 0;
+    		DriverStation.getInstance().reportWarning("auto command finished", false);
     		return true;
     	}
     	return false;

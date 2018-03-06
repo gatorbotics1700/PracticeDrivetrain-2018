@@ -20,16 +20,17 @@ public class ElevatorUpCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	System.out.println("INITIALIZING AN ELEVATOR MOVING COMMAND.");
+    	DriverStation.getInstance().reportWarning("elevator up init", false);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.elevatorSubsystem.touchingSwitch(true) || Robot.elevatorSubsystem.touchingSwitch(false)) { 
-    		Robot.elevatorSubsystem.elevatorMove(0);
-    		DriverStation.getInstance().reportWarning("Elevator hit top or bottom!", false);
-    	} else {
+//    	if (Robot.elevatorSubsystem.touchingSwitch(true) || Robot.elevatorSubsystem.touchingSwitch(false)) { 
+//    		Robot.elevatorSubsystem.elevatorMove(0);
+//    		DriverStation.getInstance().reportWarning("Elevator hit top or bottom!", false);
+//    	} else {
     		Robot.elevatorSubsystem.elevatorMove(OI.coJoy.getRawAxis(1));
-    	}
+//    	}
 		//Caution- elevator will move up forever
 		//1 = up, 0 = stopped, -1 = down
     }

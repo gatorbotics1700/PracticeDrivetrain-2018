@@ -19,6 +19,8 @@ import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.StopIntakeCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.grabIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
@@ -50,8 +52,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto", new CenterSwitchAutoCG());
-		chooser.addObject("My Auto", new testAutoCG());
+//		chooser.addDefault("Default Auto", new CenterSwitchAutoCG());
+		chooser.addDefault("Default Auto", new testAutoCG());
 		SmartDashboard.putData("Auto mode", chooser);
 		System.out.println("ROBOT INITIATED!! :)");
 	}
@@ -104,16 +106,16 @@ public class Robot extends IterativeRobot {
 		// teleop starts running. If you want the autonomous to
 		// continue until interrupted by another command, remove
 		// this line or comment it out.
-		DriverStation.getInstance().reportWarning("1", false);
+//		DriverStation.getInstance().reportWarning("1", false);
 		if (autonomousCommand != null) {
 
-			DriverStation.getInstance().reportWarning("2", false);
+//			DriverStation.getInstance().reportWarning("2", false);
 			autonomousCommand.cancel();
-			DriverStation.getInstance().reportWarning("3", false);
+//			DriverStation.getInstance().reportWarning("3", false);
 		}
-		DriverStation.getInstance().reportWarning("4", false);
+//		DriverStation.getInstance().reportWarning("4", false);
 		System.out.println("\nTELEOPINIT!!\n");
-		DriverStation.getInstance().reportWarning("TeleopInit!", false);
+//		DriverStation.getInstance().reportWarning("TeleopInit!", false);
 //		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
 	}
 
@@ -123,12 +125,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-//		new DriveCommand();
-//		new ElevatorUpCommand();
 		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
 		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
 		OI.letGo.whileHeld(new ReleaseIntakeCommand()); 
 		OI.letGo.whenReleased(new RunIntakeCommand());
+		OI.grab.whileHeld(new grabIntakeCommand()); // if limit switches don't work
+		OI.stopIntake.whileHeld(new StopIntakeCommand());
+		OI.stopIntake.whenReleased(new RunIntakeCommand());
 	}
 
 	/**

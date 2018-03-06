@@ -29,19 +29,12 @@ public class SideScaleAutoCG extends CommandGroup {
     	
     	//these values will dictate when the robot turns (we need the precise values)
     	int inchesFromScale = 300;
-    	int angle = -90;
     	int overDistance = 10;
     	
     	//this command causes the robot to drive forward until it reaches 
     	//the point where it should turn at the switch
-    	addSequential(new DriveToDistanceCommand(inchesFromScale));
-    	String gameData = "L";
-		if(gameData.charAt(0) == 'L')
-		{
-			angle = 90;
-    		
-		}
-		addSequential(new DriveToAngleCommand(angle));
+    	addSequential(new DriveToDistanceCommand(inchesFromScale, inchesFromScale));
+    	addSequential(new DriveToAngleCommand(90, -90));
 		addSequential(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
 		addSequential(new FoldIntakeCommand(false));
 		addSequential(new DriveUntilOverCommand());

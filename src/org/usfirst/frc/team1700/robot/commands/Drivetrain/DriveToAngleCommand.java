@@ -12,26 +12,33 @@ import edu.wpi.first.wpilibj.command.Command;
  * driveangle turns the robot a certain number of degrees from its current location
  */
 public class DriveToAngleCommand extends DriveAutoCommand {
-	public Double driveAngle;
+	public double angleL;
+	public double angleR;
 	
-    public DriveToAngleCommand(double driveAngle) {
-        this.driveAngle = driveAngle;
-        super.minAngleSpeed = 0.2;
-        super.minSpeed = 0;
+    public DriveToAngleCommand(double angleL, double angleR) {
+        this.angleL = angleL;
+        this.angleR = angleR;
+//        super.minAngleSpeed = 0.25;
+//        super.minSpeed = 0;
     }
     
     @Override
     protected void initialize() {
     	String gameData = DriverStation.getInstance().getGameSpecificMessage();
+    	Integer count = 0;
+    	while (gameData.length() < 3) {
+    		gameData = DriverStation.getInstance().getGameSpecificMessage();
+    		count++;
+    		if (count > 250) {
+    			super.initialize(0.0, 0.0, true);
+    			return;
+    		}
+    	}
     	if(gameData.charAt(0) == 'L') {
 			//Put left auto code here
-    		super.angle = -driveAngle;
-    		DriverStation.reportWarning("in L: " + gameData, false);
-		} else {
-			//Put right auto code here
-			super.angle = driveAngle;
-    		DriverStation.reportWarning("in else: " + gameData, false);
-		}
-    	super.initialize();
+    		super.initialize(0.0, angleL, true);
+    	} else if (gameData.charAt(0) == 'R') {
+    		super.initialize(0.0, angleR, true);
+    	}
     }
 }

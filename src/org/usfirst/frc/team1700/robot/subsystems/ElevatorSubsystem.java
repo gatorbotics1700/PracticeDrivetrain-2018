@@ -56,5 +56,9 @@ public class ElevatorSubsystem extends Subsystem {
 		enc.reset();
 	}
 	
+	public double getVelocity() {
+		return enc.getRate();
+	}
+	
 }
 
