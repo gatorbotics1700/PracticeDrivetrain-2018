@@ -9,7 +9,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.AutoForward;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAutoCG;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.FullScaleAuto;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.FullSwitchAuto;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.SideScaleAutoCG;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.testAutoCG;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
@@ -52,9 +55,12 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-//		chooser.addDefault("Default Auto", new CenterSwitchAutoCG());
-		chooser.addDefault("Default Auto", new testAutoCG());
-		SmartDashboard.putData("Auto mode", chooser);
+		chooser.addDefault("Default Auto (Center Switch)", new CenterSwitchAutoCG());
+//		chooser.addDefault("Default Auto", new testAutoCG());
+		chooser.addObject("Auto Line", new AutoForward());
+		chooser.addObject("Full Switch", new FullSwitchAuto());
+		chooser.addObject("Full Scale", new FullScaleAuto());
+		SmartDashboard.putData("Auto Mode", chooser);
 		System.out.println("ROBOT INITIATED!! :)");
 	}
 

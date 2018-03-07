@@ -60,15 +60,15 @@ public abstract class DriveAutoCommand extends Command {
     	targetAngle = (currentAngle + angle) % 360;
     	
     	//targetDistance = currentDistance + distDifference;
-    	String printcurrDist = Double.toString(currentDistance),
-     		   printcurrAngle = Double.toString(currentAngle),
-     		   printDDiff = Double.toString(distDifference),
-     		   printADiff = Double.toString(angleDifference),
-     		   printDesiredDist = Double.toString(distance),
-     		   printDesiredAngle = Double.toString(angle),
-     		   printLEnc = Integer.toString(Robot.driveSubsystem.getLeftEncoderValue()),
-     		   printREnc = Integer.toString(Robot.driveSubsystem.getRightEncoderValue()),
-     		   printTargetAngle = Double.toString(targetAngle);
+//    	String printcurrDist = Double.toString(currentDistance),
+//     		   printcurrAngle = Double.toString(currentAngle),
+//     		   printDDiff = Double.toString(distDifference),
+//     		   printADiff = Double.toString(angleDifference),
+//     		   printDesiredDist = Double.toString(distance),
+//     		   printDesiredAngle = Double.toString(angle),
+//     		   printLEnc = Integer.toString(Robot.driveSubsystem.getLeftEncoderValue()),
+//     		   printREnc = Integer.toString(Robot.driveSubsystem.getRightEncoderValue()),
+//     		   printTargetAngle = Double.toString(targetAngle);
 //    	DriverStation.getInstance().reportWarning("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", false);
 //    	System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 //     	//DriverStation.getInstance().reportWarning("We want this distance: " + printDesiredDist, false);

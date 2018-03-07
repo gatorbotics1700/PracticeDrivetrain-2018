@@ -1,9 +1,11 @@
 package org.usfirst.frc.team1700.robot.commands.AutoCGs;
 
 import org.usfirst.frc.team1700.robot.Robot;
+import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveForwardTimeOutCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToAngleCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToDistanceCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveUntilOverCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorResetCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
@@ -48,10 +50,20 @@ public class CenterSwitchAutoCG extends CommandGroup {
         // arm.
     	
     	//the robot will drive forward 100 inches
-    	addSequential(new DriveToDistanceCommand(42*DriveSubsystem.ticksToInches, 42*DriveSubsystem.ticksToInches)); //distance given in inches
+    	double centerSwitchDist1 = 42*DriveSubsystem.ticksToInches;
+    	double centerSwitchDist2 = 50*DriveSubsystem.ticksToInches;
+    	
+    	addSequential(new DriveForwardTimeOutCommand());
+    	
+    	addSequential(new DriveToDistanceCommand(centerSwitchDist1, centerSwitchDist1)); //distance given in inches
 		addSequential(new DriveToAngleCommand(-45, 45));
-		addSequential(new DriveToDistanceCommand(50*DriveSubsystem.ticksToInches, 70*DriveSubsystem.ticksToInches));
+		addSequential(new DriveToDistanceCommand(centerSwitchDist2, centerSwitchDist2));
 		addSequential(new DriveToAngleCommand(45, -45));
+		
+		addSequential(new ElevatorResetCommand());
+		addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
+		addSequential(new FoldIntakeCommand(true));
+		addSequential(new ReleaseIntakeCommand());
     	
     	//when the intake state equals above switch/scale, this code will make the robot
     	//drop the cube
