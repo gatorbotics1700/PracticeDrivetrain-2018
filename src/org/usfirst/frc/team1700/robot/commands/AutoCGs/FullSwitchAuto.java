@@ -34,11 +34,11 @@ public class FullSwitchAuto extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	double crossSwitchDist1 = 50*DriveSubsystem.ticksToInches;
-    	double crossSwitchDist2 = 110*DriveSubsystem.ticksToInches;
-    	double crossSwitchDist3 = 54*DriveSubsystem.ticksToInches;
+    	double crossSwitchDist1 = 50*DriveSubsystem.inchesToTicks;
+    	double crossSwitchDist2 = 110*DriveSubsystem.inchesToTicks;
+    	double crossSwitchDist3 = 54*DriveSubsystem.inchesToTicks;
     	
-    	double sameSwitchDist1 = 106*DriveSubsystem.ticksToInches;
+    	double sameSwitchDist1 = 106*DriveSubsystem.inchesToTicks;
     	
     	double left = -90;
     	double right = 90;
@@ -59,9 +59,9 @@ public class FullSwitchAuto extends CommandGroup {
     	} else if (Robot.driveSubsystem.getAutoSwitch() == 'M') {
     		addSequential(new DriveForwardTimeOutCommand());
     		
-        	addSequential(new DriveToDistanceCommand(42*DriveSubsystem.ticksToInches, 42*DriveSubsystem.ticksToInches)); //distance given in inches
+        	addSequential(new DriveToDistanceCommand(42*DriveSubsystem.inchesToTicks, 42*DriveSubsystem.inchesToTicks)); //distance given in inches
     		addSequential(new DriveToAngleCommand(-45, 45));
-    		addSequential(new DriveToDistanceCommand(50*DriveSubsystem.ticksToInches, 70*DriveSubsystem.ticksToInches));
+    		addSequential(new DriveToDistanceCommand(50*DriveSubsystem.inchesToTicks, 70*DriveSubsystem.inchesToTicks));
     		addSequential(new DriveToAngleCommand(45, -45));
     		
     		addSequential(new ElevatorResetCommand());

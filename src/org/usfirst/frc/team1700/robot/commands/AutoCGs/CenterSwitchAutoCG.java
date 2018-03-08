@@ -50,19 +50,19 @@ public class CenterSwitchAutoCG extends CommandGroup {
         // arm.
     	
     	//the robot will drive forward 100 inches
-    	double centerSwitchDist1 = 42*DriveSubsystem.ticksToInches;
-    	double centerSwitchDist2 = 50*DriveSubsystem.ticksToInches;
+    	double centerSwitchDist1 = 42*DriveSubsystem.inchesToTicks;
+    	double centerSwitchDist2 = 50*DriveSubsystem.inchesToTicks;
     	
     	addSequential(new DriveForwardTimeOutCommand());
     	
     	addSequential(new DriveToDistanceCommand(centerSwitchDist1, centerSwitchDist1)); //distance given in inches
 		addSequential(new DriveToAngleCommand(-45, 45));
 		addSequential(new DriveToDistanceCommand(centerSwitchDist2, centerSwitchDist2));
-		addSequential(new DriveToAngleCommand(45, -45));
+		addParallel(new DriveToAngleCommand(45, -45));
 		
 		addSequential(new ElevatorResetCommand());
-		addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
-		addSequential(new FoldIntakeCommand(true));
+		addSequential(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
+		addSequential(new FoldIntakeCommand(false));
 		addSequential(new ReleaseIntakeCommand());
     	
     	//when the intake state equals above switch/scale, this code will make the robot

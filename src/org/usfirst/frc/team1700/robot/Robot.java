@@ -133,11 +133,17 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
 		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
-		OI.letGo.whileHeld(new ReleaseIntakeCommand()); 
-		OI.letGo.whenReleased(new RunIntakeCommand());
+		OI.releaseIntake.whileHeld(new ReleaseIntakeCommand()); 
+		OI.releaseIntake.whenReleased(new RunIntakeCommand());
 		OI.grab.whileHeld(new grabIntakeCommand()); // if limit switches don't work
 		OI.stopIntake.whileHeld(new StopIntakeCommand());
 		OI.stopIntake.whenReleased(new RunIntakeCommand());
+		OI.elevatorExchange.whenPressed(new ElevatorToTicksCommand(Robot.elevatorSubsystem.exchangeTicks));
+		OI.elevatorSwitch.whenPressed(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
+		OI.elevatorScale.whenPressed(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
+		if (Math.abs(OI.coJoy.getRawAxis(1)) > 0.1) {
+			//run the ElevatorUpCommand (joystick control)
+		}
 	}
 
 	/**

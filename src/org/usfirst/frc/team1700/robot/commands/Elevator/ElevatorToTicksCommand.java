@@ -57,13 +57,7 @@ public class ElevatorToTicksCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	// Stop if elevator hits top or bottom limit switch
-    	boolean atTicks = Math.abs(tickDiff) < deadband;
-    	boolean atEnd = false; //Robot.elevatorSubsystem.touchingSwitch(false) || Robot.elevatorSubsystem.touchingSwitch(true);
-    	String printExit = Boolean.toString(atTicks);
-    	//DriverStation.reportWarning("exit command: " + printExit, false);
-//    	return atTicks || atEnd;
-    	return false;
+    	return Robot.elevatorSubsystem.touchingSwitch(false) || Robot.elevatorSubsystem.touchingSwitch(true);
     }
 
     // Called once after isFinished returns true

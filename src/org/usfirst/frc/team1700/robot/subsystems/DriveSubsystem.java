@@ -8,6 +8,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,9 +20,9 @@ public class DriveSubsystem extends Subsystem {
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
-	public static double ticksToInches = 11.94; // 40 ticks/in. * 54/20*50/12 gearbox reduction / (12pi in/shaft rotation)
-	public double distToSwitch = 140*ticksToInches;
-	public double distToAutoLine = 72*ticksToInches; // this is made up
+	public static double inchesToTicks = 11.94; // 40 ticks/in. * 54/20*50/12 gearbox reduction / (12pi in/shaft rotation)
+	public double distToSwitch = 140*inchesToTicks;
+	public double distToAutoLine = 72*inchesToTicks; // this is made up
 	
 	TalonSRX LF = RobotMap.leftFrontDrive;
 	TalonSRX LB = RobotMap.leftBackDrive;
@@ -29,6 +30,8 @@ public class DriveSubsystem extends Subsystem {
 	TalonSRX RB = RobotMap.rightBackDrive;
 	Encoder LE = RobotMap.leftDriveEncoder;
 	Encoder RE = RobotMap.rightDriveEncoder;
+	DigitalInput firstAutoSwitch = RobotMap.firstAutoSwitch;
+	DigitalInput secondAutoSwitch = RobotMap.secondAutoSwitch;
 	public AHRS navx = RobotMap.ahrs;
 	public enum AngleType {
 		PITCH, YAW, ROLL;
@@ -91,7 +94,15 @@ public class DriveSubsystem extends Subsystem {
 	
 	// returns L, M, or R
 	public char getAutoSwitch() {
-		return 'L';
+		if(firstAutoSwitch.get() && secondAutoSwitch.get()) {
+    		return 'M';
+    	} else if(firstAutoSwitch.get() && !secondAutoSwitch.get()) {
+    		return 'L';
+    	} else if(!firstAutoSwitch.get() && secondAutoSwitch.get()) {
+    		return 'R';
+    	} else {
+    		return '?';
+    	}
 	}
 	
 }

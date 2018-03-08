@@ -36,5 +36,14 @@ public class DriveForwardTimeOutCommand extends DriveAutoCommand {
 		}
 		super.initialize(0.0, 0.0, true);
     }
+    
+    @Override
+    protected boolean isFinished() {
+    	if (!executed) {
+    		return false;
+    	} else {
+    		return super.isFinished();
+    	}
+    }
 
 }

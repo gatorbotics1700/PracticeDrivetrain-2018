@@ -27,6 +27,7 @@ public class ElevatorSubsystem extends Subsystem {
 	//TODO: Test and set these
 	public int scaleTicks = 100; // # ticks to reach scale level
 	public int switchTicks = 50;
+	public int exchangeTicks = 20;
 
 	public ElevatorSubsystem() {
 		enc.reset();

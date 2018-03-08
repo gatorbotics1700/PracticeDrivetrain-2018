@@ -35,16 +35,16 @@ public class FullScaleAuto extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
     	
-    	double crossScaleDist1 = 245*DriveSubsystem.ticksToInches;
-    	double crossScaleDist2 = 186*DriveSubsystem.ticksToInches;
-    	double crossScaleDist3 = 20*DriveSubsystem.ticksToInches;
+    	double crossScaleDist1 = 245*DriveSubsystem.inchesToTicks;
+    	double crossScaleDist2 = 186*DriveSubsystem.inchesToTicks;
+    	double crossScaleDist3 = 20*DriveSubsystem.inchesToTicks;
     	
-    	double centerScaleDist1 = 210*DriveSubsystem.ticksToInches;
-    	double centerScaleDist2 = 42*DriveSubsystem.ticksToInches;
-    	double centerScaleDist3 = 57*DriveSubsystem.ticksToInches;
+    	double centerScaleDist1 = 210*DriveSubsystem.inchesToTicks;
+    	double centerScaleDist2 = 42*DriveSubsystem.inchesToTicks;
+    	double centerScaleDist3 = 57*DriveSubsystem.inchesToTicks;
     	
-    	double sameScaleDist1 = 153*DriveSubsystem.ticksToInches;
-    	double sameScaleDist2 = 21*DriveSubsystem.ticksToInches;
+    	double sameScaleDist1 = 153*DriveSubsystem.inchesToTicks;
+    	double sameScaleDist2 = 21*DriveSubsystem.inchesToTicks;
     	
     	double left = -90;
     	double right = 90;
