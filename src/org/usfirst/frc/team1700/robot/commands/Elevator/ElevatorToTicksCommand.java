@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1700.robot.commands.Elevator;
 
+import org.usfirst.frc.team1700.robot.OI;
 import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.RobotMap;
 
@@ -43,7 +44,7 @@ public class ElevatorToTicksCommand extends Command {
     	String printEnc = Double.toString(Robot.elevatorSubsystem.getCurrentPos()),
     			printTickDiff = Double.toString(tickDiff),
     			printCalcVel = Double.toString(calcVel);
-    	DriverStation.reportWarning("enc: " + printEnc, false);
+    	DriverStation.reportWarning("Elevator Encoder Value: " + printEnc, false);
     	//DriverStation.reportWarning("tickdiff: " + printTickDiff, false);
     	//DriverStation.reportWarning("calcvel: " + printCalcVel, false);
     	if (calcVel > maxSpeed) {
@@ -57,7 +58,7 @@ public class ElevatorToTicksCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Robot.elevatorSubsystem.touchingSwitch(false) || Robot.elevatorSubsystem.touchingSwitch(true);
+    	return Robot.elevatorSubsystem.touchingSwitch(false) || Robot.elevatorSubsystem.touchingSwitch(true) || Math.abs(OI.coJoy.getRawAxis(1)) > 0.1;
     }
 
     // Called once after isFinished returns true

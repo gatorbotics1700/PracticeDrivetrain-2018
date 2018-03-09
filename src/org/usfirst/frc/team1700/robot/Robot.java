@@ -11,11 +11,15 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.AutoForward;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAutoCG;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.FullScaleAuto;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.FullSwitchAuto;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.SideScaleAutoCG;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.LeftScaleAuto;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.LeftSwitchAuto;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.RightScaleAuto;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.RightSwitchAuto;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterScaleAuto;
+import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAuto;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.testAutoCG;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
+import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveForwardTimeOutCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
@@ -23,7 +27,7 @@ import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.StopIntakeCommand;
-import org.usfirst.frc.team1700.robot.commands.Intake.grabIntakeCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.GrabIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
@@ -55,11 +59,14 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto (Center Switch)", new CenterSwitchAutoCG());
-//		chooser.addDefault("Default Auto", new testAutoCG());
+		chooser.addDefault("Default Auto (Drive Forward)", new AutoForward());
+		chooser.addObject("Left Scale Auto", new LeftScaleAuto());
+		chooser.addObject("Center Scale Auto", new CenterScaleAuto());
+		chooser.addObject("Right Scale Auto", new RightScaleAuto());
+		chooser.addObject("Left Switch Auto", new LeftSwitchAuto());
+		chooser.addObject("Center Switch Auto", new CenterSwitchAutoCG());
+		chooser.addObject("Right Switch Auto",  new RightSwitchAuto());
 		chooser.addObject("Auto Line", new AutoForward());
-		chooser.addObject("Full Switch", new FullSwitchAuto());
-		chooser.addObject("Full Scale", new FullScaleAuto());
 		SmartDashboard.putData("Auto Mode", chooser);
 		System.out.println("ROBOT INITIATED!! :)");
 	}
@@ -92,6 +99,7 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
+		DriverStation.getInstance().reportWarning(autonomousCommand.getName(), false);
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
@@ -135,15 +143,11 @@ public class Robot extends IterativeRobot {
 		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
 		OI.releaseIntake.whileHeld(new ReleaseIntakeCommand()); 
 		OI.releaseIntake.whenReleased(new RunIntakeCommand());
-		OI.grab.whileHeld(new grabIntakeCommand()); // if limit switches don't work
+		OI.grab.whileHeld(new GrabIntakeCommand()); // if limit switches don't work
 		OI.stopIntake.whileHeld(new StopIntakeCommand());
 		OI.stopIntake.whenReleased(new RunIntakeCommand());
-		OI.elevatorExchange.whenPressed(new ElevatorToTicksCommand(Robot.elevatorSubsystem.exchangeTicks));
 		OI.elevatorSwitch.whenPressed(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
 		OI.elevatorScale.whenPressed(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
-		if (Math.abs(OI.coJoy.getRawAxis(1)) > 0.1) {
-			//run the ElevatorUpCommand (joystick control)
-		}
 	}
 
 	/**

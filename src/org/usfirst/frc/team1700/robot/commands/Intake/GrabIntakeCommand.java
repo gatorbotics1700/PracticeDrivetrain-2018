@@ -5,9 +5,9 @@ import org.usfirst.frc.team1700.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class grabIntakeCommand extends Command {
+public class GrabIntakeCommand extends Command {
 
-    public grabIntakeCommand() {
+    public GrabIntakeCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.intakeSubsystem);

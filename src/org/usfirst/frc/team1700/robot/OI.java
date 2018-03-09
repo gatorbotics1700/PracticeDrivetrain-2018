@@ -40,12 +40,11 @@ public class OI {
 	public static Joystick rightJoy = new Joystick(1);
 	public static Joystick coJoy = new Joystick(2);
 	
-	public static Button foldUp = new JoystickButton(coJoy, 1);
-	public static Button foldDown = new JoystickButton(coJoy, 5);
+	public static Button foldUp = new JoystickButton(coJoy, 5);
+	public static Button foldDown = new JoystickButton(coJoy, 1);
 	public static Button grab = new JoystickButton(coJoy, 10);
-	public static Button releaseIntake = new JoystickButton(coJoy, 4);
+	public static Button releaseIntake = new JoystickButton(rightJoy, 5);
 	public static Button stopIntake = new JoystickButton(coJoy, 3);
-	public static Button elevatorScale = new JoystickButton(coJoy, 2);
-	public static Button elevatorSwitch = new JoystickButton(coJoy, 6);
-	public static Button elevatorExchange = new JoystickButton(coJoy, 7);
+	public static Button elevatorScale = new JoystickButton(coJoy, 10);
+	public static Button elevatorSwitch = new JoystickButton(coJoy, 7);
 }

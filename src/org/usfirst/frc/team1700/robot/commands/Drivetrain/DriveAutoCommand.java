@@ -53,7 +53,7 @@ public abstract class DriveAutoCommand extends Command {
     	}
     	
     	Robot.driveSubsystem.resetEncoders();
-    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW) % 360;
+    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.ROLL) % 360;
 		currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
     	distDifference = distance-currentDistance;
     	angleDifference = angle;
@@ -87,7 +87,7 @@ public abstract class DriveAutoCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 //    	count++;
-    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW) % 360;
+    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.ROLL) % 360;
     	currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
     	distDifference = distance - currentDistance;
     	angleDifference = (targetAngle - currentAngle + 720 + 180) % 360 - 180;
@@ -137,13 +137,12 @@ public abstract class DriveAutoCommand extends Command {
     		   printAngleSpeed = Double.toString(angleSpeed);
 //    	//DriverStation.getInstance().reportWarning("We want this distance: " + printDesiredDist, false);
 //    	//DriverStation.getInstance().reportWarning("target angle: " + printDesiredAngle, false);
-//    	DriverStation.getInstance().reportWarning("DistanceDifference: " + printDDiff, false);
-//    	DriverStation.getInstance().reportWarning("AngleDifference: " + printADiff, false);
-//    	System.out.println("AngleDifference: " + printADiff);
-//    	//DriverStation.getInstance().reportWarning("current angle (ex.): " + printCurrAngle, false);
+    	DriverStation.getInstance().reportWarning("DistanceDifference: " + printDDiff, false);
+    	DriverStation.getInstance().reportWarning("AngleDifference: " + printADiff, false);
+    	DriverStation.getInstance().reportWarning("Current NavX Angle: " + printCurrAngle, false);
 //    	System.out.println("current angle (ex.): " + printCurrAngle);
-//    	//DriverStation.getInstance().reportWarning("Current Left Encoder Value: " + printLEnc, false);
-//    	//DriverStation.getInstance().reportWarning("Current Right Encoder Value: " + printREnc, false);
+    	DriverStation.getInstance().reportWarning("Current Left Encoder Value: " + printLEnc, false);
+    	DriverStation.getInstance().reportWarning("Current Right Encoder Value: " + printREnc, false);
 //    	DriverStation.getInstance().reportWarning("LeftSpeed: " + printLS, false);
 //    	DriverStation.getInstance().reportWarning("RightSpeed: " + printRS, false);
 //    	//DriverStation.getInstance().reportWarning("minSpeed: " + printminSpeed, false);

@@ -24,10 +24,7 @@ public class IntakeSubsystem extends Subsystem {
 	DigitalInput rightLS = RobotMap.intakeRightLimitSwitch;
 	DoubleSolenoid fold = RobotMap.carriageSol;
 	DoubleSolenoid grab = RobotMap.intakeArmSol;
-	AnalogInput leftUltra = RobotMap.leftUltrasonic;
-	AnalogInput rightUltra = RobotMap.rightUltrasonic;
-	DigitalOutput ultrasonicActivator = RobotMap.ultrasonicActivator;
-//	Compressor compressor = RobotMap.compressor;
+	Compressor compressor = RobotMap.compressor;
 	
 	public enum IntakeState {
 		OVER, NOT_YET;
@@ -38,7 +35,7 @@ public class IntakeSubsystem extends Subsystem {
 
 	public IntakeSubsystem() {
 		intakeState = IntakeState.NOT_YET;
-//		compressor.setClosedLoopControl(false);
+		compressor.setClosedLoopControl(true);
 	}
 
     public void initDefaultCommand() {
@@ -68,33 +65,23 @@ public class IntakeSubsystem extends Subsystem {
     	}
     }
     
-    public boolean leftUltrasonicClose() {
-    	// return leftUltrasonic.get() < some amount of distance
-    	return leftUltra.getValue()<150;
-    }
-    
-    public boolean rightUltrasonicClose() {
-    	// return rightUltrasonic.get() < same amount of distance
-    	return rightUltra.getValue()<150;
-    }
-    
-    public void printUltraValues() {
-    	System.out.println("LEFT ULTRA:");
-    	System.out.println(leftUltra.getValue());
-    	System.out.println("RIGHT ULTRA:");
-    	System.out.println(rightUltra.getValue());
-    }
+//    public boolean leftUltrasonicClose() {
+//    	// return leftUltrasonic.get() < some amount of distance
+//    	return leftUltra.getValue()<150;
+//    }
+//    
+//    public boolean rightUltrasonicClose() {
+//    	// return rightUltrasonic.get() < same amount of distance
+//    	return rightUltra.getValue()<150;
+//    }
     
     public boolean hasCube() {
-    	return leftLS.get();
+    	return leftLS.get() || rightLS.get();
     }
     
     public void setState(IntakeState state) {
     	this.intakeState = state;
     }
     
-    public void setDigitalOutput(boolean state) {
-    	ultrasonicActivator.set(true);
-    }
 }
 

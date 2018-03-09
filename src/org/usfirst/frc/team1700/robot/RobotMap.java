@@ -2,6 +2,7 @@ package org.usfirst.frc.team1700.robot;
 
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
@@ -21,21 +22,21 @@ import edu.wpi.first.wpilibj.SPI;
  */
 public class RobotMap {
 	// DRIVE TALONS
-	public static TalonSRX leftFrontDrive = new TalonSRX(1),
-					        rightFrontDrive = new TalonSRX(3);
+	public static VictorSPX leftFrontDrive = new VictorSPX(3),
+					        rightFrontDrive = new VictorSPX(4);
 					       
 
-	public static TalonSRX leftBackDrive = new TalonSRX(2),
-					       rightBackDrive = new TalonSRX(4);
+	public static TalonSRX leftBackDrive = new TalonSRX(5),
+					       rightBackDrive = new TalonSRX(6);
 	
 	// OTHER TALONS
-	public static TalonSRX elevatorMotor = new TalonSRX(5),
-						   leftIntakeMotor = new TalonSRX(6),
-						   rightIntakeMotor = new TalonSRX(7);
+	public static TalonSRX elevatorMotor = new TalonSRX(7),
+						   leftIntakeMotor = new TalonSRX(1),
+						   rightIntakeMotor = new TalonSRX(2);
 	
 	// PNEUMATICS
-	public static DoubleSolenoid intakeArmSol = new DoubleSolenoid(2, 3),
-								 carriageSol = new DoubleSolenoid(4, 5);
+	public static DoubleSolenoid intakeArmSol = new DoubleSolenoid(0, 1),
+								 carriageSol = new DoubleSolenoid(2, 3);
 //	
 	public static Compressor compressor = new Compressor(0); 
 	
@@ -43,22 +44,14 @@ public class RobotMap {
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) 200); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 	
 	// DIGITAL SENSORS
-	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(10), //8, 6
-							   elevatorBottomLimitSwitch = new DigitalInput(11), //11, 7
-							   intakeLeftLimitSwitch = new DigitalInput(8),//10, 8
-							   intakeRightLimitSwitch = new DigitalInput(9),
-							   firstAutoSwitch = new DigitalInput(12),
-							   secondAutoSwitch = new DigitalInput(13);
+	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(6), //8, 6
+							   elevatorBottomLimitSwitch = new DigitalInput(7), //11, 7
+							   intakeLeftLimitSwitch = new DigitalInput(8),
+							   intakeRightLimitSwitch = new DigitalInput(9);
 							   
-	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(6), new DigitalInput(7)),
-							   rightDriveEncoder = new Encoder(new DigitalInput(2), new DigitalInput(3)),
-							   elevatorEncoder = new Encoder(new DigitalInput(4),new DigitalInput (5));
-	
-	public static DigitalOutput ultrasonicActivator = new DigitalOutput(0);
-	
-	// ANALOG SENSORS
-	public static AnalogInput leftUltrasonic = new AnalogInput(0),
-							  rightUltrasonic = new AnalogInput(1);
-	
+	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(0), new DigitalInput(1)),
+							   rightDriveEncoder = new Encoder(new DigitalInput(4), new DigitalInput(5)),
+							   elevatorEncoder = new Encoder(new DigitalInput(2),new DigitalInput (3));
+	 
 	
 }

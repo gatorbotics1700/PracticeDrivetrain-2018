@@ -29,10 +29,11 @@ public class RunIntakeCommand extends Command {
     	// turn wheels in intake direction
     	if (!Robot.intakeSubsystem.hasCube()) {
     		Robot.intakeSubsystem.runIntake(OI.coJoy.getRawAxis(2));
+    		DriverStation.getInstance().reportWarning("Running intake", false);
     	} else {
     		Robot.intakeSubsystem.runIntake(0);
     		Robot.intakeSubsystem.grab(true);
-//    		DriverStation.getInstance().reportWarning("Running intake at zero", false);
+    		DriverStation.getInstance().reportWarning("Running intake at zero", false);
     		Robot.intakeSubsystem.grab(true);
     	}
 //    	DriverStation.getInstance().reportWarning("Intake is running!", false);
