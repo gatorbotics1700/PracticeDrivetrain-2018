@@ -126,6 +126,7 @@ public class Robot extends IterativeRobot {
 		}
 //		DriverStation.getInstance().reportWarning("4", false);
 		System.out.println("\nTELEOPINIT!!\n");
+		Scheduler.getInstance().add(new GrabIntakeCommand(true));
 //		DriverStation.getInstance().reportWarning("TeleopInit!", false);
 //		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
 	}
@@ -136,8 +137,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		OI.foldUp.whenPressed(new FoldIntakeCommand(false));
-		OI.foldDown.whenPressed(new FoldIntakeCommand(true));
+		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
+		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
 		OI.stopIntake.whileHeld(new StopIntakeCommand());
 		OI.stopIntake.whenReleased(new RunIntakeCommand());
 		OI.letGo.whenPressed(new GrabIntakeCommand(true));
@@ -145,8 +146,8 @@ public class Robot extends IterativeRobot {
 		OI.releaseIntakeFast.whenReleased(new RunIntakeCommand());
 		OI.releaseIntakeSlow.whileHeld(new ReleaseIntakeCommand(-0.4));
 		OI.releaseIntakeSlow.whenReleased(new RunIntakeCommand());
-		OI.elevatorSwitch.whenPressed(new ElevatorToTicksCommand(25));
-		OI.elevatorScale.whenPressed(new ElevatorToTicksCommand(35));
+//		OI.elevatorSwitch.whenPressed(new ElevatorToTicksCommand(25));
+//		OI.elevatorScale.whenPressed(new ElevatorToTicksCommand(35));
 	}
 
 	/**

@@ -49,8 +49,8 @@ public class IntakeSubsystem extends Subsystem {
     	rightMotor.set(ControlMode.PercentOutput, speed*.5);
     }
     
-   public void fold(boolean down) { // pneumaticsv 
-	   if (down) { //called in because intake
+   public void fold(boolean up) { // pneumatics
+	   if (up) { //called in because intake
     		fold.set(DoubleSolenoid.Value.kForward);
     	} else {
     		fold.set(DoubleSolenoid.Value.kReverse);
@@ -77,7 +77,8 @@ public class IntakeSubsystem extends Subsystem {
 //    }
     
     public boolean hasCube() {
-    	return leftLS.get() || rightLS.get();
+//    	return leftLS.get() || rightLS.get();
+    	return false;
     }
     
     public void setState(IntakeState state) {

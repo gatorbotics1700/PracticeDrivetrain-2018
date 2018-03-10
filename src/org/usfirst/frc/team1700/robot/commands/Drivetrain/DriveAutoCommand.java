@@ -1,5 +1,9 @@
 package org.usfirst.frc.team1700.robot.commands.Drivetrain;
 
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDateTime;
+
 import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 
@@ -37,7 +41,7 @@ public abstract class DriveAutoCommand extends Command {
 	private double angleTolerance = 2;
 	private double distanceTolerance = 5;
 	private int count = 0;
-	private int time = 0;
+	private Instant time;
 
     // Called just before this Command runs the first time
     protected void initialize(Double distance, Double angle, boolean isAngle) {
@@ -60,7 +64,7 @@ public abstract class DriveAutoCommand extends Command {
     	distDifference = distance-currentDistance;
     	angleDifference = angle;
     	targetAngle = (currentAngle + angle) % 360;
-    	this.time = 0;
+    	this.time = Instant.now();
     	
     	//targetDistance = currentDistance + distDifference;
 //    	String printcurrDist = Double.toString(currentDistance),
@@ -90,7 +94,6 @@ public abstract class DriveAutoCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 //    	count++;
-    	time++;
     	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW) % 360;
     	currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
     	distDifference = distance - currentDistance;
@@ -161,8 +164,10 @@ public abstract class DriveAutoCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if (time > 200) {
-    		DriverStation.getInstance().reportWarning("DRIVE AUTO HAS TIMED OUT AFTER 4 SECONDS.", false);
+    	Instant now = Instant.now();
+    	Duration duration = Duration.between(time, now);
+    	if (duration.toMillis()>2000 && this.angle == 0) {
+    		DriverStation.getInstance().reportWarning("DRIVE AUTO HAS TIMED OUT AFTER 2 SECONDS.", false);
     		return true;
     	}
         if (Robot.driveSubsystem.nearZero(distDifference, distanceTolerance) &&

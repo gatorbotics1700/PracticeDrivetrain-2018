@@ -34,7 +34,7 @@ public class testAutoCG extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
 //    	addSequential(new DriveToDistanceCommand(36*DriveSubsystem.inchesToTicks, 36*DriveSubsystem.inchesToTicks));
-    	addSequential(new DriveToAngleCommand(90,90));
+    	addSequential(new DriveToDistanceCommand(90,90));
 //    	addSequential(new ElevatorToTicksCommand(200));
     }
 }

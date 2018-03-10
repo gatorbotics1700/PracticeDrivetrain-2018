@@ -19,7 +19,7 @@ public class RunIntakeCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.intakeSubsystem.grab(true);
+//    	Robot.intakeSubsystem.grab(true);
     	DriverStation.getInstance().reportWarning("Starting a RunIntakeCommand", false);
     	Robot.intakeSubsystem.runIntake(OI.coJoy.getRawAxis(2));
     }

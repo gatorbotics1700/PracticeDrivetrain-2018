@@ -1,5 +1,6 @@
 package org.usfirst.frc.team1700.robot.commands.Intake;
 
+import org.usfirst.frc.team1700.robot.OI;
 import org.usfirst.frc.team1700.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -27,7 +28,7 @@ public class StopIntakeCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return OI.releaseIntakeFast.get() || OI.releaseIntakeSlow.get();
     }
 
     // Called once after isFinished returns true
