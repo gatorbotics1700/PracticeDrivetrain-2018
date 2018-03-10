@@ -8,6 +8,7 @@ import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorResetCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.AutoReleaseIntakeCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
@@ -18,16 +19,13 @@ public class LeftSwitchAuto extends CommandGroup {
 
     public LeftSwitchAuto() {
     	addSequential(new DriveForwardTimeOutCommand());
+//		addSequential(new ElevatorResetCommand());
+//		addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
 		
-		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.sameSwitchDist1, Robot.driveSubsystem.crossSwitchDist1)); //distance given in inches
-		addSequential(new DriveToAngleCommand(0, Robot.driveSubsystem.right));
-		addSequential(new DriveToDistanceCommand(0, Robot.driveSubsystem.crossSwitchDist2));
-		addSequential(new DriveToAngleCommand(0, Robot.driveSubsystem.left));
-		addSequential(new DriveToDistanceCommand(0, Robot.driveSubsystem.crossSwitchDist3));
+    	addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.distToAutoLine, Robot.driveSubsystem.distToAutoLine)); //distance given in inches
+		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.right,0));
 		
-		addSequential(new ElevatorResetCommand());
-		addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
 		addSequential(new FoldIntakeCommand(true));
-		addSequential(new ReleaseIntakeCommand());
+		addSequential(new AutoReleaseIntakeCommand(true));
     }
 }

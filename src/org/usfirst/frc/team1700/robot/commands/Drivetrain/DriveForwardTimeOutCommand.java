@@ -30,6 +30,7 @@ public class DriveForwardTimeOutCommand extends DriveAutoCommand {
 			count++;
 			if (count > 250) {
 				super.initialize(Robot.driveSubsystem.distToAutoLine, 0.0, true);
+				DriverStation.getInstance().reportWarning("Didn't get game data.", false);
 				executed = true;
 				return;
 			}

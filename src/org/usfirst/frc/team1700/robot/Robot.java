@@ -10,7 +10,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.AutoForward;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAutoCG;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.LeftScaleAuto;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.LeftSwitchAuto;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.RightScaleAuto;
@@ -18,18 +17,16 @@ import org.usfirst.frc.team1700.robot.commands.AutoCGs.RightSwitchAuto;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterScaleAuto;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAuto;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.testAutoCG;
-import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveForwardTimeOutCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorForTimeCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.StopIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.GrabIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem;
 
@@ -64,9 +61,9 @@ public class Robot extends IterativeRobot {
 		chooser.addObject("Center Scale Auto", new CenterScaleAuto());
 		chooser.addObject("Right Scale Auto", new RightScaleAuto());
 		chooser.addObject("Left Switch Auto", new LeftSwitchAuto());
-		chooser.addObject("Center Switch Auto", new CenterSwitchAutoCG());
+		chooser.addObject("Center Switch Auto", new CenterSwitchAuto());
 		chooser.addObject("Right Switch Auto",  new RightSwitchAuto());
-		chooser.addObject("Auto Line", new AutoForward());
+		chooser.addObject("Test (DON'T USE THIS IN COMPETITION!)", new testAutoCG());
 		SmartDashboard.putData("Auto Mode", chooser);
 		System.out.println("ROBOT INITIATED!! :)");
 	}
@@ -139,15 +136,17 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
-		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
-		OI.releaseIntake.whileHeld(new ReleaseIntakeCommand()); 
-		OI.releaseIntake.whenReleased(new RunIntakeCommand());
-		OI.grab.whileHeld(new GrabIntakeCommand()); // if limit switches don't work
+		OI.foldUp.whenPressed(new FoldIntakeCommand(false));
+		OI.foldDown.whenPressed(new FoldIntakeCommand(true));
 		OI.stopIntake.whileHeld(new StopIntakeCommand());
 		OI.stopIntake.whenReleased(new RunIntakeCommand());
-		OI.elevatorSwitch.whenPressed(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
-		OI.elevatorScale.whenPressed(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
+		OI.letGo.whenPressed(new GrabIntakeCommand(true));
+		OI.releaseIntakeFast.whileHeld(new ReleaseIntakeCommand(-1));
+		OI.releaseIntakeFast.whenReleased(new RunIntakeCommand());
+		OI.releaseIntakeSlow.whileHeld(new ReleaseIntakeCommand(-0.4));
+		OI.releaseIntakeSlow.whenReleased(new RunIntakeCommand());
+		OI.elevatorSwitch.whenPressed(new ElevatorToTicksCommand(25));
+		OI.elevatorScale.whenPressed(new ElevatorToTicksCommand(35));
 	}
 
 	/**

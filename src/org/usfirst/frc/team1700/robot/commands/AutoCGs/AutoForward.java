@@ -29,6 +29,6 @@ public class AutoForward extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new SimpleDriveForwardCommand(Robot.driveSubsystem.distToAutoLine));
+    	addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.distToAutoLine, Robot.driveSubsystem.distToAutoLine));
     }
 }

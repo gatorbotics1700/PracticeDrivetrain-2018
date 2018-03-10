@@ -18,18 +18,18 @@ public class RightScaleAuto extends CommandGroup {
 
     public RightScaleAuto() {
     	addSequential(new DriveForwardTimeOutCommand());
+//		addSequential(new ElevatorResetCommand());
+		addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
 		
     	addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.crossScaleDist1, Robot.driveSubsystem.sameScaleDist1)); //distance given in inches
 		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.left, Robot.driveSubsystem.left));
 		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.crossScaleDist2, Robot.driveSubsystem.sameScaleDist2));
 		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.right, 0));
 		
-		addSequential(new ElevatorResetCommand());
-		addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
 		
 		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.crossScaleDist3, 0));
 		
 		addSequential(new FoldIntakeCommand(true));
-		addSequential(new ReleaseIntakeCommand());
+		addSequential(new ReleaseIntakeCommand(-1));
     }
 }

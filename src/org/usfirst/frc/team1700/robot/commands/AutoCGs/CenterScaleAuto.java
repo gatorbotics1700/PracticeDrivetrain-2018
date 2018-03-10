@@ -20,6 +20,8 @@ public class CenterScaleAuto extends CommandGroup {
     public CenterScaleAuto() {
         
 		addSequential(new DriveForwardTimeOutCommand());
+//		addSequential(new ElevatorResetCommand());
+    	addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
     	
     	addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist1, Robot.driveSubsystem.centerScaleDist1)); //distance given in inches
 		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.left, Robot.driveSubsystem.right));
@@ -27,9 +29,7 @@ public class CenterScaleAuto extends CommandGroup {
 		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.right, Robot.driveSubsystem.left));
 		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist3, Robot.driveSubsystem.centerScaleDist3));
 		
-		addSequential(new ElevatorResetCommand());
-    	addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
 		addSequential(new FoldIntakeCommand(true));
-		addSequential(new ReleaseIntakeCommand());
+		addSequential(new ReleaseIntakeCommand(-2));
     }
 }

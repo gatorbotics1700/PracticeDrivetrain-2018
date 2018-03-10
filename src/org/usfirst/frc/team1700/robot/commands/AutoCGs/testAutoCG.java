@@ -3,7 +3,9 @@ package org.usfirst.frc.team1700.robot.commands.AutoCGs;
 import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToAngleCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToDistanceCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorForTimeCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
@@ -31,8 +33,8 @@ public class testAutoCG extends CommandGroup {
         // e.g. if Command1 requires chassis, and Command2 requires arm,
         // a CommandGroup containing them would require both the chassis and the
         // arm.
-    	addSequential(new DriveToDistanceCommand(24*DriveSubsystem.inchesToTicks, -24*DriveSubsystem.inchesToTicks));
-    	addSequential(new DriveToAngleCommand(45, -45));
+//    	addSequential(new DriveToDistanceCommand(36*DriveSubsystem.inchesToTicks, 36*DriveSubsystem.inchesToTicks));
+    	addSequential(new DriveToAngleCommand(90,90));
 //    	addSequential(new ElevatorToTicksCommand(200));
     }
 }

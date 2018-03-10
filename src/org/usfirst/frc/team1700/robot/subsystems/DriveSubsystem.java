@@ -22,7 +22,7 @@ public class DriveSubsystem extends Subsystem {
 	// AUTO CONSTANTS
 	public static double inchesToTicks = 11.94; // 40 ticks/in. * 54/20*50/12 gearbox reduction / (12pi in/shaft rotation)
 	public double distToSwitch = 140*inchesToTicks;
-	public double distToAutoLine = 72*inchesToTicks; // this is made up
+	public double distToAutoLine = 140*inchesToTicks; // this is made up
 
 	public double crossScaleDist1 = 245*DriveSubsystem.inchesToTicks;
 	public double crossScaleDist2 = 186*DriveSubsystem.inchesToTicks;
@@ -32,14 +32,14 @@ public class DriveSubsystem extends Subsystem {
 	public double centerScaleDist2 = 42*DriveSubsystem.inchesToTicks;
 	public double centerScaleDist3 = 57*DriveSubsystem.inchesToTicks;
 	
-	public double sameScaleDist1 = 153*DriveSubsystem.inchesToTicks;
-	public double sameScaleDist2 = 21*DriveSubsystem.inchesToTicks;
+	public double sameScaleDist1 = 300*DriveSubsystem.inchesToTicks;
+	public double sameScaleDist2 = 90*DriveSubsystem.inchesToTicks;
 	
 	public double crossSwitchDist1 = 50*DriveSubsystem.inchesToTicks;
-	public double crossSwitchDist2 = 110*DriveSubsystem.inchesToTicks;
+	public double crossSwitchDist2 = 110 *DriveSubsystem.inchesToTicks;
 	public double crossSwitchDist3 = 54*DriveSubsystem.inchesToTicks;
 	
-	public double sameSwitchDist1 = 106*DriveSubsystem.inchesToTicks;
+	public double sameSwitchDist1 = 130*DriveSubsystem.inchesToTicks;
 	
 	public double left = -90;
 	public double right = 90;

@@ -22,6 +22,7 @@ public class IntakeSubsystem extends Subsystem {
 	TalonSRX rightMotor = RobotMap.rightIntakeMotor;
 	DigitalInput leftLS = RobotMap.intakeLeftLimitSwitch;
 	DigitalInput rightLS = RobotMap.intakeRightLimitSwitch;
+	DigitalInput armLS = RobotMap.intakeArmLimitSwitch;
 	DoubleSolenoid fold = RobotMap.carriageSol;
 	DoubleSolenoid grab = RobotMap.intakeArmSol;
 	Compressor compressor = RobotMap.compressor;
@@ -45,20 +46,20 @@ public class IntakeSubsystem extends Subsystem {
     
     public void runIntake(double speed) { //motors start running
     	leftMotor.set(ControlMode.PercentOutput, speed); 
-    	rightMotor.set(ControlMode.PercentOutput, speed*.25);
+    	rightMotor.set(ControlMode.PercentOutput, speed*.5);
     }
     
-   public void fold(boolean in) { // pneumatics
-	   if (in) { //called in because intake
+   public void fold(boolean down) { // pneumaticsv 
+	   if (down) { //called in because intake
     		fold.set(DoubleSolenoid.Value.kForward);
     	} else {
     		fold.set(DoubleSolenoid.Value.kReverse);
     	}
     }
-   
-    
-    public void grab(boolean in) { // pneumatics
-    	if (in) { //called in because intake
+//   
+//    
+    public void grab(boolean release) { // pneumatics
+    	if (release) { //called in because intake
     		grab.set(DoubleSolenoid.Value.kForward);
     	} else {
     		grab.set(DoubleSolenoid.Value.kReverse);
@@ -81,6 +82,11 @@ public class IntakeSubsystem extends Subsystem {
     
     public void setState(IntakeState state) {
     	this.intakeState = state;
+    }
+    
+    public boolean armHit() {
+//    	return armLS.get();
+    	return false;
     }
     
 }

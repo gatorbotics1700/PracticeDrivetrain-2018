@@ -7,15 +7,17 @@ import edu.wpi.first.wpilibj.command.Command;
 
 public class GrabIntakeCommand extends Command {
 
-    public GrabIntakeCommand() {
+	boolean letGo;
+    public GrabIntakeCommand(boolean letGo) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.intakeSubsystem);
+    	this.letGo = letGo;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.intakeSubsystem.grab(true);
+    	Robot.intakeSubsystem.grab(letGo);
     	Robot.intakeSubsystem.runIntake(0);
     }
 

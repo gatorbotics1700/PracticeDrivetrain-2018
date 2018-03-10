@@ -37,6 +37,7 @@ public abstract class DriveAutoCommand extends Command {
 	private double angleTolerance = 2;
 	private double distanceTolerance = 5;
 	private int count = 0;
+	private int time = 0;
 
     // Called just before this Command runs the first time
     protected void initialize(Double distance, Double angle, boolean isAngle) {
@@ -53,11 +54,13 @@ public abstract class DriveAutoCommand extends Command {
     	}
     	
     	Robot.driveSubsystem.resetEncoders();
-    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.ROLL) % 360;
+    	DriverStation.getInstance().reportWarning("WE RESET THE ENCODERS. They are now " + Integer.toString(Robot.driveSubsystem.getLeftEncoderValue()) + Integer.toString(Robot.driveSubsystem.getRightEncoderValue()), false);
+    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW) % 360;
 		currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
     	distDifference = distance-currentDistance;
     	angleDifference = angle;
     	targetAngle = (currentAngle + angle) % 360;
+    	this.time = 0;
     	
     	//targetDistance = currentDistance + distDifference;
 //    	String printcurrDist = Double.toString(currentDistance),
@@ -87,7 +90,8 @@ public abstract class DriveAutoCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 //    	count++;
-    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.ROLL) % 360;
+    	time++;
+    	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW) % 360;
     	currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
     	distDifference = distance - currentDistance;
     	angleDifference = (targetAngle - currentAngle + 720 + 180) % 360 - 180;
@@ -121,6 +125,8 @@ public abstract class DriveAutoCommand extends Command {
     	
     	Robot.driveSubsystem.driveTank(leftSpeed, rightSpeed);
     	//Robot.driveSubsystem.driveTank(0.5, 0.5);
+    	
+    	// PRINTING AND DEBUGGING
     	String printLS = Double.toString(leftSpeed),
     		   printRS = Double.toString(rightSpeed),
     		   printDDiff = Double.toString(distDifference),
@@ -135,18 +141,18 @@ public abstract class DriveAutoCommand extends Command {
     		   printCurrAngle = Double.toString(currentAngle),
     		   printCalcDistSpeed = Double.toString(calcDistSpeed),
     		   printAngleSpeed = Double.toString(angleSpeed);
-//    	//DriverStation.getInstance().reportWarning("We want this distance: " + printDesiredDist, false);
-//    	//DriverStation.getInstance().reportWarning("target angle: " + printDesiredAngle, false);
-    	DriverStation.getInstance().reportWarning("DistanceDifference: " + printDDiff, false);
-    	DriverStation.getInstance().reportWarning("AngleDifference: " + printADiff, false);
-    	DriverStation.getInstance().reportWarning("Current NavX Angle: " + printCurrAngle, false);
+    	//DriverStation.getInstance().reportWarning("We want this distance: " + printDesiredDist, false);
+//    	DriverStation.getInstance().reportWarning("target angle: " + printDesiredAngle, false);
+//    	DriverStation.getInstance().reportWarning("DistanceDifference: " + printDDiff, false);
+//    	DriverStation.getInstance().reportWarning("AngleDifference: " + printADiff, false);
+//    	DriverStation.getInstance().reportWarning("Current NavX Angle: " + printCurrAngle, false);
 //    	System.out.println("current angle (ex.): " + printCurrAngle);
-    	DriverStation.getInstance().reportWarning("Current Left Encoder Value: " + printLEnc, false);
-    	DriverStation.getInstance().reportWarning("Current Right Encoder Value: " + printREnc, false);
+//    	DriverStation.getInstance().reportWarning("Current Left Encoder Value: " + printLEnc, false);
+//    	DriverStation.getInstance().reportWarning("Current Right Encoder Value: " + printREnc, false);
 //    	DriverStation.getInstance().reportWarning("LeftSpeed: " + printLS, false);
 //    	DriverStation.getInstance().reportWarning("RightSpeed: " + printRS, false);
-//    	//DriverStation.getInstance().reportWarning("minSpeed: " + printminSpeed, false);
-//    	//DriverStation.getInstance().reportWarning("min angle speed: " + printMinAngleSpeed, false);
+    	//DriverStation.getInstance().reportWarning("minSpeed: " + printminSpeed, false);
+    	//DriverStation.getInstance().reportWarning("min angle speed: " + printMinAngleSpeed, false);
     	
 //    	DriverStation.getInstance().reportWarning("calc distance speed: " + printCalcDistSpeed, false);
 //    	DriverStation.getInstance().reportWarning("distance speed: " + printDistSpeed, false);
@@ -155,6 +161,10 @@ public abstract class DriveAutoCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	if (time > 200) {
+    		DriverStation.getInstance().reportWarning("DRIVE AUTO HAS TIMED OUT AFTER 4 SECONDS.", false);
+    		return true;
+    	}
         if (Robot.driveSubsystem.nearZero(distDifference, distanceTolerance) &&
         	   Robot.driveSubsystem.nearZero(angleDifference, angleTolerance)) {
         	count++;

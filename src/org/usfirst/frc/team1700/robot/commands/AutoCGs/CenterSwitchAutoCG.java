@@ -6,7 +6,7 @@ import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToAngleCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToDistanceCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorResetCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorUpCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorMoveCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
@@ -53,16 +53,16 @@ public class CenterSwitchAutoCG extends CommandGroup {
     	double centerSwitchDist2 = 50*DriveSubsystem.inchesToTicks;
     	
     	addSequential(new DriveForwardTimeOutCommand());
+		
+//		addSequential(new ElevatorResetCommand());
+//		addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
     	
     	addSequential(new DriveToDistanceCommand(centerSwitchDist1, centerSwitchDist1)); //distance given in inches
 		addSequential(new DriveToAngleCommand(-45, 45));
 		addSequential(new DriveToDistanceCommand(centerSwitchDist2, centerSwitchDist2));
 		addParallel(new DriveToAngleCommand(45, -45));
-		
-//		addSequential(new ElevatorResetCommand());
-//		addSequential(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
-//		addSequential(new FoldIntakeCommand(false));
-//		addSequential(new ReleaseIntakeCommand());
+		addSequential(new FoldIntakeCommand(false));
+		addSequential(new ReleaseIntakeCommand(-1));
     	
     	//when the intake state equals above switch/scale, this code will make the robot
     	//drop the cube

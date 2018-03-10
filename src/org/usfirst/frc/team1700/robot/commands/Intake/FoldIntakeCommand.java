@@ -12,11 +12,11 @@ public class FoldIntakeCommand extends Command {
 
 	boolean retracting;
 	
-    public FoldIntakeCommand(boolean retracting) {
+    public FoldIntakeCommand(boolean down) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.intakeSubsystem);
-    	this.retracting = retracting;
+    	this.retracting = down;
     }
 
     // Called just before this Command runs the first time

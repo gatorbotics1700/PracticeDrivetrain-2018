@@ -19,7 +19,8 @@ public class RunIntakeCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.intakeSubsystem.grab(false);
+    	Robot.intakeSubsystem.grab(true);
+    	DriverStation.getInstance().reportWarning("Starting a RunIntakeCommand", false);
     	Robot.intakeSubsystem.runIntake(OI.coJoy.getRawAxis(2));
     }
 
@@ -28,13 +29,12 @@ public class RunIntakeCommand extends Command {
 //    	Robot.intakeSubsystem.printUltraValues();
     	// turn wheels in intake direction
     	if (!Robot.intakeSubsystem.hasCube()) {
-    		Robot.intakeSubsystem.runIntake(OI.coJoy.getRawAxis(2));
+    		Robot.intakeSubsystem.runIntake(0.7);
     		DriverStation.getInstance().reportWarning("Running intake", false);
     	} else {
     		Robot.intakeSubsystem.runIntake(0);
-    		Robot.intakeSubsystem.grab(true);
+    		Robot.intakeSubsystem.grab(false);
     		DriverStation.getInstance().reportWarning("Running intake at zero", false);
-    		Robot.intakeSubsystem.grab(true);
     	}
 //    	DriverStation.getInstance().reportWarning("Intake is running!", false);
     }
@@ -46,7 +46,6 @@ public class RunIntakeCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	// stop wheels
     	Robot.intakeSubsystem.runIntake(0);
     }
 

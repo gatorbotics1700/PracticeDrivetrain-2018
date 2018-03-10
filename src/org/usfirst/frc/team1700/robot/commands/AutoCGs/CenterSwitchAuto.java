@@ -19,16 +19,16 @@ public class CenterSwitchAuto extends CommandGroup {
 
     public CenterSwitchAuto() {
         
-		addSequential(new DriveForwardTimeOutCommand());
+//    	addSequential(new DriveForwardTimeOutCommand());
+//		addSequential(new ElevatorResetCommand());
+//    	addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
 		
-    	addSequential(new DriveToDistanceCommand(42*DriveSubsystem.inchesToTicks, 42*DriveSubsystem.inchesToTicks)); //distance given in inches
+    	addSequential(new DriveToDistanceCommand(10*DriveSubsystem.inchesToTicks, 10*DriveSubsystem.inchesToTicks)); //distance given in inches
 		addSequential(new DriveToAngleCommand(-45, 45));
-		addSequential(new DriveToDistanceCommand(50*DriveSubsystem.inchesToTicks, 70*DriveSubsystem.inchesToTicks));
+		addSequential(new DriveToDistanceCommand(10*DriveSubsystem.inchesToTicks, 70*DriveSubsystem.inchesToTicks));
 		addSequential(new DriveToAngleCommand(45, -45));
 		
-		addSequential(new ElevatorResetCommand());
-    	addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.switchTicks));
-    	addSequential(new FoldIntakeCommand(true));
-		addSequential(new ReleaseIntakeCommand());
+//    	addSequential(new FoldIntakeCommand(true));
+//		addSequential(new ReleaseIntakeCommand(-0.4));
     }
 }
