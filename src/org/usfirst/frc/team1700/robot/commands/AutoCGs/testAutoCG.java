@@ -4,7 +4,8 @@ import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToAngleCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToDistanceCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorForTimeCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToInchesCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorResetCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 
@@ -16,7 +17,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class testAutoCG extends CommandGroup {
 
     public testAutoCG() {
-    	this.requires(Robot.driveSubsystem);
+    	this.requires(Robot.elevatorSubsystem);
         // Add Commands here:
         // e.g. addSequential(new Command1());
         //      addSequential(new Command2());
@@ -34,7 +35,9 @@ public class testAutoCG extends CommandGroup {
         // a CommandGroup containing them would require both the chassis and the
         // arm.
 //    	addSequential(new DriveToDistanceCommand(36*DriveSubsystem.inchesToTicks, 36*DriveSubsystem.inchesToTicks));
-    	addSequential(new DriveToDistanceCommand(90,90));
-//    	addSequential(new ElevatorToTicksCommand(200));
+//    	addSequential(new DriveToDistanceCommand(90,90));
+    	addSequential(new ElevatorResetCommand());
+    	addSequential(new ElevatorToInchesCommand(35));
+//    	addSequential(new ElevatorForTimeCommand(250, 0.2));
     }
 }

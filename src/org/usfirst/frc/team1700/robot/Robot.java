@@ -20,7 +20,7 @@ import org.usfirst.frc.team1700.robot.commands.AutoCGs.testAutoCG;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveForwardTimeOutCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorForTimeCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToInchesCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
@@ -57,9 +57,6 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		oi = new OI();
 		chooser.addDefault("Default Auto (Drive Forward)", new AutoForward());
-		chooser.addObject("Left Scale Auto", new LeftScaleAuto());
-		chooser.addObject("Center Scale Auto", new CenterScaleAuto());
-		chooser.addObject("Right Scale Auto", new RightScaleAuto());
 		chooser.addObject("Left Switch Auto", new LeftSwitchAuto());
 		chooser.addObject("Center Switch Auto", new CenterSwitchAuto());
 		chooser.addObject("Right Switch Auto",  new RightSwitchAuto());
@@ -96,6 +93,9 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousInit() {
 		autonomousCommand = chooser.getSelected();
+		if (autonomousCommand.getName() == "testAutoCG" && DriverStation.getInstance().isFMSAttached()) {
+			autonomousCommand = new AutoForward();
+		}
 		DriverStation.getInstance().reportWarning(autonomousCommand.getName(), false);
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
@@ -127,6 +127,7 @@ public class Robot extends IterativeRobot {
 //		DriverStation.getInstance().reportWarning("4", false);
 		System.out.println("\nTELEOPINIT!!\n");
 		Scheduler.getInstance().add(new GrabIntakeCommand(true));
+//		Scheduler.getInstance().add(new RunIntakeCommand());
 //		DriverStation.getInstance().reportWarning("TeleopInit!", false);
 //		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
 	}
@@ -142,10 +143,14 @@ public class Robot extends IterativeRobot {
 		OI.stopIntake.whileHeld(new StopIntakeCommand());
 		OI.stopIntake.whenReleased(new RunIntakeCommand());
 		OI.letGo.whenPressed(new GrabIntakeCommand(true));
+		OI.letGo.whenReleased(new RunIntakeCommand());
+		OI.squeeze.whenPressed(new GrabIntakeCommand(false));
 		OI.releaseIntakeFast.whileHeld(new ReleaseIntakeCommand(-1));
 		OI.releaseIntakeFast.whenReleased(new RunIntakeCommand());
+		OI.releaseIntakeFast.whenReleased(new GrabIntakeCommand(true));
 		OI.releaseIntakeSlow.whileHeld(new ReleaseIntakeCommand(-0.4));
 		OI.releaseIntakeSlow.whenReleased(new RunIntakeCommand());
+		OI.releaseIntakeSlow.whenReleased(new GrabIntakeCommand(true));
 //		OI.elevatorSwitch.whenPressed(new ElevatorToTicksCommand(25));
 //		OI.elevatorScale.whenPressed(new ElevatorToTicksCommand(35));
 	}

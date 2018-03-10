@@ -1,7 +1,7 @@
 package org.usfirst.frc.team1700.robot.subsystems;
 
 import org.usfirst.frc.team1700.robot.RobotMap;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToInchesCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorMoveCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
@@ -24,10 +24,12 @@ public class ElevatorSubsystem extends Subsystem {
 	DigitalInput BL = RobotMap.elevatorBottomLimitSwitch;
 	Encoder enc = RobotMap.elevatorEncoder;
 	
-	//TODO: Test and set these
-	public int scaleTicks = 100; // # ticks to reach scale level
-	public int switchTicks = 50;
-	public int exchangeTicks = 20;
+	//TODO: test and set these
+	public double scaleHeight = 40; // # ticks to reach scale level
+	public double switchHeight = 26;
+	public double baseHeight = 9.75;
+	public double inchesToTicks = 15.5;
+	public double stallSpeed = 0.9;
 
 	public ElevatorSubsystem() {
 		enc.reset();

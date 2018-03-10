@@ -33,10 +33,10 @@ public abstract class DriveAutoCommand extends Command {
 	
 	// CONSTANTS (change these)
 	
-	private double turningAngleProportion = 0.02;
+	private double turningAngleProportion = 0.01;
 	private double maxAngleSpeed = 0.7;
 	private double driveD = 0.000;
-	private double driveP = 0.015;
+	private double driveP = 0.013;
 	private double maxDistanceSpeed = 0.8;
 	private double angleTolerance = 2;
 	private double distanceTolerance = 5;
@@ -187,7 +187,7 @@ public abstract class DriveAutoCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	
+    	Robot.driveSubsystem.driveTank(0, 0);
     	DriverStation.getInstance().reportWarning("Finished DriveAutoCommand!", false);
     }
 

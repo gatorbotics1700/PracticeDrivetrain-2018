@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1700.robot.commands.Drivetrain;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import org.usfirst.frc.team1700.robot.Robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -24,12 +27,11 @@ public class DriveForwardTimeOutCommand extends DriveAutoCommand {
     @Override
     protected void initialize() {
 	    String gameData = DriverStation.getInstance().getGameSpecificMessage();
-		Integer count = 0;
+		Instant start = Instant.now();
 		while (gameData.length() < 3) {
 			gameData = DriverStation.getInstance().getGameSpecificMessage();
-			count++;
-			if (count > 250) {
-				super.initialize(Robot.driveSubsystem.distToAutoLine, 0.0, true);
+			if (Duration.between(start, Instant.now()).toMillis() > 100) {
+				super.initialize(Robot.driveSubsystem.distToAutoLine, 0.0, false);
 				DriverStation.getInstance().reportWarning("Didn't get game data.", false);
 				executed = true;
 				return;
@@ -40,11 +42,7 @@ public class DriveForwardTimeOutCommand extends DriveAutoCommand {
     
     @Override
     protected boolean isFinished() {
-    	if (!executed) {
-    		return false;
-    	} else {
-    		return super.isFinished();
-    	}
+    	return super.isFinished();
     }
 
 }

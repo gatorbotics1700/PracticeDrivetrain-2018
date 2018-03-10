@@ -5,7 +5,7 @@ import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveForwardTimeOutCom
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToAngleCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToDistanceCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorResetCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToInchesCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorMoveCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;

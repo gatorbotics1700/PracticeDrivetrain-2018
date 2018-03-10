@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1700.robot.commands.Drivetrain;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.RobotMap;
 
@@ -24,12 +27,11 @@ public class DriveToAngleCommand extends DriveAutoCommand {
     
     @Override
     protected void initialize() {
+    	Instant start = Instant.now();
     	String gameData = DriverStation.getInstance().getGameSpecificMessage();
-    	Integer count = 0;
     	while (gameData.length() < 3) {
     		gameData = DriverStation.getInstance().getGameSpecificMessage();
-    		count++;
-    		if (count > 250) {
+    		if (Duration.between(start, Instant.now()).toMillis() > 100) {
     			super.initialize(0.0, 0.0, true);
     			return;
     		}

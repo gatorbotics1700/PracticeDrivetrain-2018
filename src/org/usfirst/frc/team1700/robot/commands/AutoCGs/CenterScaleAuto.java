@@ -5,7 +5,7 @@ import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveForwardTimeOutCom
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToAngleCommand;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveToDistanceCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorResetCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToTicksCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToInchesCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
@@ -19,9 +19,9 @@ public class CenterScaleAuto extends CommandGroup {
 
     public CenterScaleAuto() {
         
-		addSequential(new DriveForwardTimeOutCommand());
-//		addSequential(new ElevatorResetCommand());
-    	addParallel(new ElevatorToTicksCommand(Robot.elevatorSubsystem.scaleTicks));
+//		addSequential(new DriveForwardTimeOutCommand());
+		addSequential(new ElevatorResetCommand());
+    	addParallel(new ElevatorToInchesCommand(Robot.elevatorSubsystem.scaleHeight));
     	
     	addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist1, Robot.driveSubsystem.centerScaleDist1)); //distance given in inches
 		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.left, Robot.driveSubsystem.right));
@@ -30,6 +30,6 @@ public class CenterScaleAuto extends CommandGroup {
 		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist3, Robot.driveSubsystem.centerScaleDist3));
 		
 		addSequential(new FoldIntakeCommand(true));
-		addSequential(new ReleaseIntakeCommand(-2));
+		addSequential(new ReleaseIntakeCommand(-0.7));
     }
 }

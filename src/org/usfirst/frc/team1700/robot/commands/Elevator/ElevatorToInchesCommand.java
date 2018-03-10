@@ -10,20 +10,20 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ElevatorToTicksCommand extends Command {
+public class ElevatorToInchesCommand extends Command {
 
 	int deadband = 5; //change later
 	int ticks;
 	double maxSpeed = 0.5;
-	double P = 0.05; // not tuned
-	double D = 0.001; // not tuned
+	double P = 0.009; // not tuned
+	double D = 0.000; // not tuned
 	double tickDiff;
 	double calcVel;
 	
-    public ElevatorToTicksCommand(int ticks) {
+    public ElevatorToInchesCommand(double inches) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this.ticks = ticks;
+    	this.ticks = (int) Math.round(inches * Robot.elevatorSubsystem.inchesToTicks);
     	requires(Robot.elevatorSubsystem);
     }
 
@@ -40,14 +40,17 @@ public class ElevatorToTicksCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	tickDiff = ticks - Robot.elevatorSubsystem.getCurrentPos();
-    	calcVel = P*tickDiff + D*Robot.elevatorSubsystem.getVelocity();
+    	calcVel = -P*tickDiff + D*Robot.elevatorSubsystem.getVelocity();
     	String printEnc = Double.toString(Robot.elevatorSubsystem.getCurrentPos()),
     			printTickDiff = Double.toString(tickDiff),
     			printCalcVel = Double.toString(calcVel);
     	DriverStation.reportWarning("Elevator Encoder Value: " + printEnc, false);
     	DriverStation.reportWarning("tickdiff: " + printTickDiff, false);
     	DriverStation.reportWarning("calcvel: " + printCalcVel, false);
-    	if (calcVel > maxSpeed) {
+    	if (Math.abs(tickDiff) <=7.0) {
+    		Robot.elevatorSubsystem.elevatorMove(Robot.elevatorSubsystem.stallSpeed);
+    		
+    	} else if (calcVel > maxSpeed) {
     		Robot.elevatorSubsystem.elevatorMove(maxSpeed);
     	} else if (calcVel < -maxSpeed) {
     		Robot.elevatorSubsystem.elevatorMove(-maxSpeed);
@@ -58,7 +61,8 @@ public class ElevatorToTicksCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return Math.abs(OI.coJoy.getRawAxis(1)) > 1;
+//    	return Math.abs(OI.coJoy.getRawAxis(1)) > 1;
+    	return false;
 //    	return Robot.elevatorSubsystem.touchingSwitch(false) || Robot.elevatorSubsystem.touchingSwitch(true) || Math.abs(OI.coJoy.getRawAxis(1)) > 0.1;
     }
 

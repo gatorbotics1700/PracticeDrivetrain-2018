@@ -42,6 +42,7 @@ public class OI {
 	public static Button letGo = new JoystickButton(coJoy, 1);
 	public static Button foldDown = new JoystickButton(coJoy, 2);
 	public static Button foldUp = new JoystickButton(coJoy, 4);
+	public static Button squeeze = new JoystickButton(coJoy, 3);
 	public static Button releaseIntakeFast = new JoystickButton(rightJoy, 5);
 	public static Button releaseIntakeSlow = new JoystickButton(rightJoy, 4);
 	public static Button stopIntake = new JoystickButton(leftJoy, 3);

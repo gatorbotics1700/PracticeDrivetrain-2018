@@ -76,9 +76,14 @@ public class IntakeSubsystem extends Subsystem {
 //    	return rightUltra.getValue()<150;
 //    }
     
-    public boolean hasCube() {
-//    	return leftLS.get() || rightLS.get();
-    	return false;
+    public int hasCube() {
+    	if (leftLS.get() && rightLS.get()) {
+    		return 2;
+    	} else if (leftLS.get() || rightLS.get()) {
+    		return 1;
+    	} else {
+    		return 0;
+    	}
     }
     
     public void setState(IntakeState state) {

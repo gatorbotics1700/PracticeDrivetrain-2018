@@ -21,7 +21,7 @@ public class ElevatorStopCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-		Robot.elevatorSubsystem.elevatorMove(0);
+		Robot.elevatorSubsystem.elevatorMove(Robot.elevatorSubsystem.stallSpeed);
 		//1 = up, 0 = stopped, -1 = down
     }
 
@@ -37,5 +37,6 @@ public class ElevatorStopCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
+    	Robot.elevatorSubsystem.elevatorMove(0);
     }
 }

@@ -30,9 +30,8 @@ public class ElevatorMoveCommand extends Command {
 //    		DriverStation.getInstance().reportWarning("Elevator hit top or bottom!", false);
 //    	} else {
     		Robot.elevatorSubsystem.elevatorMove(-OI.coJoy.getRawAxis(1));
-//    	}
     	DriverStation.getInstance().reportWarning(Integer.toString(Robot.elevatorSubsystem.getCurrentPos()), false);
-    	DriverStation.getInstance().reportWarning(Double.toString(-OI.coJoy.getRawAxis(1)), false);
+//    	DriverStation.getInstance().reportWarning(Double.toString(-OI.coJoy.getRawAxis(1)), false);
 		//Caution- elevator will move up forever
 		//1 = up, 0 = stopped, -1 = down
     }

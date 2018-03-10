@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1700.robot.commands.Drivetrain;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 
@@ -19,13 +22,11 @@ public class DriveToDistanceCommand extends DriveAutoCommand {
     }
 	
 	public void initialize() {
+		Instant start = Instant.now();
 		String gameData = DriverStation.getInstance().getGameSpecificMessage();
-    	Integer count = 0;
     	while (gameData.length() < 3) {
-    		DriverStation.reportWarning(Integer.toString(count) + gameData, false);
     		gameData = DriverStation.getInstance().getGameSpecificMessage();
-    		count++;
-    		if (count > 2500000) {
+    		if (Duration.between(start, Instant.now()).toMillis() > 100) {
     			DriverStation.reportWarning("timed out :(", false);
     			super.initialize(0.0, 0.0, true);
     			return;
