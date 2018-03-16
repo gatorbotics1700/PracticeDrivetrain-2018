@@ -33,6 +33,7 @@ public class ElevatorSubsystem extends Subsystem {
 
 	public ElevatorSubsystem() {
 		enc.reset();
+		enc.setDistancePerPulse(0.0645);
 	}
 
     public void initDefaultCommand() {

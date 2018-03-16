@@ -26,6 +26,7 @@ import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.StopIntakeCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.GrabIntakeCommand;
+import org.usfirst.frc.team1700.robot.commands.Intake.GrabIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem;
@@ -127,6 +128,7 @@ public class Robot extends IterativeRobot {
 //		DriverStation.getInstance().reportWarning("4", false);
 		System.out.println("\nTELEOPINIT!!\n");
 		Scheduler.getInstance().add(new GrabIntakeCommand(true));
+		Scheduler.getInstance().add(new RunIntakeCommand());
 //		Scheduler.getInstance().add(new RunIntakeCommand());
 //		DriverStation.getInstance().reportWarning("TeleopInit!", false);
 //		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
@@ -138,6 +140,8 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
+		// INTAKE
 		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
 		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
 		OI.stopIntake.whileHeld(new StopIntakeCommand());
@@ -151,8 +155,10 @@ public class Robot extends IterativeRobot {
 		OI.releaseIntakeSlow.whileHeld(new ReleaseIntakeCommand(-0.4));
 		OI.releaseIntakeSlow.whenReleased(new RunIntakeCommand());
 		OI.releaseIntakeSlow.whenReleased(new GrabIntakeCommand(true));
-//		OI.elevatorSwitch.whenPressed(new ElevatorToTicksCommand(25));
-//		OI.elevatorScale.whenPressed(new ElevatorToTicksCommand(35));
+		
+		// ELEVATOR
+		OI.elevatorSwitch.whenPressed(new ElevatorToInchesCommand(elevatorSubsystem.switchHeight));
+		OI.elevatorScale.whenPressed(new ElevatorToInchesCommand(elevatorSubsystem.scaleHeight));
 	}
 
 	/**

@@ -61,9 +61,7 @@ public class ElevatorToInchesCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-//    	return Math.abs(OI.coJoy.getRawAxis(1)) > 1;
     	return false;
-//    	return Robot.elevatorSubsystem.touchingSwitch(false) || Robot.elevatorSubsystem.touchingSwitch(true) || Math.abs(OI.coJoy.getRawAxis(1)) > 0.1;
     }
 
     // Called once after isFinished returns true

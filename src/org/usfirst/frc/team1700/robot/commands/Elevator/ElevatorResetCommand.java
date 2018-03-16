@@ -17,7 +17,6 @@ public class ElevatorResetCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.elevatorSubsystem.resetEncoder();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,12 +27,12 @@ public class ElevatorResetCommand extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 //        return Robot.elevatorSubsystem.touchingSwitch(false);
-    	return true;
+    	return Robot.elevatorSubsystem.getVelocity() == 0;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-//    	Robot.elevatorSubsystem.resetEncoder();
+    	Robot.elevatorSubsystem.resetEncoder();
     }
 
     // Called when another command which requires one or more of the same
