@@ -19,6 +19,8 @@ import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAuto;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.testAutoCG;
 import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveForwardTimeOutCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorForTimeCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorMoveCommand;
+import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorResetCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
 import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToInchesCommand;
 import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
@@ -159,6 +161,8 @@ public class Robot extends IterativeRobot {
 		// ELEVATOR
 		OI.elevatorSwitch.whenPressed(new ElevatorToInchesCommand(elevatorSubsystem.switchHeight));
 		OI.elevatorScale.whenPressed(new ElevatorToInchesCommand(elevatorSubsystem.scaleHeight));
+		OI.elevatorReset.whenPressed(new ElevatorResetCommand());
+		OI.elevatorOverride.whenPressed(new ElevatorMoveCommand());
 	}
 
 	/**
