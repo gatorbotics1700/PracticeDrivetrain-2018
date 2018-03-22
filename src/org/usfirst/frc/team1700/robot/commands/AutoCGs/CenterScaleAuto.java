@@ -20,16 +20,16 @@ public class CenterScaleAuto extends CommandGroup {
     public CenterScaleAuto() {
         
 //		addSequential(new DriveForwardTimeOutCommand());
-		addSequential(new ElevatorResetCommand());
-    	addParallel(new ElevatorToInchesCommand(Robot.elevatorSubsystem.scaleHeight));
-    	
-    	addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist1, Robot.driveSubsystem.centerScaleDist1)); //distance given in inches
-		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.left, Robot.driveSubsystem.right));
-		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist2, Robot.driveSubsystem.centerScaleDist2));
-		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.right, Robot.driveSubsystem.left));
-		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist3, Robot.driveSubsystem.centerScaleDist3));
-		
-		addSequential(new FoldIntakeCommand(true));
-		addSequential(new ReleaseIntakeCommand(-0.7));
+//		addSequential(new ElevatorResetCommand());
+//    	addParallel(new ElevatorToInchesCommand(Robot.elevatorSubsystem.scaleHeight));
+//    	
+//    	addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist1, Robot.driveSubsystem.centerScaleDist1)); //distance given in inches
+//		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.left, Robot.driveSubsystem.right));
+//		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist2, Robot.driveSubsystem.centerScaleDist2));
+//		addSequential(new DriveToAngleCommand(Robot.driveSubsystem.right, Robot.driveSubsystem.left));
+//		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.centerScaleDist3, Robot.driveSubsystem.centerScaleDist3));
+//		
+//		addSequential(new FoldIntakeCommand(true));
+//		addSequential(new ReleaseIntakeCommand(-0.7));
     }
 }

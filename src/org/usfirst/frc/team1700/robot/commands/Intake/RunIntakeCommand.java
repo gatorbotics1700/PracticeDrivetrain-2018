@@ -34,13 +34,14 @@ public class RunIntakeCommand extends Command {
     	
 //    	Robot.intakeSubsystem.printUltraValues();
     	// turn wheels in intake direction
-    	if (Robot.intakeSubsystem.hasCube() == 0) {
+    	if (Robot.intakeSubsystem.hasCube() < 2) {
     		wasJustPressed = false;
     		Robot.intakeSubsystem.runIntake(0.7);
     		DriverStation.getInstance().reportWarning("Running intake", false);
     	} else {
-	    		Robot.intakeSubsystem.runIntake(0);
-	    		Robot.intakeSubsystem.grab(false);
+    		Robot.intakeSubsystem.runIntake(0);
+    		Robot.intakeSubsystem.grab(false);
+    		DriverStation.getInstance().reportWarning("Running intake at zero", false);
     	}
     }
 //    	} else if (Robot.intakeSubsystem.hasCube() == 2) {

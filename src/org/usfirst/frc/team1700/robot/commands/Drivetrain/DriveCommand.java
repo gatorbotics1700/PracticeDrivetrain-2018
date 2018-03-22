@@ -30,7 +30,7 @@ public class DriveCommand extends Command {
 		String LencVal = Double.toString(Robot.driveSubsystem.getLeftEncoderValue());
 		String Rencval = Double.toString(Robot.driveSubsystem.getRightEncoderValue());
 		Robot.driveSubsystem.driveTank(leftSpeed, rightSpeed);
-//		DriverStation.getInstance().reportWarning(LencVal + " R " + Rencval, false);
+		DriverStation.getInstance().reportWarning("LEFT ENCODER: " + LencVal, false);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

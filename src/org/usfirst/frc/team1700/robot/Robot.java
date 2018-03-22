@@ -131,6 +131,7 @@ public class Robot extends IterativeRobot {
 		System.out.println("\nTELEOPINIT!!\n");
 		Scheduler.getInstance().add(new GrabIntakeCommand(true));
 		Scheduler.getInstance().add(new RunIntakeCommand());
+		driveSubsystem.resetEncoders();
 //		Scheduler.getInstance().add(new RunIntakeCommand());
 //		DriverStation.getInstance().reportWarning("TeleopInit!", false);
 //		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control

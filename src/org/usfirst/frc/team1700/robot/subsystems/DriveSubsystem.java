@@ -24,22 +24,17 @@ public class DriveSubsystem extends Subsystem {
 	public double distToSwitch = 140*inchesToTicks;
 	public double distToAutoLine = 110*inchesToTicks;
 
-	public double crossScaleDist1 = 245*DriveSubsystem.inchesToTicks;
-	public double crossScaleDist2 = 186*DriveSubsystem.inchesToTicks;
-	public double crossScaleDist3 = 20*DriveSubsystem.inchesToTicks;
+	public double crossScaleDist1 = 210*DriveSubsystem.inchesToTicks;
+	public double crossScaleDist2 = 140*DriveSubsystem.inchesToTicks;
+	public double crossScaleDist3 = 90*DriveSubsystem.inchesToTicks;
 	
-	public double centerScaleDist1 = 210*DriveSubsystem.inchesToTicks;
-	public double centerScaleDist2 = 42*DriveSubsystem.inchesToTicks;
-	public double centerScaleDist3 = 57*DriveSubsystem.inchesToTicks;
+	public double sameScaleDist = 300*DriveSubsystem.inchesToTicks;
 	
-	public double sameScaleDist1 = 300*DriveSubsystem.inchesToTicks;
-	public double sameScaleDist2 = 90*DriveSubsystem.inchesToTicks;
+	public double crossSwitchDist1 = 18*DriveSubsystem.inchesToTicks;
+	public double crossSwitchDist2 = 127*DriveSubsystem.inchesToTicks;
+	public double crossSwitchDist3 = 18*DriveSubsystem.inchesToTicks;
 	
-	public double crossSwitchDist1 = 50*DriveSubsystem.inchesToTicks;
-	public double crossSwitchDist2 = 110 *DriveSubsystem.inchesToTicks;
-	public double crossSwitchDist3 = 54*DriveSubsystem.inchesToTicks;
-	
-	public double sameSwitchDist1 = 130*DriveSubsystem.inchesToTicks;
+	public double sameSwitchDist = 130*DriveSubsystem.inchesToTicks;
 	
 	public double left = -90;
 	public double right = 90;

@@ -18,17 +18,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class CenterSwitchAuto extends CommandGroup {
 
     public CenterSwitchAuto() {
-        
-//    	addSequential(new DriveForwardTimeOutCommand());
+    	addSequential(new DriveForwardTimeOutCommand());
 		addSequential(new ElevatorResetCommand());
     	addParallel(new ElevatorToInchesCommand(Robot.elevatorSubsystem.switchHeight));
 		
-    	addSequential(new DriveToDistanceCommand(20*DriveSubsystem.inchesToTicks, 20*DriveSubsystem.inchesToTicks)); //distance given in inches
+    	addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.crossSwitchDist1, Robot.driveSubsystem.sameSwitchDist)); //distance given in inches
 		addSequential(new DriveToAngleCommand(-45, 0));
-		addSequential(new DriveToDistanceCommand(85*DriveSubsystem.inchesToTicks, 80*DriveSubsystem.inchesToTicks));
+		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.crossSwitchDist2, 0));
 		addSequential(new DriveToAngleCommand(45, 0));
+		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.crossSwitchDist3, 0));
 		
-//    	addSequential(new FoldIntakeCommand(true));
-//		addSequential(new ReleaseIntakeCommand(-0.4));
+    	addSequential(new FoldIntakeCommand(true));
+		addSequential(new ReleaseIntakeCommand(-0.4));
     }
 }
