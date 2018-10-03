@@ -27,20 +27,6 @@ public class DriveToAngleCommand extends DriveAutoCommand {
     
     @Override
     protected void initialize() {
-    	Instant start = Instant.now();
-    	String gameData = DriverStation.getInstance().getGameSpecificMessage();
-    	while (gameData.length() < 3) {
-    		gameData = DriverStation.getInstance().getGameSpecificMessage();
-    		if (Duration.between(start, Instant.now()).toMillis() > 100) {
-    			super.initialize(0.0, 0.0, true);
-    			return;
-    		}
-    	}
-    	if(gameData.charAt(0) == 'L') {
-			//Put left auto code here
-    		super.initialize(0.0, angleL, true);
-    	} else if (gameData.charAt(0) == 'R') {
-    		super.initialize(0.0, angleR, true);
-    	}
+    	super.initialize(0.0, angleL, true);
     }
 }

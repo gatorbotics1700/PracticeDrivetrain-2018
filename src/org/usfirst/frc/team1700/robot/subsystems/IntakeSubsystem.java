@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
@@ -18,13 +19,12 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class IntakeSubsystem extends Subsystem {
 
-	TalonSRX leftMotor = RobotMap.leftIntakeMotor;
-	TalonSRX rightMotor = RobotMap.rightIntakeMotor;
-	DigitalInput leftLS = RobotMap.intakeLeftLimitSwitch;
-	DigitalInput rightLS = RobotMap.intakeRightLimitSwitch;
-	DigitalInput armLS = RobotMap.intakeArmLimitSwitch;
+	public TalonSRX leftMotor = RobotMap.leftIntakeMotor;
+	public TalonSRX rightMotor = RobotMap.rightIntakeMotor;
+	public DigitalInput beamBreak = RobotMap.beamBreak;
+	DigitalOutput arduino = RobotMap.arduinoTrigger;
 	DoubleSolenoid fold = RobotMap.carriageSol;
-	DoubleSolenoid grab = RobotMap.intakeArmSol;
+	public DoubleSolenoid grab = RobotMap.intakeArmSol;
 	Compressor compressor = RobotMap.compressor;
 	
 	public enum IntakeState {
@@ -44,18 +44,18 @@ public class IntakeSubsystem extends Subsystem {
     	setDefaultCommand(new RunIntakeCommand());
     }
     
-    public void runIntake(double speed) { //motors start running
-    	leftMotor.set(ControlMode.PercentOutput, speed); 
-    	rightMotor.set(ControlMode.PercentOutput, speed*.5);
+    public void runIntake(double leftSpeed, double rightSpeed) { //motors start running
+    	rightMotor.set(ControlMode.PercentOutput, rightSpeed); 
+    	leftMotor.set(ControlMode.PercentOutput, leftSpeed);
     }
-    
-   public void fold(boolean up) { // pneumatics
+	    
+	public void fold(boolean up) { // pneumatics
 	   if (up) { //called in because intake
-    		fold.set(DoubleSolenoid.Value.kForward);
-    	} else {
-    		fold.set(DoubleSolenoid.Value.kReverse);
-    	}
-    }
+			fold.set(DoubleSolenoid.Value.kForward);
+		} else {
+			fold.set(DoubleSolenoid.Value.kReverse);
+		}
+	}
 //   
 //    
     public void grab(boolean release) { // pneumatics
@@ -76,16 +76,6 @@ public class IntakeSubsystem extends Subsystem {
 //    	return rightUltra.getValue()<150;
 //    }
     
-    public int hasCube() {
-    	if (leftLS.get() && rightLS.get()) {
-    		return 2;
-    	} else if (leftLS.get() || rightLS.get()) {
-    		return 1;
-    	} else {
-    		return 0;
-    	}
-    }
-    
     public void setState(IntakeState state) {
     	this.intakeState = state;
     }
@@ -95,5 +85,8 @@ public class IntakeSubsystem extends Subsystem {
     	return false;
     }
     
+    public void LEDs(boolean on) {
+    	arduino.set(on);
+    }
 }
 

@@ -5,6 +5,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 
 import org.usfirst.frc.team1700.robot.Robot;
+import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem.AngleType;
 
 import edu.wpi.first.wpilibj.DriverStation;
@@ -17,6 +18,8 @@ public abstract class DriveAutoCommand extends Command {
 
 	protected double distance = 0; //distance you want
 	protected double angle = 0; //angle you want
+	protected boolean isAngle = false; 
+	protected boolean isTimedOut = false; 
 	private double currentAngle = 0;
 	private double currentDistance = 0;
 	private double angleDifference = 0;
@@ -35,11 +38,11 @@ public abstract class DriveAutoCommand extends Command {
 	
 	private double turningAngleProportion = 0.01;
 	private double maxAngleSpeed = 0.7;
-	private double driveD = 0.000;
-	private double driveP = 0.013;
+	private double driveD = -0.005;
+	private double driveP = 0.006;
 	private double maxDistanceSpeed = 0.8;
-	private double angleTolerance = 2;
-	private double distanceTolerance = 5;
+	private double angleTolerance = 4;
+	private double distanceTolerance = 3*DriveSubsystem.inchesToTicks;
 	private int count = 0;
 	private Instant time;
 
@@ -49,8 +52,9 @@ public abstract class DriveAutoCommand extends Command {
 //    	Robot.driveSubsystem.resetNavX();
     	this.distance = distance;
     	this.angle = angle;
+    	this.isAngle = isAngle; 
     	if (isAngle) {
-    		minAngleSpeed = 0.25;
+    		minAngleSpeed = 0.4;
     		minSpeed = 0;
     	} else {
     		minAngleSpeed = 0;
@@ -60,7 +64,7 @@ public abstract class DriveAutoCommand extends Command {
     	Robot.driveSubsystem.resetEncoders();
     	DriverStation.getInstance().reportWarning("WE RESET THE ENCODERS. They are now " + Integer.toString(Robot.driveSubsystem.getLeftEncoderValue()) + Integer.toString(Robot.driveSubsystem.getRightEncoderValue()), false);
     	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW) % 360;
-		currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
+		currentDistance = Robot.driveSubsystem.getRightEncoderValue();
     	distDifference = distance-currentDistance;
     	angleDifference = angle;
     	targetAngle = (currentAngle + angle) % 360;
@@ -93,9 +97,15 @@ public abstract class DriveAutoCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (isTimedOut == true) {
+        	Robot.driveSubsystem.driveTank(0.0, 0.0);
+        	return;
+    	}
+    	DriverStation.getInstance().reportWarning("Encoders: " + Integer.toString(Robot.driveSubsystem.getLeftEncoderValue()) + Integer.toString(Robot.driveSubsystem.getRightEncoderValue()), false);
+
 //    	count++;
     	currentAngle = Robot.driveSubsystem.getNavXAngle(AngleType.YAW) % 360;
-    	currentDistance = (Robot.driveSubsystem.getLeftEncoderValue() + Robot.driveSubsystem.getRightEncoderValue())/2;
+    	currentDistance = Robot.driveSubsystem.getRightEncoderValue();
     	distDifference = distance - currentDistance;
     	angleDifference = (targetAngle - currentAngle + 720 + 180) % 360 - 180;
     	
@@ -128,7 +138,6 @@ public abstract class DriveAutoCommand extends Command {
     	
     	Robot.driveSubsystem.driveTank(leftSpeed, rightSpeed);
     	//Robot.driveSubsystem.driveTank(0.5, 0.5);
-    	
     	// PRINTING AND DEBUGGING
     	String printLS = Double.toString(leftSpeed),
     		   printRS = Double.toString(rightSpeed),
@@ -144,39 +153,54 @@ public abstract class DriveAutoCommand extends Command {
     		   printCurrAngle = Double.toString(currentAngle),
     		   printCalcDistSpeed = Double.toString(calcDistSpeed),
     		   printAngleSpeed = Double.toString(angleSpeed);
-    	//DriverStation.getInstance().reportWarning("We want this distance: " + printDesiredDist, false);
-//    	DriverStation.getInstance().reportWarning("target angle: " + printDesiredAngle, false);
-//    	DriverStation.getInstance().reportWarning("DistanceDifference: " + printDDiff, false);
-//    	DriverStation.getInstance().reportWarning("AngleDifference: " + printADiff, false);
-//    	DriverStation.getInstance().reportWarning("Current NavX Angle: " + printCurrAngle, false);
-//    	System.out.println("current angle (ex.): " + printCurrAngle);
-//    	DriverStation.getInstance().reportWarning("Current Left Encoder Value: " + printLEnc, false);
-//    	DriverStation.getInstance().reportWarning("Current Right Encoder Value: " + printREnc, false);
-//    	DriverStation.getInstance().reportWarning("LeftSpeed: " + printLS, false);
-//    	DriverStation.getInstance().reportWarning("RightSpeed: " + printRS, false);
-    	//DriverStation.getInstance().reportWarning("minSpeed: " + printminSpeed, false);
-    	//DriverStation.getInstance().reportWarning("min angle speed: " + printMinAngleSpeed, false);
+   
+    	DriverStation.getInstance().reportWarning("We want this distance: " + printDesiredDist, false);
+    	DriverStation.getInstance().reportWarning("target angle: " + printDesiredAngle, false);
+    	DriverStation.getInstance().reportWarning("DistanceDifference: " + printDDiff, false);
+    	DriverStation.getInstance().reportWarning("AngleDifference: " + printADiff, false);
+    	DriverStation.getInstance().reportWarning("Current NavX Angle: " + printCurrAngle, false);
+    	DriverStation.getInstance().reportWarning("current angle (ex.): " + printCurrAngle, false);
+    	DriverStation.getInstance().reportWarning("Current Left Encoder Value: " + printLEnc, false);
+    	DriverStation.getInstance().reportWarning("Current Right Encoder Value: " + printREnc, false);
+    	DriverStation.getInstance().reportWarning("LeftSpeed: " + printLS, false);
+    	DriverStation.getInstance().reportWarning("RightSpeed: " + printRS, false);
+    	DriverStation.getInstance().reportWarning("minSpeed: " + printminSpeed, false);
+    	DriverStation.getInstance().reportWarning("min angle speed: " + printMinAngleSpeed, false);
     	
-//    	DriverStation.getInstance().reportWarning("calc distance speed: " + printCalcDistSpeed, false);
-//    	DriverStation.getInstance().reportWarning("distance speed: " + printDistSpeed, false);
-//    	DriverStation.getInstance().reportWarning("angle speed: " + printAngleSpeed, false);
+    	DriverStation.getInstance().reportWarning("calc distance speed: " + printCalcDistSpeed, false);
+    	DriverStation.getInstance().reportWarning("distance speed: " + printDistSpeed, false);
+    	DriverStation.getInstance().reportWarning("angle speed: " + printAngleSpeed, false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
     	Instant now = Instant.now();
     	Duration duration = Duration.between(time, now);
-    	if (duration.toMillis()>2000 && this.angle == 0) {
-    		DriverStation.getInstance().reportWarning("DRIVE AUTO HAS TIMED OUT AFTER 2 SECONDS.", false);
-    		return true;
+    	if (duration.toMillis()>5000) {
+    		if(isAngle == false) {
+    			DriverStation.getInstance().reportWarning("DRIVE AUTO HAS TIMED OUT AFTER 4 SECONDS.", false);
+    			return true; 
+    		}
+    		else if(isAngle == true) {
+    			isTimedOut = true; 
+    			DriverStation.getInstance().reportWarning("Drive auto timed out during a turn", false);
+    		}
     	}
-        if (Robot.driveSubsystem.nearZero(distDifference, distanceTolerance) &&
-        	   Robot.driveSubsystem.nearZero(angleDifference, angleTolerance)) {
-        	count++;
-        } else {
-        	count = 0;
+        if (isAngle) {
+        	if (Robot.driveSubsystem.nearZero(angleDifference, angleTolerance)) {
+             	count++;
+             } else {
+             	count = 0;
+             }
         }
-//    	return true;
+        else if (!isAngle) {
+        	if (Robot.driveSubsystem.nearZero(distDifference, distanceTolerance) &&
+             	   Robot.driveSubsystem.nearZero(angleDifference, angleTolerance)) {
+             	count++;
+             } else {
+             	count = 0;
+             }
+        }
     	if (count > 5) {
     		count = 0;
     		DriverStation.getInstance().reportWarning("auto command finished", false);

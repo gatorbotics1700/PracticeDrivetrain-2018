@@ -16,17 +16,18 @@ public class OI {
 	
 	// BUTTONS
 	// Christy
-	public static Button stopIntake = new JoystickButton(leftJoy, 3);
-	public static Button releaseIntakeSlow = new JoystickButton(rightJoy, 4);
-	public static Button releaseIntakeFast = new JoystickButton(rightJoy, 5);
+	public static Button stopIntake = new JoystickButton(coJoy, 10);
+	public static Button releaseIntakeSlow = new JoystickButton(rightJoy, 5);
+	public static Button releaseIntakeFast = new JoystickButton(rightJoy, 4);
 	
 	// Lauren
 	public static Button letGo = new JoystickButton(coJoy, 1);
 	public static Button foldUp = new JoystickButton(coJoy, 2);
 	public static Button foldDown = new JoystickButton(coJoy, 3);
 	public static Button squeeze = new JoystickButton(coJoy, 4);
+	
 	public static Button elevatorReset = new JoystickButton(coJoy, 5);
 	public static Button elevatorSwitch = new JoystickButton(coJoy, 6);
 	public static Button elevatorScale = new JoystickButton(coJoy, 7);
-	public static Button elevatorOverride = new JoystickButton(coJoy, 10);
+	// public static Button elevatorOverride = new JoystickButton(coJoy, 10);
 }

@@ -21,23 +21,24 @@ public class ReleaseIntakeCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	// backdrive intake
-    	Robot.intakeSubsystem.runIntake(speed);
+    	Robot.intakeSubsystem.runIntake(speed, speed);
+    	Robot.intakeSubsystem.grab(true); 
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.intakeSubsystem.runIntake(speed);
+    	Robot.intakeSubsystem.runIntake(speed, speed);
+    	DriverStation.getInstance().reportWarning("releasing intake", false);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	return !OI.releaseIntakeFast.get() && !OI.releaseIntakeSlow.get();
+    	return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.intakeSubsystem.runIntake(0);
-    	Robot.intakeSubsystem.grab(true);
+    	Robot.intakeSubsystem.runIntake(0, 0);
     }
 
     // Called when another command which requires one or more of the same

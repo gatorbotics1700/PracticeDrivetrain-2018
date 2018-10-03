@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.usfirst.frc.team1700.robot.commands.Intake.IntakeInCommand;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.AutoForward;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.LeftScaleAuto;
 import org.usfirst.frc.team1700.robot.commands.AutoCGs.LeftSwitchAuto;
@@ -59,12 +60,15 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		chooser.addDefault("Default Auto (Drive Forward)", new AutoForward());
-		chooser.addObject("Left Switch Auto", new LeftSwitchAuto());
-		chooser.addObject("Center Switch Auto", new CenterSwitchAuto());
-		chooser.addObject("Right Switch Auto",  new RightSwitchAuto());
-		chooser.addObject("Test (DON'T USE THIS IN COMPETITION!)", new testAutoCG());
-		SmartDashboard.putData("Auto Mode", chooser);
+//		chooser.addDefault("Default Auto (Drive Forward)", new AutoForward());
+//		chooser.addObject("Left Switch Auto", new LeftSwitchAuto());
+//		chooser.addObject("Center Switch Auto", new CenterSwitchAuto());
+//		chooser.addObject("Right Switch Auto",  new RightSwitchAuto());
+//		chooser.addObject("Left Scale Auto", new LeftScaleAuto());
+//		chooser.addObject("Center Scale Auto", new CenterScaleAuto());
+//		chooser.addObject("Right Scale Auto", new RightScaleAuto());
+//		chooser.addObject("Test (DON'T USE THIS IN COMPETITION!)", new testAutoCG());
+//		SmartDashboard.putData("Auto Mode", chooser);
 		System.out.println("ROBOT INITIATED!! :)");
 	}
 
@@ -95,15 +99,16 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = chooser.getSelected();
+		autonomousCommand = new LeftSwitchAuto();
+		// chooser.getSelected();
 		if (autonomousCommand.getName() == "testAutoCG" && DriverStation.getInstance().isFMSAttached()) {
-			autonomousCommand = new AutoForward();
+			autonomousCommand = new CenterSwitchAuto();
 		}
 		DriverStation.getInstance().reportWarning(autonomousCommand.getName(), false);
 		if (autonomousCommand != null) {
 			autonomousCommand.start();
 		}
-		System.out.println("AUTO INIT!!");
+		DriverStation.getInstance().reportWarning("AUTO INIT!!", false);
 	}
 
 	/**
@@ -132,7 +137,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().add(new GrabIntakeCommand(true));
 		Scheduler.getInstance().add(new RunIntakeCommand());
 		driveSubsystem.resetEncoders();
-//		Scheduler.getInstance().add(new RunIntakeCommand());
+		Scheduler.getInstance().add(new ElevatorMoveCommand());
 //		DriverStation.getInstance().reportWarning("TeleopInit!", false);
 //		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
 	}
@@ -143,15 +148,16 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		
+
 		// INTAKE
 		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
 		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
 		OI.stopIntake.whileHeld(new StopIntakeCommand());
-		OI.stopIntake.whenReleased(new RunIntakeCommand());
-		OI.letGo.whenPressed(new GrabIntakeCommand(true));
+		OI.stopIntake.whenReleased(new IntakeInCommand());
+		OI.letGo.whileHeld(new GrabIntakeCommand(true));
 		OI.letGo.whenReleased(new RunIntakeCommand());
 		OI.squeeze.whenPressed(new GrabIntakeCommand(false));
+		OI.squeeze.whenPressed(new IntakeInCommand());
 		OI.releaseIntakeFast.whileHeld(new ReleaseIntakeCommand(-1));
 		OI.releaseIntakeFast.whenReleased(new RunIntakeCommand());
 		OI.releaseIntakeFast.whenReleased(new GrabIntakeCommand(true));
@@ -163,7 +169,7 @@ public class Robot extends IterativeRobot {
 		OI.elevatorSwitch.whenPressed(new ElevatorToInchesCommand(elevatorSubsystem.switchHeight));
 		OI.elevatorScale.whenPressed(new ElevatorToInchesCommand(elevatorSubsystem.scaleHeight));
 		OI.elevatorReset.whenPressed(new ElevatorResetCommand());
-		OI.elevatorOverride.whenPressed(new ElevatorMoveCommand());
+		// OI.elevatorOverride.whenPressed(new ElevatorMoveCommand());
 	}
 
 	/**

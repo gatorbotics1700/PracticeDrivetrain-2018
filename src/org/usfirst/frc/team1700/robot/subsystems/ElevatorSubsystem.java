@@ -25,8 +25,10 @@ public class ElevatorSubsystem extends Subsystem {
 	Encoder enc = RobotMap.elevatorEncoder;
 	
 	//TODO: test and set these
-	public double scaleHeight = 40; // # ticks to reach scale level
+	public double scaleHeight = 80; // # ticks to reach scale level
+	public double scaleAfterSwitchHeight = 40; 
 	public double switchHeight = 26;
+	public double slightly = 12;
 	public double baseHeight = 9.75;
 	public double inchesToTicks = 15.5;
 	public double stallSpeed = 0.9;
@@ -38,7 +40,7 @@ public class ElevatorSubsystem extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-    	setDefaultCommand(new ElevatorMoveCommand());
+//    	setDefaultCommand(new ElevatorMoveCommand());
     }
     
     public void elevatorMove(double speed) {
@@ -46,10 +48,11 @@ public class ElevatorSubsystem extends Subsystem {
     }
     
     public boolean touchingSwitch(boolean top) {
-		if (BL.get()) {
-			enc.reset();
-		}
-		return (UL.get() && top) || (BL.get() && !top);
+//		if (BL.get()) {
+//			enc.reset();
+//		}
+//		return (UL.get() && top) || (BL.get() && !top);
+    	return false;
     }
     
 	public int getCurrentPos() {

@@ -1,5 +1,8 @@
 package org.usfirst.frc.team1700.robot.commands.Elevator;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import org.usfirst.frc.team1700.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -9,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ElevatorResetCommand extends Command {
 
+	Instant start;
     public ElevatorResetCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -17,6 +21,7 @@ public class ElevatorResetCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	start = Instant.now();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -27,7 +32,7 @@ public class ElevatorResetCommand extends Command {
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
 //        return Robot.elevatorSubsystem.touchingSwitch(false);
-    	return Robot.elevatorSubsystem.getVelocity() == 0;
+    	return Robot.elevatorSubsystem.getVelocity() <= 0.1 || Duration.between(start, Instant.now()).toMillis()>2000;
     }
 
     // Called once after isFinished returns true

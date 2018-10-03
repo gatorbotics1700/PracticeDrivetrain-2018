@@ -18,7 +18,7 @@ public class StopIntakeCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.intakeSubsystem.runIntake(0);
+    	Robot.intakeSubsystem.runIntake(0, 0);
     	Robot.intakeSubsystem.grab(false);
     }
 

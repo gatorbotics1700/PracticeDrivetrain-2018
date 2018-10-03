@@ -24,15 +24,16 @@ public class RobotMap {
 	// DRIVE TALONS
 	public static VictorSPX leftFrontDrive = new VictorSPX(3),
 					        rightFrontDrive = new VictorSPX(4);
-					       
+//	public static TalonSRX leftFrontDrive = new TalonSRX(3),
+//						   rightFrontDrive = new TalonSRX(4;)
 
-	public static TalonSRX leftBackDrive = new TalonSRX(5),
-					       rightBackDrive = new TalonSRX(6); //6
+	public static TalonSRX leftBackDrive = new TalonSRX(1),
+					       rightBackDrive = new TalonSRX(2); //6
 	
 	// OTHER TALONS
 	public static TalonSRX elevatorMotor = new TalonSRX(7), //7
-						   leftIntakeMotor = new TalonSRX(1),
-						   rightIntakeMotor = new TalonSRX(2);
+						   leftIntakeMotor = new TalonSRX(5),
+						   rightIntakeMotor = new TalonSRX(6);
 	
 	// PNEUMATICS
 	public static DoubleSolenoid intakeArmSol = new DoubleSolenoid(0, 1),
@@ -44,15 +45,16 @@ public class RobotMap {
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) 200); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
 	
 	// DIGITAL SENSORS
-	public static DigitalInput elevatorTopLimitSwitch = new DigitalInput(6),
-							   elevatorBottomLimitSwitch = new DigitalInput(9), 
-							   intakeLeftLimitSwitch = new DigitalInput(8),
-							   intakeRightLimitSwitch = new DigitalInput(7),
-							   intakeArmLimitSwitch = new DigitalInput(10);
+	public static DigitalInput 	beamBreak = new DigitalInput(7),
+								elevatorTopLimitSwitch = new DigitalInput(9),
+							    elevatorBottomLimitSwitch = new DigitalInput(8); 
 							   
 	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(1), new DigitalInput(0)),
 							   rightDriveEncoder = new Encoder(new DigitalInput(5), new DigitalInput(4)),
-							   elevatorEncoder = new Encoder(new DigitalInput(2),new DigitalInput (3));
+							   elevatorEncoder = new Encoder(new DigitalInput(2), new DigitalInput (3));
+	
+	// DIGITAL OUTPUT
+	public static DigitalOutput arduinoTrigger = new DigitalOutput(10);
 	 
 	
 }

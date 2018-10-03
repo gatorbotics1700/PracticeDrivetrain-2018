@@ -25,8 +25,8 @@ public class DriveCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	@Override
 	protected void execute() {
-		double leftSpeed = OI.leftJoy.getRawAxis(1);
-		double rightSpeed = OI.rightJoy.getRawAxis(1);
+		double leftSpeed = OI.leftJoy.getRawAxis(1) /2.0 ;
+		double rightSpeed = OI.rightJoy.getRawAxis(1) /2.0 ;
 		String LencVal = Double.toString(Robot.driveSubsystem.getLeftEncoderValue());
 		String Rencval = Double.toString(Robot.driveSubsystem.getRightEncoderValue());
 		Robot.driveSubsystem.driveTank(leftSpeed, rightSpeed);

@@ -14,7 +14,7 @@ public class ElevatorToInchesCommand extends Command {
 
 	int deadband = 5; //change later
 	int ticks;
-	double maxSpeed = 0.5;
+	double maxSpeed = 0.88;
 	double P = 0.009; // not tuned
 	double D = 0.000; // not tuned
 	double tickDiff;

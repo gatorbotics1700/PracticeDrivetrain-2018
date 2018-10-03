@@ -3,6 +3,7 @@ package org.usfirst.frc.team1700.robot.commands.Intake;
 import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem.IntakeState;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -22,7 +23,8 @@ public class FoldIntakeCommand extends Command {
     // Called just before this Command runs the first time
     protected void initialize() {
     	Robot.intakeSubsystem.fold(retracting);
-    	}
+    	DriverStation.getInstance().reportWarning("TRYING TO RETRACT! UP = " + Boolean.toString(this.retracting), false);
+    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {

@@ -44,7 +44,7 @@ public class AutoReleaseIntakeCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	if (go) {
-    		Robot.intakeSubsystem.runIntake(-0.7);
+    		Robot.intakeSubsystem.runIntake(-0.7, 0.25*(-0.7));
     	} else {
     		this.cancel();
     	}
