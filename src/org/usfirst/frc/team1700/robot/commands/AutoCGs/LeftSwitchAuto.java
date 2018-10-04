@@ -42,26 +42,28 @@ public class LeftSwitchAuto extends CommandGroup {
     	}
     	DriverStation.getInstance().reportWarning("at drivetodistance logic", false);
     	if(gameData.charAt(0) == 'R') {
+    		if(gameData.charAt(1) == 'L') {
+    			DriverStation.getInstance().reportWarning("Switch on right, scale on left; scale", false);
+    			addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.sameScaleDist, 0));
+
+        		addParallel(new ElevatorToInchesCommand(Robot.elevatorSubsystem.scaleHeight));
+        		addSequential(new DriveToAngleCommand(60,0));
+        		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.finalDistToScale, 0)); //distance given in inches
+    		
+        		addSequential(new FoldIntakeCommand(false));
+
+        		start = Instant.now();
+        		while (Duration.between(start, Instant.now()).toMillis() < Robot.driveSubsystem.waitTime) {
+        		}
+        		
+        		addSequential(new GrabIntakeCommand(true));
+        		addSequential(new ReleaseIntakeCommand(-0.4));
+    			DriverStation.getInstance().reportWarning("finished left scale auto", false);
+    		}
+    		else {
     			DriverStation.getInstance().reportWarning("Switch on right: cross line", false);
     			addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.distToAutoLine, 0)); //distance given in inches
-//    		if(gameData.charAt(1) == 'L') {
-//    			DriverStation.getInstance().reportWarning("Switch on right, scale on left; scale", false);
-//    			addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.sameScaleDist, 0));
-//
-//        		addParallel(new ElevatorToInchesCommand(Robot.elevatorSubsystem.scaleHeight));
-//        		addSequential(new DriveToAngleCommand(60,0));
-//        		addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.finalDistToScale, 0)); //distance given in inches
-//    		
-//        		addSequential(new FoldIntakeCommand(false));
-//
-//        		start = Instant.now();
-//        		while (Duration.between(start, Instant.now()).toMillis() < Robot.driveSubsystem.waitTime) {
-//        		}
-//        		
-//        		addSequential(new GrabIntakeCommand(true));
-//        		addSequential(new ReleaseIntakeCommand(-0.4));
-//    			DriverStation.getInstance().reportWarning("finished left scale auto", false);
-//    		}
+    		}
 //    		else if(gameData.charAt(1) == 'R') {
 //    			DriverStation.getInstance().reportWarning("Switch on right, scale on right; cross scale", false);
 //    			addSequential(new DriveToDistanceCommand(Robot.driveSubsystem.crossScaleDist1, 0));

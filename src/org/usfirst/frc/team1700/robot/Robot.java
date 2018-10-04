@@ -102,7 +102,7 @@ public class Robot extends IterativeRobot {
 		autonomousCommand = new LeftSwitchAuto();
 		// chooser.getSelected();
 		if (autonomousCommand.getName() == "testAutoCG" && DriverStation.getInstance().isFMSAttached()) {
-			autonomousCommand = new CenterSwitchAuto();
+			autonomousCommand = new LeftSwitchAuto();
 		}
 		DriverStation.getInstance().reportWarning(autonomousCommand.getName(), false);
 		if (autonomousCommand != null) {

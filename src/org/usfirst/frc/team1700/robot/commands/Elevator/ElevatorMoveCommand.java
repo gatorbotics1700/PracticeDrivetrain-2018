@@ -25,12 +25,29 @@ public class ElevatorMoveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+		Robot.elevatorSubsystem.elevatorMove(-OI.coJoy.getRawAxis(1));
 //    	if (Robot.elevatorSubsystem.touchingSwitch(true) || Robot.elevatorSubsystem.touchingSwitch(false)) { 
 //    		Robot.elevatorSubsystem.elevatorMove(0);
 //    		DriverStation.getInstance().reportWarning("Elevator hit top or bottom!", false);
 //    	} else {
-    		Robot.elevatorSubsystem.elevatorMove(-OI.coJoy.getRawAxis(1));
-    	DriverStation.getInstance().reportWarning(Integer.toString(Robot.elevatorSubsystem.getCurrentPos()), false);
+//    	double currTicks = Robot.elevatorSubsystem.getCurrentPos();
+//    	DriverStation.reportWarning("Elevator ticks: " + currTicks, false);
+//    	if(OI.coJoy.getRawAxis(1) > 0) {
+//    		if(currTicks < (Robot.elevatorSubsystem.switchHeight * Robot.elevatorSubsystem.inchesToTicks - 60)) {
+//        		Robot.elevatorSubsystem.elevatorMove(-OI.coJoy.getRawAxis(1));
+//        	}
+//        	else if (currTicks < Robot.elevatorSubsystem.switchHeight * Robot.elevatorSubsystem.inchesToTicks){
+//        		Robot.elevatorSubsystem.elevatorMove(-0.5*OI.coJoy.getRawAxis(1));
+//        	}
+//        	else {
+//        		Robot.elevatorSubsystem.elevatorMove(0);
+//        	}
+//    	}
+//    	else {
+//    		Robot.elevatorSubsystem.elevatorMove(-OI.coJoy.getRawAxis(1));
+//    	}
+//    	
+//    	DriverStation.getInstance().reportWarning(Integer.toString(Robot.elevatorSubsystem.getCurrentPos()), false);
 //    	DriverStation.getInstance().reportWarning(Double.toString(-OI.coJoy.getRawAxis(1)), false);
 		//1 = up, 0 = stopped, -1 = down
     }

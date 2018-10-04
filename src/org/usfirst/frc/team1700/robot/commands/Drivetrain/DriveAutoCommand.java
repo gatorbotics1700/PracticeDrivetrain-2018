@@ -37,7 +37,7 @@ public abstract class DriveAutoCommand extends Command {
 	// CONSTANTS (change these)
 	
 	private double turningAngleProportion = 0.01;
-	private double maxAngleSpeed = 0.7;
+	private double maxAngleSpeed = 0.4;
 	private double driveD = -0.005;
 	private double driveP = 0.006;
 	private double maxDistanceSpeed = 0.8;
