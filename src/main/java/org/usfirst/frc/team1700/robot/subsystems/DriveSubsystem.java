@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
+// ITERATIVE CONVERSION NOTE: This class doesn't need to extend anything
 public class DriveSubsystem extends Subsystem {
 
 	// AUTO CONSTANTS

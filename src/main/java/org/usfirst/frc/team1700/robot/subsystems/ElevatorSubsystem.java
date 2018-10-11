@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 /**
  *
  */
+// ITERATIVE CONVERSION NOTE: This class doesn't need to extend anything
 public class ElevatorSubsystem extends Subsystem {
 
     // Put methods for controlling this subsystem
