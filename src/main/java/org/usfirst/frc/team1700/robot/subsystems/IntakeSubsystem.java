@@ -39,11 +39,6 @@ public class IntakeSubsystem {
 		intakeState = IntakeState.NOT_YET;
 		compressor.setClosedLoopControl(true);
 	}
-
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-    	setDefaultCommand(new RunIntakeCommand());
-    }
     
     public void runIntake(double leftSpeed, double rightSpeed) { //motors start running
     	rightMotor.set(ControlMode.PercentOutput, rightSpeed); 

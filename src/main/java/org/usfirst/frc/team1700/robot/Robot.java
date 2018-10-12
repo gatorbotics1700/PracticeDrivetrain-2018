@@ -145,6 +145,9 @@ public class Robot extends IterativeRobot {
 		OI.releaseIntakeSlow.whenReleased(new RunIntakeCommand());
 		OI.releaseIntakeSlow.whenReleased(new GrabIntakeCommand(true));
 
+		// UPDATE ROBOT STATE
+		if (OI.releaseIntakeFast.)
+
 		// EXECUTE
 		DriveSubsystem.driverControl();
 		ElevatorSubsystem.driverControl();
