@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 // ITERATIVE CONVERSION NOTE: This class doesn't need to extend anything
-public class IntakeSubsystem extends Subsystem {
+public class IntakeSubsystem {
 
 	public TalonSRX leftMotor = RobotMap.leftIntakeMotor;
 	public TalonSRX rightMotor = RobotMap.rightIntakeMotor;

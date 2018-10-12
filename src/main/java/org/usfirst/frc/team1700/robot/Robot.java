@@ -121,25 +121,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void teleopInit() {
-		// This makes sure that the autonomous stops running when
-		// teleop starts running. If you want the autonomous to
-		// continue until interrupted by another command, remove
-		// this line or comment it out.
-//		DriverStation.getInstance().reportWarning("1", false);
-		if (autonomousCommand != null) {
-
-//			DriverStation.getInstance().reportWarning("2", false);
-			autonomousCommand.cancel();
-//			DriverStation.getInstance().reportWarning("3", false);
-		}
-//		DriverStation.getInstance().reportWarning("4", false);
-		System.out.println("\nTELEOPINIT!!\n");
-		Scheduler.getInstance().add(new GrabIntakeCommand(true));
-		Scheduler.getInstance().add(new RunIntakeCommand());
-		driveSubsystem.resetEncoders();
-		Scheduler.getInstance().add(new ElevatorMoveCommand());
-//		DriverStation.getInstance().reportWarning("TeleopInit!", false);
-//		new ElevatorUpCommand(); //ElevatorUp currently used as coJoy speed control
 	}
 
 	/**
@@ -147,7 +128,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
-		Scheduler.getInstance().run();
 
 		// INTAKE
 		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
@@ -164,12 +144,10 @@ public class Robot extends IterativeRobot {
 		OI.releaseIntakeSlow.whileHeld(new ReleaseIntakeCommand(-0.4));
 		OI.releaseIntakeSlow.whenReleased(new RunIntakeCommand());
 		OI.releaseIntakeSlow.whenReleased(new GrabIntakeCommand(true));
-		
-		// ELEVATOR
-		OI.elevatorSwitch.whenPressed(new ElevatorToInchesCommand(elevatorSubsystem.switchHeight));
-		OI.elevatorScale.whenPressed(new ElevatorToInchesCommand(elevatorSubsystem.scaleHeight));
-		OI.elevatorReset.whenPressed(new ElevatorResetCommand());
-		// OI.elevatorOverride.whenPressed(new ElevatorMoveCommand());
+
+		// EXECUTE
+		DriveSubsystem.driverControl();
+		ElevatorSubsystem.driverControl();
 	}
 
 	/**

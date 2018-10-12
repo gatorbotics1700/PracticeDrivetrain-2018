@@ -18,7 +18,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 // ITERATIVE CONVERSION NOTE: This class doesn't need to extend anything
-public class DriveSubsystem extends Subsystem {
+public class DriveSubsystem{
 
 	// AUTO CONSTANTS
 	public static double inchesToTicks = 11.94; // 40 ticks/in. * 54/20*50/12 gearbox reduction / (12pi in/shaft rotation)
@@ -72,10 +72,6 @@ public class DriveSubsystem extends Subsystem {
 		RE.setReverseDirection(true);
 	}
 	
-	public void initDefaultCommand() {
-		// Set the default command for a subsystem here.
-		setDefaultCommand(new DriveCommand());
-	}
 	
 	public void driveTank(double leftSpeed, double rightSpeed) {
 		LF.set(ControlMode.PercentOutput, -leftSpeed);
@@ -121,6 +117,15 @@ public class DriveSubsystem extends Subsystem {
 	
 	public Double getVelocity() {
 		return (LE.getRate()+RE.getRate())/2;
+	}
+
+	public void driverControl() {
+		double leftSpeed = OI.leftJoy.getRawAxis(1) /2.0 ;
+		double rightSpeed = OI.rightJoy.getRawAxis(1) /2.0 ;
+		String LencVal = Double.toString(getLeftEncoderValue());
+		String Rencval = Double.toString(getRightEncoderValue());
+		driveTank(leftSpeed, rightSpeed);
+		DriverStation.getInstance().reportWarning("LEFT ENCODER: " + LencVal, false);
 	}
 	
 	

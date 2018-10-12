@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  *
  */
 // ITERATIVE CONVERSION NOTE: This class doesn't need to extend anything
-public class ElevatorSubsystem extends Subsystem {
+public class ElevatorSubsystem {
 
     // Put methods for controlling this subsystem
 	TalonSRX EM = RobotMap.elevatorMotor;
@@ -38,11 +38,6 @@ public class ElevatorSubsystem extends Subsystem {
 		enc.reset();
 		enc.setDistancePerPulse(0.0645);
 	}
-
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-//    	setDefaultCommand(new ElevatorMoveCommand());
-    }
     
     public void elevatorMove(double speed) {
 		EM.set(ControlMode.PercentOutput, speed);
@@ -66,6 +61,10 @@ public class ElevatorSubsystem extends Subsystem {
 	
 	public double getVelocity() {
 		return enc.getRate();
+	}
+
+	public void driverControl(){
+		elevatorMove(-OI.coJoy.getRawAxis(1));
 	}
 	
 }
