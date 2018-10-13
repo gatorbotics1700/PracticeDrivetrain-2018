@@ -1,8 +1,6 @@
 package org.usfirst.frc.team1700.robot.subsystems;
 
 import org.usfirst.frc.team1700.robot.RobotMap;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToInchesCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorMoveCommand;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
