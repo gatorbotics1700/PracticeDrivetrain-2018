@@ -5,13 +5,9 @@ import org.usfirst.frc.team1700.robot.RobotMap;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
-import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
@@ -20,38 +16,40 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class DriveSubsystem{
 
 	// AUTO CONSTANTS
-	public static double inchesToTicks = 11.94; // 40 ticks/in. * 54/20*50/12 gearbox reduction / (12pi in/shaft rotation)
-	public double distToSwitch = 140*inchesToTicks;
-	public double distToAutoLine = 110*inchesToTicks;
-	public double finalDistToSwitch = 30*inchesToTicks; 
-	public double finalDistToScale = 23*inchesToTicks; // with bad encoder: 55
+	public static final double inchesToTicks = 11.94; // 40 ticks/in. * 54/20*50/12 gearbox reduction / (12pi in/shaft rotation)
+	public static final double distToSwitch = 140*inchesToTicks;
+	public static final double distToAutoLine = 110*inchesToTicks;
+	public static double finalDistToSwitch = 30*inchesToTicks; 
+	public static double finalDistToScale = 23*inchesToTicks; // with bad encoder: 55
 
-	public double crossScaleDist1 = 210*DriveSubsystem.inchesToTicks;
-	public double crossScaleDist2 = 190*DriveSubsystem.inchesToTicks;
-	public double crossScaleDist3 = 57*DriveSubsystem.inchesToTicks;
+	public static final double crossScaleDist1 = 210*DriveSubsystem.inchesToTicks;
+	public static final double crossScaleDist2 = 190*DriveSubsystem.inchesToTicks;
+	public static final double crossScaleDist3 = 57*DriveSubsystem.inchesToTicks;
 	
-	public double sameScaleDist = 226*DriveSubsystem.inchesToTicks; // with bad encoder: 280
+	public static final double sameScaleDist = 226*DriveSubsystem.inchesToTicks; // with bad encoder: 280
 	
-	public long waitTime = 250; 
+	public static final long waitTime = 250; 
 	
-	public double crossSwitchDist1 = 18*DriveSubsystem.inchesToTicks;
-	public double crossSwitchDist2 = 127*DriveSubsystem.inchesToTicks;
-	public double crossSwitchDist3 = 18*DriveSubsystem.inchesToTicks;
+	public static final double crossSwitchDist1 = 18*DriveSubsystem.inchesToTicks;
+	public static final double crossSwitchDist2 = 127*DriveSubsystem.inchesToTicks;
+	public static final double crossSwitchDist3 = 18*DriveSubsystem.inchesToTicks;
 	
-	public double centerLeftDist1 = 50*DriveSubsystem.inchesToTicks;
-	public double centerLeftDist2 = 80*DriveSubsystem.inchesToTicks;
-	public double centerLeftDist3 = 20*DriveSubsystem.inchesToTicks;
+	public static final double centerLeftDist1 = 50*DriveSubsystem.inchesToTicks;
+	public static final double centerLeftDist2 = 80*DriveSubsystem.inchesToTicks;
+	public static final double centerLeftDist3 = 20*DriveSubsystem.inchesToTicks;
 	
-	public double centerRightDist1 = 50*DriveSubsystem.inchesToTicks;
-	public double centerRightDist2 = 70*DriveSubsystem.inchesToTicks;
-	public double centerRightDist3 = 25*DriveSubsystem.inchesToTicks;
+	public static final double centerRightDist1 = 50*DriveSubsystem.inchesToTicks;
+	public static final double centerRightDist2 = 70*DriveSubsystem.inchesToTicks;
+	public static final double centerRightDist3 = 25*DriveSubsystem.inchesToTicks;
 		
-	public double centerDistBack = -18*DriveSubsystem.inchesToTicks;
+	public static final double centerDistBack = -18*DriveSubsystem.inchesToTicks;
 	
-	public double sameSwitchDist = 140*DriveSubsystem.inchesToTicks;
+	public static final  double sameSwitchDist = 140*DriveSubsystem.inchesToTicks;
 	
-	public double left = -90;
-	public double right = 90;
+	public static final  double left = -90;
+	public static final  double right = 90;
+
+	public int test = 1;
 	
 	// MOTORS AND SENSORS
 	VictorSPX LF = RobotMap.leftFrontDrive;
@@ -70,7 +68,6 @@ public class DriveSubsystem{
 	public DriveSubsystem() {
 		RE.setReverseDirection(true);
 	}
-	
 	
 	public void driveTank(double leftSpeed, double rightSpeed) {
 		LF.set(ControlMode.PercentOutput, -leftSpeed);

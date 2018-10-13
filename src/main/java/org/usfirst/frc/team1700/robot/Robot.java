@@ -1,18 +1,13 @@
 
 package org.usfirst.frc.team1700.robot;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+import org.usfirst.frc.team1700.robot.autonmodes.AutonomousBase;
 
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem;
-
-
-import com.kauailabs.navx.frc.AHRS;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,11 +18,15 @@ import com.kauailabs.navx.frc.AHRS;
  */
 public class Robot extends IterativeRobot {
 
-	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	public static OI oi;
+
+	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
+	public static AutonomousBase auto;
+
+	// Control variables
 	double leftIntakeSpeed = 0;
 	double rightIntakeSpeed = 0;
 	Boolean desiredGrabIntakeState = false;
@@ -35,6 +34,9 @@ public class Robot extends IterativeRobot {
 	double leftSpeed = 0;
 	double rightSpeed = 0;
 	double elevatorSpeed = 0;
+
+	// State variables
+	Boolean hasGameData = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -59,19 +61,11 @@ public class Robot extends IterativeRobot {
 	public void disabledPeriodic() {
 	}
 
-	/**
-	 * This autonomous (along with the chooser code above) shows how to select
-	 * between different autonomous modes using the dashboard. The sendable
-	 * chooser code works with the Java SmartDashboard. If you prefer the
-	 * LabVIEW Dashboard, remove all of the chooser code and uncomment the
-	 * getString code to get the auto name from the text box below the Gyro
-	 *
-	 * You can add additional auto modes by adding additional commands to the
-	 * chooser code above (like the commented example) or additional comparisons
-	 * to the switch structure below with additional strings & commands.
-	 */
 	@Override
 	public void autonomousInit() {
+		// Choose auton mode based on starting location
+		Boolean preferSwitch = true;
+		auto = new AutonomousBase(AutonomousBase.StartLocation.LEFT, preferSwitch);
 	}
 
 	/**
@@ -79,6 +73,7 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
+		auto.periodic();
 	}
 
 	@Override
@@ -148,6 +143,5 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
-		LiveWindow.run();
 	}
 }
