@@ -3,36 +3,14 @@ package org.usfirst.frc.team1700.robot;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.usfirst.frc.team1700.robot.commands.Intake.IntakeInCommand;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.AutoForward;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.LeftScaleAuto;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.LeftSwitchAuto;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.RightScaleAuto;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.RightSwitchAuto;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterScaleAuto;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.CenterSwitchAuto;
-import org.usfirst.frc.team1700.robot.commands.AutoCGs.testAutoCG;
-import org.usfirst.frc.team1700.robot.commands.Drivetrain.DriveForwardTimeOutCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorForTimeCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorMoveCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorResetCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorStopCommand;
-import org.usfirst.frc.team1700.robot.commands.Elevator.ElevatorToInchesCommand;
-import org.usfirst.frc.team1700.robot.commands.Intake.FoldIntakeCommand;
-import org.usfirst.frc.team1700.robot.commands.Intake.ReleaseIntakeCommand;
-import org.usfirst.frc.team1700.robot.commands.Intake.RunIntakeCommand;
-import org.usfirst.frc.team1700.robot.commands.Intake.StopIntakeCommand;
-import org.usfirst.frc.team1700.robot.commands.Intake.GrabIntakeCommand;
-import org.usfirst.frc.team1700.robot.commands.Intake.GrabIntakeCommand;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.ElevatorSubsystem;
 import org.usfirst.frc.team1700.robot.subsystems.IntakeSubsystem;
+
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -50,8 +28,13 @@ public class Robot extends IterativeRobot {
 	public static final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
 	public static final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
-	Command autonomousCommand;
-	SendableChooser<Command> chooser = new SendableChooser<>();
+	double leftIntakeSpeed = 0;
+	double rightIntakeSpeed = 0;
+	Boolean desiredGrabIntakeState = false;
+	Boolean desiredFoldIntakeState = true;
+	double leftSpeed = 0;
+	double rightSpeed = 0;
+	double elevatorSpeed = 0;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -60,15 +43,6 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-//		chooser.addDefault("Default Auto (Drive Forward)", new AutoForward());
-//		chooser.addObject("Left Switch Auto", new LeftSwitchAuto());
-//		chooser.addObject("Center Switch Auto", new CenterSwitchAuto());
-//		chooser.addObject("Right Switch Auto",  new RightSwitchAuto());
-//		chooser.addObject("Left Scale Auto", new LeftScaleAuto());
-//		chooser.addObject("Center Scale Auto", new CenterScaleAuto());
-//		chooser.addObject("Right Scale Auto", new RightScaleAuto());
-//		chooser.addObject("Test (DON'T USE THIS IN COMPETITION!)", new testAutoCG());
-//		SmartDashboard.putData("Auto Mode", chooser);
 		System.out.println("ROBOT INITIATED!! :)");
 	}
 
@@ -83,7 +57,6 @@ public class Robot extends IterativeRobot {
 
 	@Override
 	public void disabledPeriodic() {
-		Scheduler.getInstance().run();
 	}
 
 	/**
@@ -99,16 +72,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autonomousCommand = new LeftSwitchAuto();
-		// chooser.getSelected();
-		if (autonomousCommand.getName() == "testAutoCG" && DriverStation.getInstance().isFMSAttached()) {
-			autonomousCommand = new LeftSwitchAuto();
-		}
-		DriverStation.getInstance().reportWarning(autonomousCommand.getName(), false);
-		if (autonomousCommand != null) {
-			autonomousCommand.start();
-		}
-		DriverStation.getInstance().reportWarning("AUTO INIT!!", false);
 	}
 
 	/**
@@ -116,7 +79,6 @@ public class Robot extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		Scheduler.getInstance().run();
 	}
 
 	@Override
@@ -129,28 +91,56 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 
-		// INTAKE
-		OI.foldUp.whenPressed(new FoldIntakeCommand(true));
-		OI.foldDown.whenPressed(new FoldIntakeCommand(false));
-		OI.stopIntake.whileHeld(new StopIntakeCommand());
-		OI.stopIntake.whenReleased(new IntakeInCommand());
-		OI.letGo.whileHeld(new GrabIntakeCommand(true));
-		OI.letGo.whenReleased(new RunIntakeCommand());
-		OI.squeeze.whenPressed(new GrabIntakeCommand(false));
-		OI.squeeze.whenPressed(new IntakeInCommand());
-		OI.releaseIntakeFast.whileHeld(new ReleaseIntakeCommand(-1));
-		OI.releaseIntakeFast.whenReleased(new RunIntakeCommand());
-		OI.releaseIntakeFast.whenReleased(new GrabIntakeCommand(true));
-		OI.releaseIntakeSlow.whileHeld(new ReleaseIntakeCommand(-0.4));
-		OI.releaseIntakeSlow.whenReleased(new RunIntakeCommand());
-		OI.releaseIntakeSlow.whenReleased(new GrabIntakeCommand(true));
-
 		// UPDATE ROBOT STATE
-		if (OI.releaseIntakeFast.)
+		leftSpeed = OI.leftJoy.getRawAxis(1);
+		rightSpeed = OI.rightJoy.getRawAxis(1);
+		elevatorSpeed = -OI.coJoy.getRawAxis(1);
+
+		if (OI.releaseIntakeFast.get()){
+			leftIntakeSpeed = -1;
+			rightIntakeSpeed = -1;
+			desiredGrabIntakeState = RobotMap.GRAB_INTAKE_OPEN;
+		}
+		else if (OI.releaseIntakeSlow.get()){
+			leftIntakeSpeed = -0.4;
+			rightIntakeSpeed = -0.4;
+			desiredGrabIntakeState = RobotMap.GRAB_INTAKE_OPEN;
+		}
+		else if (OI.stopIntake.get()){
+			leftIntakeSpeed = 0;
+			rightIntakeSpeed = 0;
+			//no update to desiredGrabIntakeState
+		}
+		else {
+			leftIntakeSpeed = 0.5;
+			rightIntakeSpeed = 0.3;
+			if (OI.squeeze.get()){
+				desiredGrabIntakeState = RobotMap.GRAB_INTAKE_CLOSE;
+			}
+			else if (OI.letGo.get()){
+				desiredGrabIntakeState = RobotMap.GRAB_INTAKE_OPEN;
+			}
+			else{
+				//no update to desiredGrabIntakeState
+			}
+		}
+
+		if (OI.foldUp.get()){
+			desiredFoldIntakeState = true;
+		}
+		else if (OI.foldDown.get()){
+			desiredFoldIntakeState = false;
+		}
+		else {
+			// no update to desiredFoldIntakeState
+		}
 
 		// EXECUTE
-		DriveSubsystem.driverControl();
-		ElevatorSubsystem.driverControl();
+		driveSubsystem.driveTank(leftSpeed, rightSpeed);
+		elevatorSubsystem.elevatorMove(elevatorSpeed);
+		intakeSubsystem.fold(desiredFoldIntakeState);
+		intakeSubsystem.grab(desiredGrabIntakeState);
+		intakeSubsystem.runIntake(leftIntakeSpeed, rightIntakeSpeed);
 	}
 
 	/**

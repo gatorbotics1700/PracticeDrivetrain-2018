@@ -55,6 +55,10 @@ public class RobotMap {
 	
 	// DIGITAL OUTPUT
 	public static DigitalOutput arduinoTrigger = new DigitalOutput(10);
+
+	// STATE ENUMS
+	public static Boolean GRAB_INTAKE_OPEN = true;
+	public static Boolean GRAB_INTAKE_CLOSE = false;
 	 
 	
 }

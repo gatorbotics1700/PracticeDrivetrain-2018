@@ -62,10 +62,6 @@ public class ElevatorSubsystem {
 	public double getVelocity() {
 		return enc.getRate();
 	}
-
-	public void driverControl(){
-		elevatorMove(-OI.coJoy.getRawAxis(1));
-	}
 	
 }
 

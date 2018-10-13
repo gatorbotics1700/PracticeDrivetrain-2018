@@ -117,16 +117,6 @@ public class DriveSubsystem{
 	
 	public Double getVelocity() {
 		return (LE.getRate()+RE.getRate())/2;
-	}
-
-	public void driverControl() {
-		double leftSpeed = OI.leftJoy.getRawAxis(1) /2.0 ;
-		double rightSpeed = OI.rightJoy.getRawAxis(1) /2.0 ;
-		String LencVal = Double.toString(getLeftEncoderValue());
-		String Rencval = Double.toString(getRightEncoderValue());
-		driveTank(leftSpeed, rightSpeed);
-		DriverStation.getInstance().reportWarning("LEFT ENCODER: " + LencVal, false);
-	}
-	
+	}	
 	
 }
