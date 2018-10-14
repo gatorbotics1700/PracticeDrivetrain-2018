@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.Encoder;
 /**
  *
  */
-// ITERATIVE CONVERSION NOTE: This class doesn't need to extend anything
 public class ElevatorSubsystem {
 
     // Put methods for controlling this subsystem
@@ -26,6 +25,7 @@ public class ElevatorSubsystem {
 	public double slightly = 12;
 	public double baseHeight = 9.75;
 	public double inchesToTicks = 15.5;
+	public double ticksToInches = 1/15.5;
 	public double stallSpeed = 0.9;
 
 	public ElevatorSubsystem() {
@@ -45,8 +45,8 @@ public class ElevatorSubsystem {
     	return false;
     }
     
-	public int getCurrentPos() {
-		return enc.get();
+	public double getCurrentPos() {
+		return enc.get()*ticksToInches;
 	}
 	
 	public void resetEncoder() {
@@ -54,7 +54,7 @@ public class ElevatorSubsystem {
 	}
 	
 	public double getVelocity() {
-		return enc.getRate();
+		return enc.getRate()*ticksToInches;
 	}
 	
 }

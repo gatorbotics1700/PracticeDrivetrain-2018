@@ -27,13 +27,13 @@ public class Robot extends IterativeRobot {
 	public static AutonomousBase auto;
 
 	// Control variables
-	double leftIntakeSpeed = 0;
-	double rightIntakeSpeed = 0;
-	Boolean desiredGrabIntakeState = false;
-	Boolean desiredFoldIntakeState = true;
-	double leftSpeed = 0;
-	double rightSpeed = 0;
-	double elevatorSpeed = 0;
+	public static double leftIntakeSpeed = 0;
+	public static double rightIntakeSpeed = 0;
+	public static Boolean desiredGrabIntakeState = RobotMap.GRAB_INTAKE_CLOSE;
+	public static Boolean desiredFoldIntakeState = true;
+	public static double leftSpeed = 0;
+	public static double rightSpeed = 0;
+	public static double elevatorSpeed = 0;
 
 	// State variables
 	Boolean hasGameData = false;
@@ -65,7 +65,8 @@ public class Robot extends IterativeRobot {
 	public void autonomousInit() {
 		// Choose auton mode based on starting location
 		Boolean preferSwitch = true;
-		auto = new AutonomousBase(AutonomousBase.StartLocation.LEFT, preferSwitch);
+
+		auto = new AutonomousBase(AutonomousBase.StartLocation.LEFT, preferSwitch, driveSubsystem, intakeSubsystem, elevatorSubsystem);
 	}
 
 	/**
@@ -74,6 +75,13 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		auto.periodic();
+
+		// EXECUTE (Autonomous responsible for setting all of these values)
+		driveSubsystem.driveTank(leftSpeed, rightSpeed);
+		elevatorSubsystem.elevatorMove(elevatorSpeed);
+		intakeSubsystem.fold(desiredFoldIntakeState);
+		intakeSubsystem.grab(desiredGrabIntakeState);
+		intakeSubsystem.runIntake(leftIntakeSpeed, rightIntakeSpeed);
 	}
 
 	@Override

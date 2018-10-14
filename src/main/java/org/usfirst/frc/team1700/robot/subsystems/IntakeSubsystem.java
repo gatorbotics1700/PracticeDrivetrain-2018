@@ -10,10 +10,6 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 
-/**
- *
- */
-// ITERATIVE CONVERSION NOTE: This class doesn't need to extend anything
 public class IntakeSubsystem {
 
 	public TalonSRX leftMotor = RobotMap.leftIntakeMotor;
