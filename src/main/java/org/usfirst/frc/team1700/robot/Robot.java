@@ -18,12 +18,8 @@ public class Robot extends IterativeRobot {
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
 	// Control variables
-
 	public static double leftSpeed = 0;
 	public static double rightSpeed = 0;
-
-	// State variables
-	Boolean hasGameData = false;
 
 	/**
 	 * This function is run when the robot is first started up and should be
