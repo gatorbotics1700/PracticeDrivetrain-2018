@@ -1,4 +1,3 @@
-
 package org.usfirst.frc.team1700.robot;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -18,8 +17,8 @@ public class Robot extends IterativeRobot {
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
 	// Control variables
-	public static double leftSpeed = 0;
-	public static double rightSpeed = 0;
+	public static double leftPercentOutput = 0;
+	public static double rightPercentOutput = 0;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -43,20 +42,10 @@ public class Robot extends IterativeRobot {
 	@Override
 	public void disabledPeriodic() {
 	}
-
-	@Override
-	public void autonomousInit() {
-	}
-
-	/**
-	 * This function is called periodically during autonomous
-	 */
-	@Override
-	public void autonomousPeriodic() {
-	}
-
-	@Override
+	//Everything in teleopInit starts when teleop mode is turned on (so we don't want anything in it).
+	@Override 
 	public void teleopInit() {
+		driveSubsystem.driveTank(leftPercentOutput, rightPercentOutput);
 	}
 
 	/**
@@ -66,11 +55,11 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 
 		// UPDATE ROBOT STATE
-		leftSpeed = OI.leftJoy.getRawAxis(1);
-		rightSpeed = OI.rightJoy.getRawAxis(1);
+		leftPercentOutput = OI.leftJoy.getRawAxis(1);
+		rightPercentOutput = OI.rightJoy.getRawAxis(1);
 
 		// EXECUTE
-		driveSubsystem.driveTank(leftSpeed, rightSpeed);
+		driveSubsystem.driveTank(leftPercentOutput, rightPercentOutput);
 	}
 
 	/**

@@ -14,10 +14,11 @@ public class DriveSubsystem{
 	TalonSRX LB = RobotMap.leftBackDrive;
 	TalonSRX RB = RobotMap.rightBackDrive;
 
-	public void driveTank(double leftSpeed, double rightSpeed) {
-		LF.set(ControlMode.PercentOutput, -leftSpeed);
-		LB.set(ControlMode.PercentOutput, -leftSpeed);
-		RF.set(ControlMode.PercentOutput, rightSpeed);
-		RB.set(ControlMode.PercentOutput, rightSpeed);
+	//Intakes the speeds of joysticks and updates motor speeds 
+	public void driveTank(double leftPercentOutput, double rightPercentOutput) { 
+		LF.set(ControlMode.PercentOutput, -leftPercentOutput);
+		LB.set(ControlMode.PercentOutput, -leftPercentOutput);
+		RF.set(ControlMode.PercentOutput, rightPercentOutput);
+		RB.set(ControlMode.PercentOutput, rightPercentOutput);
 	}
 }
