@@ -12,12 +12,14 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
  * floating around.
  */
 public class RobotMap {
-	// DRIVE TALONS: UPDATE BASED ON WHAT'S ON THE DRIVETRAIN
-	public static VictorSPX leftFrontDrive = new VictorSPX(3),
-					        rightFrontDrive = new VictorSPX(4);
+	//left side of the drivetrain
+	public static TalonSRX leftFirstDrive = new TalonSRX(1); 
+	public static TalonSRX leftSecondDrive = new TalonSRX(2); 
+	public static TalonSRX leftThirdDrive = new TalonSRX(3);
 
-	public static TalonSRX leftBackDrive = new TalonSRX(1),
-					       rightBackDrive = new TalonSRX(2); //6
-
+	//right side of the drivetrain
+	public static TalonSRX rightFirstDrive = new TalonSRX(4);
+	public static TalonSRX rightSecondDrive = new TalonSRX(5);
+	public static TalonSRX rightThirdDrive = new TalonSRX(6);
 	
 }
