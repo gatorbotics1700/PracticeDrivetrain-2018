@@ -2,7 +2,11 @@ package org.usfirst.frc.team1700.robot;
 
 
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DigitalInput; 
+import com.kauailabs.navx.frc.AHRS; 
+import edu.wpi.first.wpilibj.SPI;
+
 
 
 /**
@@ -21,5 +25,12 @@ public class RobotMap {
 	public static TalonSRX rightFirstDrive = new TalonSRX(4);
 	public static TalonSRX rightSecondDrive = new TalonSRX(5);
 	public static TalonSRX rightThirdDrive = new TalonSRX(6);
-	
+
+	//NAVX
+	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) 200); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
+
+	//Encoders -- DIGITAL INPUT CHANGED BASED ON PRACTICE DRIVETRAIN
+	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(1), new DigitalInput(0));
+	public static Encoder	   rightDriveEncoder = new Encoder(new DigitalInput(5), new DigitalInput(4));
+							 
 }

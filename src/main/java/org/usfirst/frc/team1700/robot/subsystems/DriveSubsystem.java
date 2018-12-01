@@ -4,9 +4,21 @@ import org.usfirst.frc.team1700.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.DigitalInput;
+
 
 public class DriveSubsystem{
+
+	AHRS imu = RobotMap.ahrs; 
+	Encoder leftEncoder = RobotMap.leftDriveEncoder;
+	Encoder rightEncoder = RobotMap.rightDriveEncoder; 
+	
+	//Value needs to be changed based on what's on drivetrain
+	private static double wheelCircumference = 4 * Math.PI; //in inches 
+	private static double numTicks = 4096;
+	public static final double inchesPerTick = wheelCircumference / numTicks;
 
 	// MOTORS AND SENSORS : UPDATE BASED ON WHAT'S ON THE PRACTICE DRIVETRAIN
 	TalonSRX L1 = RobotMap.leftFirstDrive; 
@@ -15,6 +27,11 @@ public class DriveSubsystem{
 	TalonSRX R1 = RobotMap.rightFirstDrive;
 	TalonSRX R2 = RobotMap.rightSecondDrive;
 	TalonSRX R3 = RobotMap.rightThirdDrive;
+
+	public DriveSubsystem() {
+		leftEncoder.setDistancePerPulse(inchesPerTick);
+		rightEncoder.setDistancePerPulse(inchesPerTick);
+	}
 
 	//Intakes the speeds of joysticks and updates motor speeds 
 	public void driveTank(double leftPercentOutput, double rightPercentOutput) { 
@@ -25,4 +42,46 @@ public class DriveSubsystem{
 		R2.set(ControlMode.PercentOutput, rightPercentOutput);
 		R3.set(ControlMode.PercentOutput, rightPercentOutput);
 	}
+
+	//Velocity 
+	public double getSensorVelocity()
+	{
+		double x = imu.getVelocityX();
+		double y = imu.getVelocityY();
+		return Math.sqrt(x*x + y*y);
+	}
+	
+	//Left wheel displacement
+	public double getLeftWheelDisplacement()
+	{
+		double leftWheelDisplacement = leftEncoder.getDistance();
+		return leftWheelDisplacement; 
+	}
+
+	//Right wheel displacement
+	public double getRightWheelDisplacement()
+	{
+		double rightWheelDisplacement = rightEncoder.getDistance();
+		return rightWheelDisplacement;  
+	}
+
+	//Scales speed of wheel by distance per pulse
+	public Double getVelocity() 
+	{
+		return (leftEncoder.getRate()+rightEncoder.getRate())/2;
+	}
+
+	//Position
+	public double getSensorDisplacement()
+	{
+		double x = imu.getDisplacementX();
+		double y = imu.getDisplacementY();
+		return Math.sqrt(x*x + y*y);
+	}
+
+	public boolean isMoving()
+	{
+		return imu.isMoving(); 
+	}
+
 }
