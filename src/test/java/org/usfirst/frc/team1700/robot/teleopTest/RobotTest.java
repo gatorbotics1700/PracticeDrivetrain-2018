@@ -1,10 +1,17 @@
 package org.usfirst.frc.team1700.robot.teleopTest;
 
 import org.junit.jupiter.api.Test;
-//import org.usfirst.frc.team1700.robot.Robot;
+import org.usfirst.frc.team1700.robot.Robot;
+import org.junit.jupiter.api.BeforeEach;
 
 public class RobotTest {
-  //  Robot.robotInit();
+  private Robot robot;
+  
+  @BeforeEach
+  public void setUp(){
+      System.out.println("setup function");
+      robot = new Robot();
+  }
 
     @Test
     public void testFun(){
