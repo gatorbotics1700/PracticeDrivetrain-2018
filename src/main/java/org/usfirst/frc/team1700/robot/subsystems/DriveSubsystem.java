@@ -12,12 +12,10 @@ import edu.wpi.first.wpilibj.DigitalInput;
 public class DriveSubsystem{
 
 	AHRS imu = RobotMap.ahrs; 
-	Encoder leftEncoder = RobotMap.leftDriveEncoder;
-	Encoder rightEncoder = RobotMap.rightDriveEncoder; 
 	
 	//Value needs to be changed based on what's on drivetrain
 	private static double wheelCircumference = 4 * Math.PI; //in inches 
-	private static double numTicks = 4096;
+	private static double numTicks = 4096; //double-check this value!!
 	public static final double inchesPerTick = wheelCircumference / numTicks;
 
 	// MOTORS AND SENSORS : UPDATE BASED ON WHAT'S ON THE PRACTICE DRIVETRAIN
@@ -29,8 +27,6 @@ public class DriveSubsystem{
 	TalonSRX R3 = RobotMap.rightThirdDrive;
 
 	public DriveSubsystem() {
-		leftEncoder.setDistancePerPulse(inchesPerTick);
-		rightEncoder.setDistancePerPulse(inchesPerTick);
 	}
 
 	//Intakes the speeds of joysticks and updates motor speeds 
@@ -54,21 +50,22 @@ public class DriveSubsystem{
 	//Left wheel displacement
 	public double getLeftWheelDisplacement()
 	{
-		double leftWheelDisplacement = leftEncoder.getDistance();
+		double leftWheelDisplacement = L2.getSensorCollection().getQuadraturePosition();
 		return leftWheelDisplacement; 
 	}
 
 	//Right wheel displacement
 	public double getRightWheelDisplacement()
 	{
-		double rightWheelDisplacement = rightEncoder.getDistance();
+		double rightWheelDisplacement = R2.getSensorCollection().getQuadraturePosition();
 		return rightWheelDisplacement;  
 	}
 
 	//Scales speed of wheel by distance per pulse
 	public Double getVelocity() 
 	{
-		return (leftEncoder.getRate()+rightEncoder.getRate())/2;
+		Double velocity = (L2.getSensorCollection().getQuadratureVelocity()+R2.getSensorCollection().getQuadratureVelocity())/2.0;
+		return velocity; //getQuadratureVelocity returns in units per 100ms
 	}
 
 	//Position

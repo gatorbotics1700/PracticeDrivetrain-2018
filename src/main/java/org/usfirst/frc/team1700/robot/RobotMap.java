@@ -28,9 +28,5 @@ public class RobotMap {
 
 	//NAVX
 	public static AHRS ahrs = new AHRS(SPI.Port.kMXP, (byte) 200); /* Alternatives:  SPI.Port.kMXP, I2C.Port.kMXP or SerialPort.Port.kUSB */
-
-	//Encoders -- DIGITAL INPUT CHANGED BASED ON PRACTICE DRIVETRAIN
-	public static Encoder	   leftDriveEncoder = new Encoder(new DigitalInput(1), new DigitalInput(0));
-	public static Encoder	   rightDriveEncoder = new Encoder(new DigitalInput(5), new DigitalInput(4));
 							 
 }
