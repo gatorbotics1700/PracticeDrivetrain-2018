@@ -50,21 +50,21 @@ public class DriveSubsystem{
 	//Left wheel displacement
 	public double getLeftWheelDisplacement()
 	{
-		double leftWheelDisplacement = L2.getSensorCollection().getQuadraturePosition();
+		double leftWheelDisplacement = L2.getSensorCollection().getQuadraturePosition() * inchesPerTick;
 		return leftWheelDisplacement; 
 	}
 
 	//Right wheel displacement
 	public double getRightWheelDisplacement()
 	{
-		double rightWheelDisplacement = R2.getSensorCollection().getQuadraturePosition();
+		double rightWheelDisplacement = R2.getSensorCollection().getQuadraturePosition() * inchesPerTick;
 		return rightWheelDisplacement;  
 	}
 
 	//Scales speed of wheel by distance per pulse
 	public Double getVelocity() 
 	{
-		Double velocity = (L2.getSensorCollection().getQuadratureVelocity()+R2.getSensorCollection().getQuadratureVelocity())/2.0;
+		Double velocity = ((L2.getSensorCollection().getQuadratureVelocity()+R2.getSensorCollection().getQuadratureVelocity())/2.0) * inchesPerTick;
 		return velocity; //getQuadratureVelocity returns in units per 100ms
 	}
 
