@@ -17,6 +17,7 @@ public class DriveSubsystem{
 	private static double wheelCircumference = 4 * Math.PI; //in inches 
 	private static double numTicks = 4096; //double-check this value!!
 	public static final double inchesPerTick = wheelCircumference / numTicks;
+	public static final double ticksPerInch = 1/inchesPerTick;
 
 	// MOTORS AND SENSORS : UPDATE BASED ON WHAT'S ON THE PRACTICE DRIVETRAIN
 	TalonSRX L1 = RobotMap.leftFirstDrive; 
@@ -30,13 +31,13 @@ public class DriveSubsystem{
 	}
 
 	//Intakes the speeds of joysticks and updates motor speeds 
-	public void driveTank(double leftPercentOutput, double rightPercentOutput) { 
-		L1.set(ControlMode.PercentOutput, -leftPercentOutput);
-		L2.set(ControlMode.PercentOutput, -leftPercentOutput);
-		L3.set(ControlMode.PercentOutput, -leftPercentOutput);
-		R1.set(ControlMode.PercentOutput, rightPercentOutput);
-		R2.set(ControlMode.PercentOutput, rightPercentOutput);
-		R3.set(ControlMode.PercentOutput, rightPercentOutput);
+	public void driveTank(double leftSpeed, double rightSpeed) { 
+		L1.set(ControlMode.Velocity, -leftSpeed*ticksPerInch);
+		L2.set(ControlMode.Velocity, -leftSpeed*ticksPerInch);
+		L3.set(ControlMode.Velocity, -leftSpeed*ticksPerInch);
+		R1.set(ControlMode.Velocity, rightSpeed*ticksPerInch); 
+		R2.set(ControlMode.Velocity, rightSpeed*ticksPerInch);
+		R3.set(ControlMode.Velocity, rightSpeed*ticksPerInch);
 	}
 
 	//Velocity 
@@ -92,7 +93,11 @@ public class DriveSubsystem{
 	}
 
 	public void resetEncoders(){
-		//add function
+		L2.setSelectedSensorPosition(0, 0, 10);
+		L2.getSensorCollection().setQuadraturePosition(0, 10);
+		R2.setSelectedSensorPosition(0, 0, 10); 
+		R2.getSensorCollection().setQuadraturePosition(0, 10);
+
 	}
 
 }
