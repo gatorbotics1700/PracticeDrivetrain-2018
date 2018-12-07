@@ -10,7 +10,6 @@ public class RobotTest {
   @BeforeEach
   public void setUp(){
       System.out.println("setup function");
-      robot = new Robot();
   }
 
     @Test
