@@ -48,14 +48,14 @@ public class DriveSubsystem{
 	}
 	
 	//Left wheel displacement
-	public double getLeftWheelDisplacement()
+	public double getLeftEncoderValue()
 	{
 		double leftWheelDisplacement = L2.getSensorCollection().getQuadraturePosition() * inchesPerTick;
 		return leftWheelDisplacement; 
 	}
 
 	//Right wheel displacement
-	public double getRightWheelDisplacement()
+	public double getRightEncoderValue()
 	{
 		double rightWheelDisplacement = R2.getSensorCollection().getQuadraturePosition() * inchesPerTick;
 		return rightWheelDisplacement;  
@@ -64,8 +64,18 @@ public class DriveSubsystem{
 	//Scales speed of wheel by distance per pulse
 	public Double getVelocity() 
 	{
-		Double velocity = ((L2.getSensorCollection().getQuadratureVelocity()+R2.getSensorCollection().getQuadratureVelocity())/2.0) * inchesPerTick;
+		Double velocity = ((getVelocityL()+getVelocityR())/2.0) * inchesPerTick;
 		return velocity; //getQuadratureVelocity returns in units per 100ms
+	}
+	
+	//right encoder's velocity 
+	public double getVelocityL(){
+		return L2.getSensorCollection().getQuadratureVelocity();
+	}
+
+	//left encoder's velocity
+	public double getVelocityR(){
+		return R2.getSensorCollection().getQuadratureVelocity();
 	}
 
 	//Position
@@ -79,6 +89,10 @@ public class DriveSubsystem{
 	public boolean isMoving()
 	{
 		return imu.isMoving(); 
+	}
+
+	public void resetEncoders(){
+		//add function
 	}
 
 }
