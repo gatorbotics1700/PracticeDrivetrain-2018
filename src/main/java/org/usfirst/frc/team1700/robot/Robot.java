@@ -31,8 +31,10 @@ public class Robot extends TimedRobot {
 	public static final DriveSubsystem driveSubsystem = new DriveSubsystem();
 
 	// Control variables
-	public static double leftPercentOutput = 0;
-	public static double rightPercentOutput = 0;
+	public static double leftSpeed = 0;
+	public static double rightSpeed = 0;
+
+
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -59,7 +61,8 @@ public class Robot extends TimedRobot {
 	//Everything in teleopInit starts when teleop mode is turned on (so we don't want anything in it).
 	@Override 
 	public void teleopInit() {
-		driveSubsystem.driveTank(leftPercentOutput, rightPercentOutput);
+		// set robot speed to 0 in init so that it doesn't start moving as soon as we turn on teleop
+		driveSubsystem.driveTank(0, 0);
 	}
 
 	/**
@@ -69,11 +72,11 @@ public class Robot extends TimedRobot {
 	public void teleopPeriodic() {
 
 		// UPDATE ROBOT STATE
-		leftPercentOutput = OI.leftJoy.getRawAxis(1);
-		rightPercentOutput = OI.rightJoy.getRawAxis(1);
+		leftSpeed = OI.leftJoy.getRawAxis(1);
+		rightSpeed = OI.rightJoy.getRawAxis(1);
 
 		// EXECUTE
-		driveSubsystem.driveTank(leftPercentOutput, rightPercentOutput);
+		driveSubsystem.driveTank(leftSpeed, rightSpeed);
 	}
 
 	/**
