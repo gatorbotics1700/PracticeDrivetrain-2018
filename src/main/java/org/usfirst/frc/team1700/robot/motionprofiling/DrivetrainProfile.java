@@ -1,8 +1,8 @@
-package org.usfirst.frc.team1700.robot.reese;
+package org.usfirst.frc.team1700.robot.motionprofiling;
 
-import org.usfirst.frc.team1700.robot.reese.profile.Profile;
-import org.usfirst.frc.team1700.robot.reese.profile.ProfileFromFile;
-import org.usfirst.frc.team1700.robot.reese.profile.ProfilePoint;
+import org.usfirst.frc.team1700.robot.motionprofiling.profile.Profile;
+import org.usfirst.frc.team1700.robot.motionprofiling.profile.ProfileFromFile;
+import org.usfirst.frc.team1700.robot.motionprofiling.profile.ProfilePoint;
 
 public class DrivetrainProfile extends Profile{
     Profile profile;

@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1700.robot.reese.path;
+package org.usfirst.frc.team1700.robot.motionprofiling.path;
 
 public class QuinticHermiteSpline {
     public double x0, x1, dx0, dx1, ddx0, ddx1, y0, y1, dy0, dy1, ddy0, ddy1;

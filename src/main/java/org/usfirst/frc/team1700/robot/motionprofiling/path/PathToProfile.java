@@ -1,9 +1,9 @@
-package org.usfirst.frc.team1700.robot.reese.path;
+package org.usfirst.frc.team1700.robot.motionprofiling.path;
 
 import java.util.ArrayList;
-import org.usfirst.frc.team1700.robot.reese.path.PathPoint;
-import org.usfirst.frc.team1700.robot.reese.profile.ProfilePoint;
-import org.usfirst.frc.team1700.robot.reese.util.TextFileWriter;
+import org.usfirst.frc.team1700.robot.motionprofiling.path.PathPoint;
+import org.usfirst.frc.team1700.robot.motionprofiling.profile.ProfilePoint;
+import org.usfirst.frc.team1700.robot.motionprofiling.util.TextFileWriter;
 
 public class PathToProfile{
     String fileName;

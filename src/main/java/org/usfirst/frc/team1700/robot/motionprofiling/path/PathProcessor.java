@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1700.robot.reese.path;
+package org.usfirst.frc.team1700.robot.motionprofiling.path;
 
 import java.util.ArrayList;
 

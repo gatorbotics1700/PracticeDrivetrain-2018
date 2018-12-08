@@ -1,7 +1,7 @@
-package org.usfirst.frc.team1700.robot.reese.profile;
+package org.usfirst.frc.team1700.robot.motionprofiling.profile;
 
 import java.util.ArrayList;
-import org.usfirst.frc.team1700.robot.reese.profile.ProfilePoint;
+import org.usfirst.frc.team1700.robot.motionprofiling.profile.ProfilePoint;
 
 public class Profile{
     public ArrayList<ArrayList<ProfilePoint>> profile;

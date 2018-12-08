@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1700.robot.reese.profile;
+package org.usfirst.frc.team1700.robot.motionprofiling.profile;
 
 public class ProfilePoint {
 
