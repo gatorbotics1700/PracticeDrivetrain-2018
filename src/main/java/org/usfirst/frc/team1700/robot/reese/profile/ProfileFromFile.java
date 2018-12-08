@@ -39,11 +39,10 @@ public class ProfileFromFile{
         while(tokenizerL.hasMoreTokens()) {
             StringTokenizer line_tokenizerL = new StringTokenizer(tokenizerL.nextToken(), ", ");
             
+            double dt = Double.parseDouble(line_tokenizerL.nextToken());
             double position = Double.parseDouble(line_tokenizerL.nextToken());
             double velocity = Double.parseDouble(line_tokenizerL.nextToken());
-            // fix this so dt is actually the time and acceleration is right 
-            double dt = Double.parseDouble(line_tokenizerL.nextToken());
-            double acceleration = 0; 
+            double acceleration = Double.parseDouble(line_tokenizerL.nextToken()); 
             ProfilePoint stats = new ProfilePoint(dt, position, velocity, acceleration);
 
             profileL.add(stats);
@@ -59,11 +58,10 @@ public class ProfileFromFile{
         while(tokenizerR.hasMoreTokens()) {
             StringTokenizer line_tokenizerR = new StringTokenizer(tokenizerR.nextToken(), ", ");
             
+            double dt = Double.parseDouble(line_tokenizerR.nextToken());
             double position = Double.parseDouble(line_tokenizerR.nextToken());
             double velocity = Double.parseDouble(line_tokenizerR.nextToken());
-            // fix dt and acceleration
-            double dt = Double.parseDouble(line_tokenizerR.nextToken());
-            double acceleration = 0;
+            double acceleration = Double.parseDouble(line_tokenizerR.nextToken());
             ProfilePoint stats = new ProfilePoint(dt, position, velocity, acceleration);
             profileR.add(stats);
         }
