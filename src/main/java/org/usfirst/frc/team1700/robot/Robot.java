@@ -45,7 +45,7 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		oi = new OI();
-		System.out.println("ROBOT INITIATED!! :)");
+		System.out.println("ROBOT INITIATED TEST!! :)");
 	}
 
 	/**
