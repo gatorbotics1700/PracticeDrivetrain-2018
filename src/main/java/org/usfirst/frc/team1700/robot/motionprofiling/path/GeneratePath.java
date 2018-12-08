@@ -1,8 +1,8 @@
-package org.usfirst.frc.team1700.robot.reese.path;
+package org.usfirst.frc.team1700.robot.motionprofiling.path;
 
 import java.util.ArrayList;
-import org.usfirst.frc.team1700.robot.reese.path.Waypoint;
-import org.usfirst.frc.team1700.robot.reese.path.QuinticHermiteSpline;
+import org.usfirst.frc.team1700.robot.motionprofiling.path.Waypoint;
+import org.usfirst.frc.team1700.robot.motionprofiling.path.QuinticHermiteSpline;
 
 public class GeneratePath{
     public GeneratePath(){

@@ -1,7 +1,7 @@
-package org.usfirst.frc.team1700.robot.reese.profile;
+package org.usfirst.frc.team1700.robot.motionprofiling.profile;
 
-import org.usfirst.frc.team1700.robot.reese.util.TextFileReader;
-import org.usfirst.frc.team1700.robot.reese.profile.Profile;
+import org.usfirst.frc.team1700.robot.motionprofiling.util.TextFileReader;
+import org.usfirst.frc.team1700.robot.motionprofiling.profile.Profile;
 
 import java.util.ArrayList;
 import java.util.StringTokenizer;

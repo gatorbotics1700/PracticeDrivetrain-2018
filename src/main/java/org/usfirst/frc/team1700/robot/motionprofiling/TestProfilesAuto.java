@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1700.robot.reese;
+package org.usfirst.frc.team1700.robot.motionprofiling;
 
 import org.usfirst.frc.team1700.robot.Robot;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
@@ -34,6 +34,15 @@ public class TestProfilesAuto{
         else {
             driveForwardAutoPeriodic();
         }
+    }
+
+    //fill this in later
+    public void driveForwardAutoInit(){
+        //TODO(Reese): planning to write this
+    }
+
+    public void driveForwardAutoPeriodic(){
+        //TODO(Reese): planning to write this 
     }
 
     Test2dProfileStates test2dProfileState;

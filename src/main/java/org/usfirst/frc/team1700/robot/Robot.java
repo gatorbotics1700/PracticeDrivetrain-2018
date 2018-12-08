@@ -2,8 +2,8 @@ package org.usfirst.frc.team1700.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
-import org.usfirst.frc.team1700.robot.reese.TestProfilesAuto;
-import org.usfirst.frc.team1700.robot.reese.TestProfilesAuto.AutoType;
+import org.usfirst.frc.team1700.robot.motionprofiling.TestProfilesAuto;
+import org.usfirst.frc.team1700.robot.motionprofiling.TestProfilesAuto.AutoType;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -62,12 +62,10 @@ public class Robot extends TimedRobot {
 	public void disabledPeriodic() {
 	}
 
-	@Override
 	public void autoInit(){
 		auto.init();
 	}
 
-	@Override
 	public void autoPeriodic(){
 		auto.periodic();
 	}
