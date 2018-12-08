@@ -28,13 +28,16 @@ public class DriveSubsystem{
 	TalonSRX R3 = RobotMap.rightThirdDrive;
 
 	public DriveSubsystem() {
+		L1.setInverted(true);
+		L2.setInverted(true);
+		L3.setInverted(true);
 	}
 
 	//Intakes the speeds of joysticks and updates motor speeds 
 	public void driveTank(double leftSpeed, double rightSpeed) { 
-		L1.set(ControlMode.PercentOutput, -leftSpeed);
-		L2.set(ControlMode.PercentOutput, -leftSpeed);
-		L3.set(ControlMode.PercentOutput, -leftSpeed);
+		L1.set(ControlMode.PercentOutput, leftSpeed);
+		L2.set(ControlMode.PercentOutput, leftSpeed);
+		L3.set(ControlMode.PercentOutput, leftSpeed);
 		R1.set(ControlMode.PercentOutput, rightSpeed); 
 		R2.set(ControlMode.PercentOutput, rightSpeed);
 		R3.set(ControlMode.PercentOutput, rightSpeed);
