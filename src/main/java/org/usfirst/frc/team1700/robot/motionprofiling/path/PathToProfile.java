@@ -7,6 +7,8 @@ import org.usfirst.frc.team1700.robot.motionprofiling.util.TextFileWriter;
 
 public class PathToProfile{
     String fileName;
+    String fileL;
+    String fileR;
     double AMax = 300;
     double dt = 0.01;
     ArrayList<Integer> badAPoints = new ArrayList<Integer>();
@@ -18,6 +20,11 @@ public class PathToProfile{
     public ArrayList<ProfilePoint> finalProfile = new ArrayList<ProfilePoint>();
 
     public PathToProfile(){
+    }
+
+    public PathToProfile(String fileL, String fileR) {
+        this.fileL = fileL;
+        this.fileR = fileR;
     }
 
     public void generateProfile(ArrayList<PathPoint> path) {    
@@ -316,8 +323,6 @@ public class PathToProfile{
     }
 
     public void writeProfile() {
-        String fileL = "src/main/java/resources/LeftTestFile.csv";
-        String fileR = "src/main/java/resources/RightTestFile.csv"; 
         TextFileWriter writerL = new TextFileWriter(fileL);
         TextFileWriter writerR = new TextFileWriter(fileR);
         

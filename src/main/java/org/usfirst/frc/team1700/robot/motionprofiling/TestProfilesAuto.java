@@ -57,7 +57,7 @@ public class TestProfilesAuto{
         driveSubsystem.resetEncoders(); 
         startTime = System.currentTimeMillis();
         
-        drivetrainProfile.generateProfile("src/main/java/resources/LeftTestFile.csv", "src/main/java/resources/RightTestFile.csv");
+        drivetrainProfile.generateProfile("src/main/java/resources/LeftTestCurve.csv", "src/main/java/resources/RightTestCurve.csv");
         test2dProfileState = Test2dProfileStates.DRIVING;   
     }
 

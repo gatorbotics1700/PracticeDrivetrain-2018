@@ -5,11 +5,13 @@ import java.util.ArrayList;
 // this is mainly math and i dont know what to do for it
 public class PathProcessor{
     public ArrayList<PathPoint> path; 
-    public double MaxV = 100; 
+    public double MaxV; 
     public double smallCurvature = 0.0001;
-    public double trackWidth = 15; //change based on robot, 15 is a nice number so we'll go with that for now  
+    public double trackWidth; 
 
-    public PathProcessor(){
+    public PathProcessor(double MaxV, double trackWidth){
+        this.MaxV = MaxV;
+        this.trackWidth = trackWidth;
     }
 
     public ArrayList<PathPoint> processPath(ArrayList<PathPoint> path){
