@@ -2,6 +2,8 @@ package org.usfirst.frc.team1700.robot;
 
 import edu.wpi.first.wpilibj.TimedRobot;
 import org.usfirst.frc.team1700.robot.subsystems.DriveSubsystem;
+import org.usfirst.frc.team1700.robot.reese.TestProfilesAuto;
+import org.usfirst.frc.team1700.robot.reese.TestProfilesAuto.AutoType;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -33,7 +35,7 @@ public class Robot extends TimedRobot {
 	// Control variables
 	public static double leftSpeed = 0;
 	public static double rightSpeed = 0;
-
+  	private TestProfilesAuto auto = new TestProfilesAuto(AutoType.DRIVE_FORWARD);
 
 
 	/**
@@ -51,6 +53,7 @@ public class Robot extends TimedRobot {
 	 * You can use it to reset any subsystem information you want to clear when
 	 * the robot is disabled.
 	 */
+
 	@Override
 	public void disabledInit() {
 	}
@@ -58,6 +61,17 @@ public class Robot extends TimedRobot {
 	@Override
 	public void disabledPeriodic() {
 	}
+
+	@Override
+	public void autoInit(){
+		auto.init();
+	}
+
+	@Override
+	public void autoPeriodic(){
+		auto.periodic();
+	}
+
 	//Everything in teleopInit starts when teleop mode is turned on (so we don't want anything in it).
 	@Override 
 	public void teleopInit() {

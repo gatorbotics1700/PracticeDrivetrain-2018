@@ -23,7 +23,7 @@ public class TestProfilesAuto{
             test2dProfileAutoInit();
         }
         else {
-            //driveForwardAutoInit();
+            driveForwardAutoInit();
         }
     }
 
@@ -32,7 +32,7 @@ public class TestProfilesAuto{
             test2dProfileAutoPeriodic();
         }
         else {
-            //driveForwardAutoPeriodic();
+            driveForwardAutoPeriodic();
         }
     }
 
