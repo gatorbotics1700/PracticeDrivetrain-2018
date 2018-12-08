@@ -32,12 +32,12 @@ public class DriveSubsystem{
 
 	//Intakes the speeds of joysticks and updates motor speeds 
 	public void driveTank(double leftSpeed, double rightSpeed) { 
-		L1.set(ControlMode.Velocity, -leftSpeed*ticksPerInch);
-		L2.set(ControlMode.Velocity, -leftSpeed*ticksPerInch);
-		L3.set(ControlMode.Velocity, -leftSpeed*ticksPerInch);
-		R1.set(ControlMode.Velocity, rightSpeed*ticksPerInch); 
-		R2.set(ControlMode.Velocity, rightSpeed*ticksPerInch);
-		R3.set(ControlMode.Velocity, rightSpeed*ticksPerInch);
+		L1.set(ControlMode.PercentOutput, -leftSpeed);
+		L2.set(ControlMode.PercentOutput, -leftSpeed);
+		L3.set(ControlMode.PercentOutput, -leftSpeed);
+		R1.set(ControlMode.PercentOutput, rightSpeed); 
+		R2.set(ControlMode.PercentOutput, rightSpeed);
+		R3.set(ControlMode.PercentOutput, rightSpeed);
 	}
 
 	//Velocity 
