@@ -8,15 +8,15 @@ public class GeneratePath{
     public GeneratePath(){
     }
     
-    public ArrayList<PathPoint> generatePath() {
+    public ArrayList<PathPoint> generatePath(Waypoint waypoint1, Waypoint waypoint2) {
         ArrayList<PathPoint> path = new ArrayList<PathPoint>();
         double numPointsPerSegment = 100000.0;
         double posAlongPath = 0;
         Waypoint[] points = new Waypoint[] {
-            new Waypoint(0, 0, 0),      // Waypoint @ x=0,  y=0,    exit angle=0 radians
-            new Waypoint(100, 100, 0)     // Waypoint @ x=100,y=100,    exit angle=0 radians          
+            waypoint1,
+            waypoint2
         };
-    
+
         double maxVelocity = 0;
     
         //List<QuinticHermiteSpline> splines = new ArrayList<>(waypoints.size() - 1);
