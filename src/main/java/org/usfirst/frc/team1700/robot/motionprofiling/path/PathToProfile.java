@@ -40,7 +40,7 @@ public class PathToProfile{
         else {
             // yippee go you
             shrink();
-            writeProfile();
+            //writeProfile();
         }
     }
 
@@ -264,7 +264,7 @@ public class PathToProfile{
             }
             if(!accGood) {
                 Acount++;
-                //System.out.println("A bad: " + i);
+                System.out.println("A bad: " + i);
                 badAPoints.add(i);
             }
             if(!posGood) {
@@ -273,7 +273,8 @@ public class PathToProfile{
             }
             if(!velGood) {
                 Vcount ++;
-                //System.out.println("V bad: " + i);
+
+                System.out.println("V bad: " + i + " right error: " + Math.abs(point.Rv - (point.Ra*dt + prevRV)) + ", left error: " + Math.abs(point.Lv - (point.La*dt + prevLV)));
             }
 
             prevT = point.time;

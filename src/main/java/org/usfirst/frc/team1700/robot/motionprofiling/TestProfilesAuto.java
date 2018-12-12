@@ -7,6 +7,8 @@ public class TestProfilesAuto{
     private DriveSubsystem driveSubsystem;
     private DrivetrainProfile drivetrainProfile;
 
+    protected double startTime;
+
     public static enum AutoType {
         DRIVE_FORWARD,
         CURVE;
@@ -36,13 +38,43 @@ public class TestProfilesAuto{
         }
     }
 
+    DriveForwardAutoStates driveForwardAutoState;
+
+    protected enum DriveForwardAutoStates{
+        DRIVING,
+        END;
+    }
+
     //fill this in later
     public void driveForwardAutoInit(){
-        //TODO(Reese): planning to write this
+        driveSubsystem.resetEncoders(); 
+        startTime = System.currentTimeMillis();
+        
+        drivetrainProfile.generateProfile("src/main/java/resources/LeftTestStraight.csv", "src/main/java/resources/RightTestStraight.csv");
+        driveForwardAutoState = DriveForwardAutoStates.DRIVING;
     }
 
     public void driveForwardAutoPeriodic(){
-        //TODO(Reese): planning to write this 
+        double currentDistanceL= driveSubsystem.getLeftEncoderValue();
+        double currentDistanceR= driveSubsystem.getRightEncoderValue();
+        double currentVelocityL = driveSubsystem.getVelocityL();
+        double currentVelocityR = driveSubsystem.getVelocityR();
+
+        if(driveForwardAutoState == DriveForwardAutoStates.DRIVING){
+            if(currentDistanceL > drivetrainProfile.getTotalDistance()) {
+                driveForwardAutoState = DriveForwardAutoStates.END;
+            }
+            else{
+                double time = System.currentTimeMillis() - startTime;
+                Robot.leftSpeed = -drivetrainProfile.updateLeftVoltage(time, currentDistanceL, currentVelocityL);
+                Robot.rightSpeed = -drivetrainProfile.updateRightVoltage(time, currentDistanceR, currentVelocityR);
+            }
+        }
+        else{
+            Robot.leftSpeed = 0;
+            Robot.rightSpeed = 0;
+        }
+
     }
 
     Test2dProfileStates test2dProfileState;
@@ -52,7 +84,6 @@ public class TestProfilesAuto{
         END;
     }
 
-    protected double startTime;
     public void test2dProfileAutoInit() {
         driveSubsystem.resetEncoders(); 
         startTime = System.currentTimeMillis();
@@ -73,15 +104,10 @@ public class TestProfilesAuto{
                test2dProfileState = Test2dProfileStates.END;
             }
             else{
+                double time = System.currentTimeMillis() - startTime;
+                Robot.leftSpeed = -drivetrainProfile.updateLeftVoltage(time, currentDistanceL, currentVelocityL);
+                Robot.rightSpeed = -drivetrainProfile.updateRightVoltage(time, currentDistanceR, currentVelocityR);
             }
-        }
-        else{
-        }
-
-        if(test2dProfileState == Test2dProfileStates.DRIVING){
-            double time = System.currentTimeMillis() - startTime;
-            Robot.leftSpeed = -drivetrainProfile.updateLeftVoltage(time, currentDistanceL, currentVelocityL);
-            Robot.rightSpeed = -drivetrainProfile.updateRightVoltage(time, currentDistanceR, currentVelocityR);
         }
         else{
             Robot.leftSpeed = 0;
