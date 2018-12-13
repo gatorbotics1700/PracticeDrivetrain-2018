@@ -3,6 +3,7 @@ package org.usfirst.frc.team1700.robot.subsystems;
 import org.usfirst.frc.team1700.robot.RobotMap;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.kauailabs.navx.frc.AHRS;
 import edu.wpi.first.wpilibj.Encoder;
@@ -28,9 +29,20 @@ public class DriveSubsystem{
 	TalonSRX R3 = RobotMap.rightThirdDrive;
 
 	public DriveSubsystem() {
-		L1.setInverted(true);
-		L2.setInverted(true);
-		L3.setInverted(true);
+		L1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+		L2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+		L3.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+
+		L1.setSensorPhase(true);
+		L2.setSensorPhase(true);
+		L3.setSensorPhase(true);
+
+		L1.configVoltageCompSaturation(11.0, 10); //not sure what these should actually be
+		L1.enableVoltageCompensation(true);
+		L2.configVoltageCompSaturation(11.0, 10); //not sure what these should actually be
+		L2.enableVoltageCompensation(true);
+		L3.configVoltageCompSaturation(11.0, 10); //not sure what these should actually be
+		L3.enableVoltageCompensation(true);
 	}
 
 	//Intakes the speeds of joysticks and updates motor speeds 
