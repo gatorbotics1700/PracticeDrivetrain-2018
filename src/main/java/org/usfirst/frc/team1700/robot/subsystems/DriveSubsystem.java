@@ -32,6 +32,10 @@ public class DriveSubsystem{
 		L2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		R2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 
+		L1.setInverted(true);
+		L2.setInverted(true);
+		L3.setInverted(true);
+
 		L2.setSensorPhase(true);
 		R2.setSensorPhase(true);
 
@@ -71,14 +75,14 @@ public class DriveSubsystem{
 	//Left wheel displacement
 	public double getLeftEncoderValue()
 	{
-		double leftWheelDisplacement = L2.getSensorCollection().getQuadraturePosition() * inchesPerTick;
+		double leftWheelDisplacement = -L2.getSensorCollection().getQuadraturePosition() * inchesPerTick;
 		return leftWheelDisplacement; 
 	}
 
 	//Right wheel displacement
 	public double getRightEncoderValue()
 	{
-		double rightWheelDisplacement = R2.getSensorCollection().getQuadraturePosition() * inchesPerTick;
+		double rightWheelDisplacement = -R2.getSensorCollection().getQuadraturePosition() * inchesPerTick;
 		return rightWheelDisplacement;  
 	}
 
@@ -91,12 +95,12 @@ public class DriveSubsystem{
 	
 	//right encoder's velocity 
 	public double getVelocityL(){
-		return L2.getSensorCollection().getQuadratureVelocity();
+		return -L2.getSensorCollection().getQuadratureVelocity();
 	}
 
 	//left encoder's velocity
 	public double getVelocityR(){
-		return R2.getSensorCollection().getQuadratureVelocity();
+		return -R2.getSensorCollection().getQuadratureVelocity();
 	}
 
 	//Position
