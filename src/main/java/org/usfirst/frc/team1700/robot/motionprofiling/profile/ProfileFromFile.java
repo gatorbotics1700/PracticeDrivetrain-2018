@@ -27,8 +27,8 @@ public class ProfileFromFile{
         numFiles = 1;
     }
 
-    public Profile load2DProfile_2Files() {
-        Profile profile = new Profile();
+    public ArrayList<ArrayList<ProfilePoint>> load2DProfile_2Files() {
+        ArrayList<ArrayList<ProfilePoint>> profile = new ArrayList<ArrayList<ProfilePoint>>();
         ArrayList<ProfilePoint> profileL = new ArrayList<ProfilePoint>();
         ArrayList<ProfilePoint> profileR = new ArrayList<ProfilePoint>();
         // Left

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import org.usfirst.frc.team1700.robot.motionprofiling.profile.ProfilePoint;
 
 public class Profile{
-    public ArrayList<ArrayList<ProfilePoint>> profile;
+    public ArrayList<ArrayList<ProfilePoint>> profile = new ArrayList<ArrayList<ProfilePoint>>();
 
     public Profile() {
     }
@@ -12,18 +12,17 @@ public class Profile{
     public void generateProfile() {
     }
 
+
     protected int i = 0;
     public ProfilePoint getCurrPoint(int index, double currTime) {
         ArrayList<ProfilePoint> chosenProfile = profile.get(index);
-        while(currTime < chosenProfile.get(i).time && i < chosenProfile.size()){
+        System.out.println(currTime + ", " + i);
+        while(i < chosenProfile.size() && currTime > chosenProfile.get(i).time){
             i++;
         }
-        if(chosenProfile.size() < i-1) {
-            return chosenProfile.get(i-1);
-        }
-        else {
-            return chosenProfile.get(chosenProfile.size()-1); 
-        }
+        
+        i = Math.max(i, 1);
+        return chosenProfile.get(i-1); 
     }
 
     // 1D profiles
@@ -31,10 +30,10 @@ public class Profile{
         return getCurrPoint(0, currTime);
     }
 
-    public double getTotalDistance() {
-        ArrayList<ProfilePoint> firstProfile = profile.get(0);
-        return (firstProfile.get(firstProfile.size()-1)).pos;
-    }
+    // public double getTotalDistance() {
+    //     ArrayList<ProfilePoint> firstProfile = profile.get(0);
+    //     return (firstProfile.get(firstProfile.size()-1)).pos;
+    // }
 
     public void add(ArrayList<ProfilePoint> newProfilePart) {
         profile.add(newProfilePart); 

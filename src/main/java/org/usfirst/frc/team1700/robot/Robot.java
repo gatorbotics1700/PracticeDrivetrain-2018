@@ -24,8 +24,8 @@ public class Robot extends TimedRobot {
    */
 
 	@Override
-  public void robotPeriodic() {
-  }
+    public void robotPeriodic() {
+    }
 
 
 	public static OI oi;
@@ -62,12 +62,15 @@ public class Robot extends TimedRobot {
 	public void disabledPeriodic() {
 	}
 
-	public void autoInit(){
+	@Override
+	public void autonomousInit(){
 		auto.init();
 	}
 
-	public void autoPeriodic(){
+	@Override
+	public void autonomousPeriodic(){
 		auto.periodic();
+		driveSubsystem.driveTank(leftSpeed, rightSpeed);
 	}
 
 	//Everything in teleopInit starts when teleop mode is turned on (so we don't want anything in it).
@@ -89,6 +92,9 @@ public class Robot extends TimedRobot {
 
 		// EXECUTE
 		driveSubsystem.driveTank(leftSpeed, rightSpeed);
+		// System.out.println("Right: " + driveSubsystem.getRightEncoderValue()); 
+		// System.out.println("Left: " + driveSubsystem.getLeftEncoderValue()); 
+
 	}
 
 	/**

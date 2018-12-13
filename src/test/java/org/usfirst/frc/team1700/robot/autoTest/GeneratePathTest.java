@@ -5,8 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 public class GeneratePathTest {   
-    String fileL = "src/main/java/resources/LeftTestStraight.csv";
-    String fileR = "src/main/java/resources/RightTestStraight.csv";
+    String fileL = "src/main/resources/LeftTestStraight.csv";
+    String fileR = "src/main/resources/RightTestStraight.csv";
     Waypoint waypoint1 = new Waypoint(0, 0, 0);
     Waypoint waypoint2 = new Waypoint(100, 100, 0);          
 
