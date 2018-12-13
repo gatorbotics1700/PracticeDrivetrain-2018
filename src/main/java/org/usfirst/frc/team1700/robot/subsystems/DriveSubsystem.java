@@ -29,13 +29,11 @@ public class DriveSubsystem{
 	TalonSRX R3 = RobotMap.rightThirdDrive;
 
 	public DriveSubsystem() {
-		L1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 		L2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-		L3.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+		R2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
 
-		L1.setSensorPhase(true);
 		L2.setSensorPhase(true);
-		L3.setSensorPhase(true);
+		R2.setSensorPhase(true);
 
 		L1.configVoltageCompSaturation(11.0, 10); //not sure what these should actually be
 		L1.enableVoltageCompensation(true);
@@ -43,6 +41,13 @@ public class DriveSubsystem{
 		L2.enableVoltageCompensation(true);
 		L3.configVoltageCompSaturation(11.0, 10); //not sure what these should actually be
 		L3.enableVoltageCompensation(true);
+
+		R1.configVoltageCompSaturation(11.0, 10); //not sure what these should actually be
+		R1.enableVoltageCompensation(true);
+		R2.configVoltageCompSaturation(11.0, 10); //not sure what these should actually be
+		R2.enableVoltageCompensation(true);
+		R3.configVoltageCompSaturation(11.0, 10); //not sure what these should actually be
+		R3.enableVoltageCompensation(true);
 	}
 
 	//Intakes the speeds of joysticks and updates motor speeds 
